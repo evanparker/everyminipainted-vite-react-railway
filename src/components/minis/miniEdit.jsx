@@ -61,7 +61,7 @@ const MiniEdit = () => {
 
   return (
     <>
-      {mini && token && userId === mini?.userId && (
+      {mini && token && userId === mini?.userId._id && (
         <div>
           <form
             onSubmit={handleSubmit}

@@ -1,3 +1,30 @@
+# everymini-frontend
+
+A miniatures portfolio website
+
+
+## TODO:
+* ~~User data/avatars~~
+* ~~Purchase Domain and Deployment~~
+* Add createdOn/updatedOn/etc.
+* Error pages (404, etc)
+* ~~Improvements to miniEdit~~
+  * ~~Deleting Images~~
+  * ~~Deleting Mini~~
+  * ~~Reordering Images~~
+* Manufacturers/~~Figures~~
+* Moderation
+* Search
+* Change api to use json:api format 
+  * https://jsonapi.org/ 
+  * https://www.npmjs.com/package/jsonapi-serializer#relationship-deserializer
+* Tags
+* Add alerts/toasts for
+  * Deleting
+  * Saving
+  * Logging out
+
+
 ---
 title: Vite + React
 description: The default Vite + React starter, utilizing `Caddy` to serve the built app
