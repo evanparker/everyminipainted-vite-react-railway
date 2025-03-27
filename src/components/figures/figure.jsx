@@ -72,9 +72,14 @@ const Figure = () => {
         </div>
       )}
       {minis && (
-        <div className="mt-5">
-          <DisplayMinis minis={minis} />
-        </div>
+        <>
+          <h3 className="mt-5 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
+            Minis
+          </h3>
+          <div className="mt-5">
+            <DisplayMinis minis={minis} />
+          </div>
+        </>
       )}
     </div>
   );

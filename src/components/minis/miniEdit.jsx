@@ -53,7 +53,10 @@ const MiniEdit = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const miniData = await putMini(mini._id, {...mini, figure: selectedFigure});
+    const miniData = await putMini(mini._id, {
+      ...mini,
+      figure: selectedFigure,
+    });
     setMini({ ...miniData, images: mini.images });
     navigate(`/minis/${id}`);
   };
@@ -73,9 +76,8 @@ const MiniEdit = () => {
   };
 
   const chooseFigure = (figure) => {
-    console.log("choosefigure", figure);
     setSelectedFigure(figure);
-    setFigureSearch(figure.name);
+    setFigureSearch(figure?.name || "");
     setFigureDropdownOpen(false);
   };
 
@@ -118,15 +120,21 @@ const MiniEdit = () => {
                 onFocus={handleFigureSearchChange}
               />
               {figureDropdownOpen && (
-                <ul
-                  className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
-                >
+                <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm bg-gray-300 dark:bg-gray-800 text-gray-700 dark:text-gray-200">
+                  <li key={"none"}>
+                    <div
+                      onClick={() => chooseFigure(undefined)}
+                      className="w-full py-2 text-sm rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600 font-medium text-gray-900 dark:text-gray-300"
+                    >
+                      None
+                    </div>
+                  </li>
                   {figureResults.map((f) => (
                     <li key={f._id}>
                       <div
                         onClick={() => chooseFigure(f)}
-                        className="w-full py-2 ms-2 text-sm rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600 font-medium text-gray-900 dark:text-gray-300"
-                      >
+                        className="w-full py-2 text-sm rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600 font-medium text-gray-900 dark:text-gray-300"
+                        >
                         {f.name}
                       </div>
                     </li>
