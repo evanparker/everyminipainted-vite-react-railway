@@ -8,6 +8,7 @@ A miniatures portfolio website
 * ~~Purchase Domain and Deployment~~
 * Add createdOn/updatedOn/etc.
 * Error pages (404, etc)
+* Fix sort order for images by adding explicit order
 * ~~Improvements to miniEdit~~
   * ~~Deleting Images~~
   * ~~Deleting Mini~~
@@ -23,6 +24,8 @@ A miniatures portfolio website
   * Deleting
   * Saving
   * Logging out
+* Scrape reaper site for data
+* Serve robots/rich links
 
 
 ---

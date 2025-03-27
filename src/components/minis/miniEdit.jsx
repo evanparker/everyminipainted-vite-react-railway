@@ -4,12 +4,24 @@ import useUserData from "../../useUserData";
 import DragAndDrop from "../images/DragAndDrop";
 import { getMini, putMini } from "../../services/mini";
 import { postImage } from "../../services/image";
-import { Button, HR, Label, TextInput } from "flowbite-react";
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  HR,
+  Label,
+  TextInput,
+} from "flowbite-react";
 import CldThumbnailImage from "../images/CldThumbnailImage";
 import { BsFillTrash3Fill } from "react-icons/bs";
+import { getFiguresBySearch } from "../../services/figure";
 
 const MiniEdit = () => {
   const [mini, setMini] = useState();
+  const [figureSearch, setFigureSearch] = useState("");
+  const [figureResults, setFigureResults] = useState([]);
+  const [selectedFigure, setSelectedFigure] = useState();
+  const [figureDropdownOpen, setFigureDropdownOpen] = useState(false);
   const { token, userId } = useUserData();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -20,6 +32,7 @@ const MiniEdit = () => {
     const fetchData = async () => {
       const miniData = await getMini(id);
       setMini(miniData);
+      setSelectedFigure(miniData.figure);
     };
     fetchData();
   }, [id]);
@@ -34,13 +47,13 @@ const MiniEdit = () => {
 
   const handleDelete = (index) => {
     const imagesClone = mini.images;
-    imagesClone.splice(index,1);
+    imagesClone.splice(index, 1);
     setMini({ ...mini, images: imagesClone });
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const miniData = await putMini(mini._id, mini);
+    const miniData = await putMini(mini._id, {...mini, figure: selectedFigure});
     setMini({ ...miniData, images: mini.images });
     navigate(`/minis/${id}`);
   };
@@ -59,6 +72,21 @@ const MiniEdit = () => {
     setMini((prevMini) => ({ ...prevMini, name: e.target.value }));
   };
 
+  const chooseFigure = (figure) => {
+    console.log("choosefigure", figure);
+    setSelectedFigure(figure);
+    setFigureSearch(figure.name);
+    setFigureDropdownOpen(false);
+  };
+
+  const handleFigureSearchChange = async (e) => {
+    e.preventDefault();
+    setFigureSearch(e.target.value);
+    const figures = await getFiguresBySearch(e.target.value);
+    setFigureDropdownOpen(true);
+    setFigureResults(figures);
+  };
+
   return (
     <>
       {mini && token && userId === mini?.userId._id && (
@@ -67,7 +95,7 @@ const MiniEdit = () => {
             onSubmit={handleSubmit}
             className="max-w-lg flex flex-col gap-5"
           >
-            <div className=" mb-2 block">
+            <div className="mb-2 block">
               <Label htmlFor="name1">Name</Label>
               <TextInput
                 id="name1"
@@ -76,6 +104,37 @@ const MiniEdit = () => {
                 onChange={handleNameChange}
               />
             </div>
+
+            <div className="mb-2 block">
+              <Label htmlFor="figure1">Figure</Label>
+              {selectedFigure && (
+                <div className="dark:text-white">{selectedFigure.name}</div>
+              )}
+              <TextInput
+                id="figure1"
+                type="text"
+                value={figureSearch}
+                onChange={handleFigureSearchChange}
+                onFocus={handleFigureSearchChange}
+              />
+              {figureDropdownOpen && (
+                <ul
+                  className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+                >
+                  {figureResults.map((f) => (
+                    <li key={f._id}>
+                      <div
+                        onClick={() => chooseFigure(f)}
+                        className="w-full py-2 ms-2 text-sm rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600 font-medium text-gray-900 dark:text-gray-300"
+                      >
+                        {f.name}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
             <DragAndDrop addImages={addImages} />
 
             <Button type="submit">Save</Button>
@@ -96,10 +155,17 @@ const MiniEdit = () => {
                   key={img._id}
                   className="relative cursor-move max-w-md flex rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800"
                 >
-                  <div onClick={()=> handleDelete(index)} className="absolute right-2 top-2 p-2 cursor-pointer text-gray-500 hover:text-gray-800 bg-gray-100 dark:text-gray-400 dark:bg-gray-700 dark:hover:text-gray-200">
-                    <BsFillTrash3Fill className=""/>
+                  <div
+                    onClick={() => handleDelete(index)}
+                    className="absolute right-2 top-2 p-2 cursor-pointer text-gray-500 hover:text-gray-800 bg-gray-100 dark:text-gray-400 dark:bg-gray-700 dark:hover:text-gray-200"
+                  >
+                    <BsFillTrash3Fill className="" />
                   </div>
-                  <CldThumbnailImage publicId={img.cloudinaryPublicId}  width={400} height={400}/>
+                  <CldThumbnailImage
+                    publicId={img.cloudinaryPublicId}
+                    width={400}
+                    height={400}
+                  />
                 </div>
               ))}
             </div>

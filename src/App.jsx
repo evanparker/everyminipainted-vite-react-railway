@@ -40,7 +40,7 @@ function App() {
   return (
     <>
       <ThemeModeScript />
-      <Navigation user={user} />
+      <div className="mb-5"><Navigation user={user}/></div>
       <Routes>
         <Route path="/" element={<Minis />} />
 

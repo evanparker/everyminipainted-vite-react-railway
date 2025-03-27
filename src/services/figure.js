@@ -5,8 +5,18 @@ async function getFigures() {
   return response;
 }
 
+async function getFiguresBySearch(query) {
+  const response = await apiClient.get(`/figures/search?query=${query}`);
+  return response;
+}
+
 async function getFigure(id) {
   const response = await apiClient.get(`/figures/${id}`);
+  return response;
+}
+
+async function getFigureMinis(id) {
+  const response = await apiClient.get(`/figures/${id}/minis`);
   return response;
 }
 
@@ -25,4 +35,4 @@ async function deleteFigure(id) {
   return response;
 }
 
-export { getFigure, getFigures, postFigure, putFigure, deleteFigure };
+export { getFigure, getFigures, postFigure, putFigure, deleteFigure, getFiguresBySearch, getFigureMinis };

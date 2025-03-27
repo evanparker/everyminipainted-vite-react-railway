@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import DisplayFigure from "./displayFigure";
-import { deleteFigure, getFigure } from "../../services/figure";
+import { deleteFigure, getFigure, getFigureMinis } from "../../services/figure";
 import { Button } from "flowbite-react";
 import DeleteModal from "../deleteModal";
 import { BsFillTrash3Fill, BsFillPencilFill } from "react-icons/bs";
 import { getUserByMe } from "../../services/user";
+import DisplayMinis from "../minis/displayMinis";
 
 const Figure = () => {
   const navigate = useNavigate();
   const [figure, setFigure] = useState();
+  const [minis, setMinis] = useState();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const { id } = useParams();
@@ -19,14 +21,19 @@ const Figure = () => {
       const figureData = await getFigure(id);
       setFigure(figureData);
     };
+    const fetchFigureMinisData = async () => {
+      const miniData = await getFigureMinis(id);
+      setMinis(miniData);
+    };
     const fetchSelfData = async () => {
       const selfData = await getUserByMe();
-      if(selfData.roles.includes("admin")) {
+      if (selfData.roles.includes("admin")) {
         setIsAdmin(true);
       }
     };
-    
+
     fetchFigureData();
+    fetchFigureMinisData();
     fetchSelfData();
   }, [id]);
 
@@ -62,6 +69,11 @@ const Figure = () => {
           >
             <BsFillTrash3Fill className="mr-2 h-5 w-5" /> Delete
           </Button>
+        </div>
+      )}
+      {minis && (
+        <div className="mt-5">
+          <DisplayMinis minis={minis} />
         </div>
       )}
     </div>
