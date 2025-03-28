@@ -35,4 +35,12 @@ async function deleteFigure(id) {
   return response;
 }
 
-export { getFigure, getFigures, postFigure, putFigure, deleteFigure, getFiguresBySearch, getFigureMinis };
+export {
+  getFigure,
+  getFigures,
+  postFigure,
+  putFigure,
+  deleteFigure,
+  getFiguresBySearch,
+  getFigureMinis,
+};

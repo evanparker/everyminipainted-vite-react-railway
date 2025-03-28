@@ -12,7 +12,7 @@ const DisplayMinis = ({ minis }) => {
           <Link key={mini._id} to={"/minis/" + mini._id}>
             <Card
               className="w-60 overflow-hidden text-gray-900 dark:text-white"
-              renderImage={() => publicId && <CldThumbnailImage publicId={publicId} width={238} height={238}/>}
+              renderImage={() => publicId && <CldThumbnailImage publicId={publicId} width={200} height={200}/>}
             >
               {mini.name}
             </Card>

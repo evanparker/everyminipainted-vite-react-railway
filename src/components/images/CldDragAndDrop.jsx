@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { FileInput, Label } from "flowbite-react";
 
-const DragAndDrop = ({ addImages }) => {
+const CldDragAndDrop = ({ addImages }) => {
   const [dragOver, setDragOver] = useState(false);
   const [loadingStates, setLoadingStates] = useState([]);
   const abortControllerRef = useRef(new AbortController());
@@ -21,7 +21,7 @@ const DragAndDrop = ({ addImages }) => {
     setDragOver(false);
 
     const files = Array.from(e.target?.files || e.dataTransfer.files);
-    let publicIds = [];
+    const publicIds = [];
     setLoadingStates(new Array(files.length).fill(true));
 
     abortControllerRef.current.abort();
@@ -30,7 +30,7 @@ const DragAndDrop = ({ addImages }) => {
       const url = `https://api.cloudinary.com/v1_1/${
         import.meta.env.VITE_CLOUD_NAME
       }/upload`;
-      for (let file of files) {
+      for (const file of files) {
         try {
           const formData = new FormData();
           const fields = {
@@ -121,8 +121,8 @@ const DragAndDrop = ({ addImages }) => {
   );
 };
 
-DragAndDrop.propTypes = {
+CldDragAndDrop.propTypes = {
   addImages: PropTypes.func,
 };
 
-export default DragAndDrop;
+export default CldDragAndDrop;

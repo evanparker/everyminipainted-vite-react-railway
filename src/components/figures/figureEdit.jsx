@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import DragAndDrop from "../images/DragAndDrop";
+import CldDragAndDrop from "../images/CldDragAndDrop";
 import { getFigure, putFigure } from "../../services/figure";
 import { postImage } from "../../services/image";
 import { Button, HR, Label, TextInput } from "flowbite-react";
@@ -23,11 +23,11 @@ const FigureEdit = () => {
     };
     const fetchSelfData = async () => {
       const selfData = await getUserByMe();
-      if(selfData.roles.includes("admin")) {
+      if (selfData.roles.includes("admin")) {
         setIsAdmin(true);
       }
     };
-    
+
     fetchFigureData();
     fetchSelfData();
   }, [id]);
@@ -42,9 +42,9 @@ const FigureEdit = () => {
 
   const handleDelete = (index) => {
     const imagesClone = figure.images;
-    imagesClone.splice(index,1);
+    imagesClone.splice(index, 1);
     setFigure({ ...figure, images: imagesClone });
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,7 +55,7 @@ const FigureEdit = () => {
 
   const addImages = async (publicIds) => {
     let images = figure.images;
-    for (let publicId of publicIds) {
+    for (const publicId of publicIds) {
       const newImage = await postImage({ cloudinaryPublicId: publicId });
       images = [newImage, ...images];
     }
@@ -75,7 +75,7 @@ const FigureEdit = () => {
             onSubmit={handleSubmit}
             className="max-w-lg flex flex-col gap-5"
           >
-            <div className=" mb-2 block">
+            <div className="mb-2 block">
               <Label htmlFor="name1">Name</Label>
               <TextInput
                 id="name1"
@@ -84,7 +84,7 @@ const FigureEdit = () => {
                 onChange={handleNameChange}
               />
             </div>
-            <DragAndDrop addImages={addImages} />
+            <CldDragAndDrop addImages={addImages} />
 
             <Button type="submit">Save</Button>
           </form>
@@ -104,10 +104,17 @@ const FigureEdit = () => {
                   key={img._id}
                   className="relative cursor-move max-w-md flex rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800"
                 >
-                  <div onClick={()=> handleDelete(index)} className="absolute right-2 top-2 p-2 cursor-pointer text-gray-500 hover:text-gray-800 bg-gray-100 dark:text-gray-400 dark:bg-gray-700 dark:hover:text-gray-200">
-                    <BsFillTrash3Fill className=""/>
+                  <div
+                    onClick={() => handleDelete(index)}
+                    className="absolute right-2 top-2 p-2 cursor-pointer text-gray-500 hover:text-gray-800 bg-gray-100 dark:text-gray-400 dark:bg-gray-700 dark:hover:text-gray-200"
+                  >
+                    <BsFillTrash3Fill className="" />
                   </div>
-                  <CldThumbnailImage publicId={img.cloudinaryPublicId} width={400} height={400} />
+                  <CldThumbnailImage
+                    publicId={img.cloudinaryPublicId}
+                    width={200}
+                    height={200}
+                  />
                 </div>
               ))}
             </div>

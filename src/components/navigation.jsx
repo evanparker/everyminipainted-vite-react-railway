@@ -108,27 +108,13 @@ function Navigation({ user }) {
         <NavbarLink as={Link} to={"/figures"}>
           Figures
         </NavbarLink>
+        <NavbarLink as={Link} to={"/manufacturers"}>
+          Manufacturers
+        </NavbarLink>
         {user && (
-          <Dropdown
-            arrowIcon={false}
-            inline
-            label={
-              <NavbarLink>
-                <HiPlus className="inline" /> New
-              </NavbarLink>
-            }
-          >
-            <DropdownItem>
-              <NavbarLink as={Link} to={"/minis/new"}>
-                Mini
-              </NavbarLink>
-            </DropdownItem>
-            <DropdownItem>
-              <NavbarLink as={Link} to={"/figures/new"}>
-                Figure
-              </NavbarLink>
-            </DropdownItem>
-          </Dropdown>
+          <NavbarLink as={Link} to={"/minis/new"}>
+            <HiPlus className="inline" /> New Mini
+          </NavbarLink>
         )}
       </NavbarCollapse>
     </Navbar>

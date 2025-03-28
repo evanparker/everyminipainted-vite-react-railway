@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useUserData from "../../useUserData";
-import DisplayMini from "./displayMini";
-import DragAndDrop from "../images/DragAndDrop";
+import CldDragAndDrop from "../images/CldDragAndDrop";
 import { postMini } from "../../services/mini";
 import { postImage } from "../../services/image";
-import { Button, HR, Label, TextInput } from "flowbite-react";
+import { Button, Label, TextInput } from "flowbite-react";
 import { getFiguresBySearch } from "../../services/figure";
+import ImageSortContainer from "../images/imageSortContainer";
 
 const MiniNew = () => {
   const [mini, setMini] = useState({ name: "", images: [] });
@@ -22,13 +22,27 @@ const MiniNew = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const miniData = await postMini({...mini, figure: selectedFigure});
+    const miniData = await postMini({ ...mini, figure: selectedFigure });
     navigate(`/minis/${miniData._id}`);
+  };
+
+  const handleSort = (position1, position2) => {
+    const imagesClone = [...mini.images];
+    const temp = imagesClone[position1];
+    imagesClone[position1] = imagesClone[position2];
+    imagesClone[position2] = temp;
+    setMini({ ...mini, images: imagesClone });
+  };
+
+  const handleDelete = (index) => {
+    const imagesClone = mini.images;
+    imagesClone.splice(index, 1);
+    setMini({ ...mini, images: imagesClone });
   };
 
   const addImages = async (publicIds) => {
     let images = mini.images;
-    for (let publicId of publicIds) {
+    for (const publicId of publicIds) {
       const newImage = await postImage({ cloudinaryPublicId: publicId });
       images = [newImage, ...images];
     }
@@ -58,11 +72,14 @@ const MiniNew = () => {
     <>
       {token && (
         <div>
+          <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+            New Mini
+          </h1>
           <form
             onSubmit={handleSubmit}
             className="max-w-lg flex flex-col gap-5"
           >
-            <div className=" mb-2 block">
+            <div className="mb-2 block">
               <Label htmlFor="name1">Name</Label>
               <TextInput
                 id="name1"
@@ -108,12 +125,20 @@ const MiniNew = () => {
               )}
             </div>
 
-            <DragAndDrop addImages={addImages} />
+            <div className="mb-2 block">
+              <Label htmlFor="images1">Images</Label>
+              <CldDragAndDrop addImages={addImages} />
 
+              {mini.images.length > 0 && <div className="mt-5">
+                <ImageSortContainer
+                  onSort={handleSort}
+                  onDelete={handleDelete}
+                  images={mini.images}
+                />
+              </div>}
+            </div>
             <Button type="submit">Save</Button>
           </form>
-          <HR />
-          <DisplayMini mini={mini} />
         </div>
       )}
       {!token && (

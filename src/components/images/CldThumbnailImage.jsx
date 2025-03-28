@@ -1,5 +1,5 @@
 import { Cloudinary } from "@cloudinary/url-gen";
-import { thumbnail } from "@cloudinary/url-gen/actions/resize";
+import { pad } from "@cloudinary/url-gen/actions/resize";
 import { format, quality } from "@cloudinary/url-gen/actions/delivery";
 import { AdvancedImage } from "@cloudinary/react";
 
@@ -8,9 +8,9 @@ const cld = new Cloudinary({
     cloudName: import.meta.env.VITE_CLOUD_NAME,
   },
 });
-// eslint-disable-next-line react/prop-types
+
 const CldThumbnailImage = ({ publicId, width, height }) => {
-  let thumb = thumbnail();
+  let thumb = pad();
   if (width !== undefined) {
     thumb = thumb.width(width);
   }

@@ -10,6 +10,11 @@ async function getManufacturer(id) {
   return response;
 }
 
+async function getManufacturerFigures(id) {
+  const response = await apiClient.get(`/manufactuers/${id}/figures`);
+  return response;
+}
+
 async function postManufacturer(manufacturer) {
   const response = await apiClient.post(`/manufacturers/`, manufacturer);
   return response;
@@ -25,4 +30,11 @@ async function deleteManufacturer(id) {
   return response;
 }
 
-export { getManufacturer, getManufacturers, postManufacturer, putManufacturer, deleteManufacturer };
+export {
+  getManufacturer,
+  getManufacturers,
+  getManufacturerFigures,
+  postManufacturer,
+  putManufacturer,
+  deleteManufacturer,
+};

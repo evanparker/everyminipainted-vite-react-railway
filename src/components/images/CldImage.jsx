@@ -8,7 +8,7 @@ const cld = new Cloudinary({
     cloudName: import.meta.env.VITE_CLOUD_NAME,
   },
 });
-// eslint-disable-next-line react/prop-types
+
 const CldImage = ({ publicId, width, height }) => {
   let thumb = scale();
   if (width !== undefined) {

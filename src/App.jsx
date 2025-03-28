@@ -18,6 +18,10 @@ import Signup from "./components/auth/signup";
 import { initThemeMode, ThemeModeScript } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { getUserByMe } from "./services/user";
+import Manufacturers from "./components/manufacturers/manufacturers";
+import Manufacturer from "./components/manufacturers/manufacturer";
+import ManufacturerEdit from "./components/manufacturers/manufacturerEdit";
+import ManufacturerNew from "./components/manufacturers/manufacturerNew";
 
 function App() {
   const { token, setUserData, resetUserData } = useUserData();
@@ -60,6 +64,11 @@ function App() {
         <Route path="/figures/:id" element={<Figure />} />
         <Route path="/figures/:id/edit" element={<FigureEdit />} />
         <Route path="/figures/new" element={<FigureNew />} />
+
+        <Route path="/manufacturers" element={<Manufacturers />} />
+        <Route path="/manufacturers/:id" element={<Manufacturer />} />
+        <Route path="/manufacturers/:id/edit" element={<ManufacturerEdit />} />
+        <Route path="/manufacturers/new" element={<ManufacturerNew />} />
 
         <Route path="/users/:username" element={<User />} />
         <Route path="/users/edit" element={<UserEdit />} />

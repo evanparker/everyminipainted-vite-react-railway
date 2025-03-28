@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getUserByMe, putUser } from "../../services/user";
 import { Button, Label, TextInput } from "flowbite-react";
-import DragAndDrop from "../images/DragAndDrop";
+import CldDragAndDrop from "../images/CldDragAndDrop";
 import { postImage } from "../../services/image";
 import { useNavigate } from "react-router-dom";
 import UserAvater from "./userAvatar";
@@ -56,7 +56,7 @@ const UserEdit = () => {
                 onChange={handleEmailChange}
               />
             </div>
-            <DragAndDrop addImages={addImages} />
+            <CldDragAndDrop addImages={addImages} />
 
             <Button type="submit">Save</Button>
           </form>

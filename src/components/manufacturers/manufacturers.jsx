@@ -1,31 +1,31 @@
 import { useEffect, useState } from "react";
-import { getFigures } from "../../services/figure";
+import { getManufacturers } from "../../services/manufacturer";
 import { Card } from "flowbite-react";
 import { Link } from "react-router-dom";
 import CldThumbnailImage from "../images/CldThumbnailImage";
 
-const Figures = () => {
-  const [figures, setFigures] = useState([]);
+const Manufacturers = () => {
+  const [manufacturers, setManufacturers] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const figuresData = await getFigures();
-      setFigures(figuresData);
+      const manufacturersData = await getManufacturers();
+      setManufacturers(manufacturersData);
     };
     fetchData();
   }, []);
 
   return (
     <div className="flex flex-wrap gap-4">
-      {figures.map((figure) => {
-        const publicId = figure?.images[0]?.cloudinaryPublicId;
+      {manufacturers.map((manufacturer) => {
+        const publicId = manufacturer?.images[0]?.cloudinaryPublicId;
         return (
-          <Link key={figure._id} to={"/figures/" + figure._id}>
+          <Link key={manufacturer._id} to={"/manufacturers/" + manufacturer._id}>
             <Card
               className="w-60 overflow-hidden text-gray-900 dark:text-white"
               renderImage={() => publicId && <CldThumbnailImage publicId={publicId} width={200} height={200} />}
             >
-              {figure.name}
+              {manufacturer.name}
             </Card>
           </Link>
         );
@@ -34,4 +34,4 @@ const Figures = () => {
   );
 };
 
-export default Figures;
+export default Manufacturers;

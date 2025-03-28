@@ -1,20 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useUserData from "../../useUserData";
-import DragAndDrop from "../images/DragAndDrop";
+import CldDragAndDrop from "../images/CldDragAndDrop";
 import { getMini, putMini } from "../../services/mini";
 import { postImage } from "../../services/image";
 import {
   Button,
-  Dropdown,
-  DropdownItem,
   HR,
   Label,
   TextInput,
 } from "flowbite-react";
-import CldThumbnailImage from "../images/CldThumbnailImage";
-import { BsFillTrash3Fill } from "react-icons/bs";
 import { getFiguresBySearch } from "../../services/figure";
+import ImageSortContainer from "../images/imageSortContainer";
 
 const MiniEdit = () => {
   const [mini, setMini] = useState();
@@ -25,8 +22,6 @@ const MiniEdit = () => {
   const { token, userId } = useUserData();
   const { id } = useParams();
   const navigate = useNavigate();
-  const dragImage = useRef(0);
-  const draggedOverImage = useRef(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,11 +32,11 @@ const MiniEdit = () => {
     fetchData();
   }, [id]);
 
-  const handleSort = () => {
+  const handleSort = (position1, position2) => {
     const imagesClone = [...mini.images];
-    const temp = imagesClone[dragImage.current];
-    imagesClone[dragImage.current] = imagesClone[draggedOverImage.current];
-    imagesClone[draggedOverImage.current] = temp;
+    const temp = imagesClone[position1];
+    imagesClone[position1] = imagesClone[position2];
+    imagesClone[position2] = temp;
     setMini({ ...mini, images: imagesClone });
   };
 
@@ -63,7 +58,7 @@ const MiniEdit = () => {
 
   const addImages = async (publicIds) => {
     let images = mini.images;
-    for (let publicId of publicIds) {
+    for (const publicId of publicIds) {
       const newImage = await postImage({ cloudinaryPublicId: publicId });
       images = [newImage, ...images];
     }
@@ -143,7 +138,7 @@ const MiniEdit = () => {
               )}
             </div>
 
-            <DragAndDrop addImages={addImages} />
+            <CldDragAndDrop addImages={addImages} />
 
             <Button type="submit">Save</Button>
           </form>
@@ -152,30 +147,8 @@ const MiniEdit = () => {
             <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
               {mini?.name || "Untitled Mini"}
             </h1>
-            <div className="mt-5 flex flex-wrap gap-4">
-              {mini?.images?.map((img, index) => (
-                <div
-                  draggable
-                  onDragStart={() => (dragImage.current = index)}
-                  onDragEnter={() => (draggedOverImage.current = index)}
-                  onDragEnd={handleSort}
-                  onDragOver={(e) => e.preventDefault()}
-                  key={img._id}
-                  className="relative cursor-move max-w-md flex rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800"
-                >
-                  <div
-                    onClick={() => handleDelete(index)}
-                    className="absolute right-2 top-2 p-2 cursor-pointer text-gray-500 hover:text-gray-800 bg-gray-100 dark:text-gray-400 dark:bg-gray-700 dark:hover:text-gray-200"
-                  >
-                    <BsFillTrash3Fill className="" />
-                  </div>
-                  <CldThumbnailImage
-                    publicId={img.cloudinaryPublicId}
-                    width={400}
-                    height={400}
-                  />
-                </div>
-              ))}
+            <div className="mt-5">
+              <ImageSortContainer onSort={handleSort} onDelete={handleDelete} images={mini.images}/>
             </div>
           </div>
         </div>
