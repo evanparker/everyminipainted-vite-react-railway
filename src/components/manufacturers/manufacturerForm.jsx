@@ -60,8 +60,7 @@ const ManufacturerForm = ({ mode }) => {
       manufacturerData = await postManufacturer(manufacturer);
     }
     if (manufacturerData) {
-      setManufacturer({ ...manufacturerData, images: manufacturer.images });
-      navigate(`/manufacturers/${id}`);
+      navigate(`/manufacturers/${id? id : ""}`);
     }
   };
 

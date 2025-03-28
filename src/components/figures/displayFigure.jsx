@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import CldThumbnailImage from "../images/CldThumbnailImage";
 import ImageModal from "../images/imageModal";
+import { Link } from "react-router-dom";
 
 
 const DisplayFigure = ({ figure }) => {
@@ -24,6 +25,15 @@ const DisplayFigure = ({ figure }) => {
             </div>
           ))}
         </div>
+        {figure.manufacturer && (
+          <Link to={`/manufacturers/${figure.manufacturer._id}`}>
+            <div className="mt-5 p-3 cursor-pointer max-w-md rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 text-gray-900 dark:text-white">
+            <div className="mb-1 text-xs text-gray-600 dark:text-gray-400">Manufacturer:</div>
+              {figure.manufacturer.name}
+            </div>
+          </Link>
+        )}
+
       </div>
     </>
   );

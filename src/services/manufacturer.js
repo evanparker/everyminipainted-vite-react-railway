@@ -11,8 +11,14 @@ async function getManufacturer(id) {
 }
 
 async function getManufacturerFigures(id) {
-  const response = await apiClient.get(`/manufactuers/${id}/figures`);
+  const response = await apiClient.get(`/manufacturers/${id}/figures`);
   return response;
+}
+
+async function getManufacturersBySearch(query) {
+  const response = await apiClient.get(`/manufacturers/search?query=${query}`);
+  return response;
+
 }
 
 async function postManufacturer(manufacturer) {
@@ -34,6 +40,7 @@ export {
   getManufacturer,
   getManufacturers,
   getManufacturerFigures,
+  getManufacturersBySearch,
   postManufacturer,
   putManufacturer,
   deleteManufacturer,

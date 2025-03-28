@@ -26,7 +26,7 @@ A miniatures portfolio website
   * Logging out
 * Scrape reaper site for data
 * Serve robots/rich links
-* Share forms between edit/create pages
+* Share forms between edit/create pages (still todo: ~~figures forms~~, mini forms)
 
 
 ---

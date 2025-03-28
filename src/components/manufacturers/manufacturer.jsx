@@ -6,12 +6,12 @@ import { Button } from "flowbite-react";
 import DeleteModal from "../deleteModal";
 import { BsFillTrash3Fill, BsFillPencilFill } from "react-icons/bs";
 import { getUserByMe } from "../../services/user";
-import DisplayMinis from "../minis/displayMinis";
+import DisplayFigures from "../figures/displayFigures";
 
 const Manufacturer = () => {
   const navigate = useNavigate();
   const [manufacturer, setManufacturer] = useState();
-  const [minis, setMinis] = useState();
+  const [figures, setFigures] = useState();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const { id } = useParams();
@@ -22,8 +22,8 @@ const Manufacturer = () => {
       setManufacturer(manufacturerData);
     };
     const fetchManufacturerMinisData = async () => {
-      const miniData = await getManufacturerFigures(id);
-      setMinis(miniData);
+      const figureData = await getManufacturerFigures(id);
+      setFigures(figureData);
     };
     const fetchSelfData = async () => {
       const selfData = await getUserByMe();
@@ -71,13 +71,13 @@ const Manufacturer = () => {
           </Button>
         </div>
       )}
-      {minis && (
+      {figures && (
         <>
           <h3 className="mt-5 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
-            Minis
+            Figures
           </h3>
           <div className="mt-5">
-            <DisplayMinis minis={minis} />
+            <DisplayFigures figures={figures} />
           </div>
         </>
       )}
