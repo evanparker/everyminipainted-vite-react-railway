@@ -9,7 +9,7 @@ import { getUserByMe } from "../../services/user";
 const Figures = () => {
   const [figures, setFigures] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       const figuresData = await getFigures();
@@ -30,15 +30,15 @@ const Figures = () => {
     <>
       {isAdmin && (
         <div className="mb-5 flex gap-5">
-        <Button as={Link} to={`/figures/new`}>
-          <HiPlus className="inline" /> New Figure
-        </Button>
+          <Button as={Link} to={`/figures/new`}>
+            <HiPlus className="inline" /> New Figure
+          </Button>
         </div>
       )}
 
       <div className="flex flex-wrap gap-4">
         {figures.map((figure) => {
-          const publicId = figure?.images[0]?.cloudinaryPublicId;
+          const publicId = figure?.thumbnail?.cloudinaryPublicId;
           return (
             <Link key={figure._id} to={"/figures/" + figure._id}>
               <Card

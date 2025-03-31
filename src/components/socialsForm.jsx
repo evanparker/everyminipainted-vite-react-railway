@@ -8,7 +8,6 @@ const SocialsForm = ({ socials, setSocials }) => {
       ...prevSocials,
       { service: social.service, link: "" },
     ]);
-    console.log(socials);
   };
 
   const deleteSocialField = (index) => {

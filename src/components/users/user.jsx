@@ -27,12 +27,8 @@ const User = () => {
       setUser(userData);
     };
     const fetchSelfData = async () => {
-      try {
-        const selfData = await getUserByMe();
-        setSelf(selfData);
-      } catch (e) {
-        console.log(e.message);
-      }
+      const selfData = await getUserByMe();
+      setSelf(selfData);
     };
 
     fetchUserData();

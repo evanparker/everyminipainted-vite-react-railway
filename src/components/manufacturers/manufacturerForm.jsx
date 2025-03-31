@@ -7,16 +7,10 @@ import {
   putManufacturer,
 } from "../../services/manufacturer";
 import { postImage } from "../../services/image";
-import {
-  Button,
-  Label,
-  Textarea,
-  TextInput,
-} from "flowbite-react";
+import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import { getUserByMe } from "../../services/user";
 import ImageSortContainer from "../images/imageSortContainer";
 import SocialsForm from "../socialsForm";
-
 
 const ManufacturerForm = ({ mode }) => {
   const [manufacturer, setManufacturer] = useState({ name: "", images: [] });
@@ -58,6 +52,13 @@ const ManufacturerForm = ({ mode }) => {
     const imagesClone = manufacturer.images;
     imagesClone.splice(index, 1);
     setManufacturer({ ...manufacturer, images: imagesClone });
+  };
+
+  const handleSetThumbnail = (id) => {
+    setManufacturer((prevManufacturer) => ({
+      ...prevManufacturer,
+      thumbnail: id,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -157,6 +158,8 @@ const ManufacturerForm = ({ mode }) => {
                   onSort={handleSort}
                   onDelete={handleDelete}
                   images={manufacturer.images}
+                  thumbnail={manufacturer.thumbnail}
+                  onSetThumbnail={handleSetThumbnail}
                 />
               </div>
             </div>

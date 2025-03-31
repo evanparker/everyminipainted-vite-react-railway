@@ -55,12 +55,22 @@ const DisplayFigure = ({ figure }) => {
         )}
         {figure.partNumber && (
           <div className="max-w-md">
-              <div className="mt-5 p-3 rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 text-gray-900 dark:text-white">
-                <div className="mb-1 text-xs text-gray-600 dark:text-gray-400">
-                  Part Number:
-                </div>
-                {figure.partNumber}
+            <div className="mt-5 p-3 rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 text-gray-900 dark:text-white">
+              <div className="mb-1 text-xs text-gray-600 dark:text-gray-400">
+                Part Number:
               </div>
+              {figure.partNumber}
+            </div>
+          </div>
+        )}
+        {figure.artist && (
+          <div className="max-w-md">
+            <div className="mt-5 p-3 rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 text-gray-900 dark:text-white">
+              <div className="mb-1 text-xs text-gray-600 dark:text-gray-400">
+                Artist:
+              </div>
+              {figure.artist}
+            </div>
           </div>
         )}
         {figure.manufacturer && (

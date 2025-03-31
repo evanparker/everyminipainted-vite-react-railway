@@ -7,6 +7,7 @@ import { postImage } from "../../services/image";
 import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import { getFiguresBySearch } from "../../services/figure";
 import ImageSortContainer from "../images/imageSortContainer";
+import { HiSearch } from "react-icons/hi";
 
 const MiniForm = ({ mode }) => {
   const [mini, setMini] = useState({ name: "", images: [] });
@@ -41,6 +42,10 @@ const MiniForm = ({ mode }) => {
     const imagesClone = mini.images;
     imagesClone.splice(index, 1);
     setMini({ ...mini, images: imagesClone });
+  };
+
+  const handleSetThumbnail = (id) => {
+    setMini((prevMini) => ({ ...prevMini, thumbnail: id }));
   };
 
   const handleSubmit = async (e) => {
@@ -120,14 +125,17 @@ const MiniForm = ({ mode }) => {
               />
             </div>
 
-            <div className="max-w-lg block">
+            <div className="max-w-lg">
               <Label htmlFor="figure1">Figure</Label>
               {selectedFigure && (
-                <div className="dark:text-white">{selectedFigure.name}</div>
+                <div className="py-2 dark:text-white">
+                  {selectedFigure.name}
+                </div>
               )}
               <TextInput
                 id="figure1"
                 type="text"
+                icon={HiSearch}
                 value={figureSearch}
                 onChange={handleFigureSearchChange}
                 onFocus={handleFigureSearchChange}
@@ -156,16 +164,18 @@ const MiniForm = ({ mode }) => {
               )}
             </div>
 
-            <div className="block">
+            <div className="flex flex-col gap-5">
               <div className="max-w-lg">
                 <Label htmlFor="images1">Images</Label>
                 <CldDragAndDrop addImages={addImages} />
               </div>
-              <div className="mt-5">
+              <div className="">
                 <ImageSortContainer
                   onSort={handleSort}
                   onDelete={handleDelete}
                   images={mini.images}
+                  onSetThumbnail={handleSetThumbnail}
+                  thumbnail={mini.thumbnail}
                 />
               </div>
             </div>

@@ -7,6 +7,7 @@ import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import { getUserByMe } from "../../services/user";
 import ImageSortContainer from "../images/imageSortContainer";
 import { getManufacturersBySearch } from "../../services/manufacturer";
+import { HiSearch } from "react-icons/hi";
 
 const FigureForm = ({ mode }) => {
   const [figure, setFigure] = useState({
@@ -14,6 +15,7 @@ const FigureForm = ({ mode }) => {
     partNumber: "",
     website: "",
     description: "",
+    artist: "",
     images: [],
   });
   const [isAdmin, setIsAdmin] = useState(false);
@@ -58,6 +60,10 @@ const FigureForm = ({ mode }) => {
     const imagesClone = figure.images;
     imagesClone.splice(index, 1);
     setFigure({ ...figure, images: imagesClone });
+  };
+
+  const handleSetThumbnail = (id) => {
+    setFigure((prevFigure) => ({ ...prevFigure, thumbnail: id }));
   };
 
   const handleSubmit = async (e) => {
@@ -106,6 +112,11 @@ const FigureForm = ({ mode }) => {
   const handlePartNumberChange = (e) => {
     e.preventDefault();
     setFigure((prevFigure) => ({ ...prevFigure, partNumber: e.target.value }));
+  };
+
+  const handleArtistChange = (e) => {
+    e.preventDefault();
+    setFigure((prevFigure) => ({ ...prevFigure, artist: e.target.value }));
   };
 
   const chooseManufacturer = (manufacturer) => {
@@ -168,6 +179,16 @@ const FigureForm = ({ mode }) => {
             </div>
 
             <div className="max-w-lg block">
+              <Label htmlFor="artist1">Artist</Label>
+              <TextInput
+                id="artist1"
+                type="text"
+                value={figure.artist}
+                onChange={handleArtistChange}
+              />
+            </div>
+
+            <div className="max-w-lg block">
               <Label htmlFor="manufacturer1">Manufacturer</Label>
               {selectedManufacturer && (
                 <div className="dark:text-white">
@@ -177,6 +198,7 @@ const FigureForm = ({ mode }) => {
               <TextInput
                 id="manufacturer1"
                 type="text"
+                icon={HiSearch}
                 value={manufacturerSearch}
                 onChange={handleManufacturerSearchChange}
                 onFocus={handleManufacturerSearchChange}
@@ -215,6 +237,8 @@ const FigureForm = ({ mode }) => {
                   onSort={handleSort}
                   onDelete={handleDelete}
                   images={figure.images}
+                  thumbnail={figure.thumbnail}
+                  onSetThumbnail={handleSetThumbnail}
                 />
               </div>
             </div>

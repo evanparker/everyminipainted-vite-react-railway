@@ -38,7 +38,7 @@ const Manufacturers = () => {
       )}
       <div className="flex flex-wrap gap-4">
         {manufacturers.map((manufacturer) => {
-          const publicId = manufacturer?.images[0]?.cloudinaryPublicId;
+          const publicId = manufacturer?.thumbnail?.cloudinaryPublicId;
           return (
             <Link
               key={manufacturer._id}

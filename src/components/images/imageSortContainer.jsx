@@ -1,8 +1,14 @@
 import { useRef } from "react";
 import CldThumbnailImage from "./CldThumbnailImage";
-import { BsFillTrash3Fill } from "react-icons/bs";
+import { BsFillTrash3Fill, BsPin, BsPinFill } from "react-icons/bs";
 
-const ImageSortContainer = ({ onSort, onDelete, images }) => {
+const ImageSortContainer = ({
+  onSort,
+  onDelete,
+  onSetThumbnail,
+  images,
+  thumbnail,
+}) => {
   const dragImage = useRef(0);
   const draggedOverImage = useRef(0);
 
@@ -24,6 +30,14 @@ const ImageSortContainer = ({ onSort, onDelete, images }) => {
           >
             <BsFillTrash3Fill />
           </div>
+          {onSetThumbnail && (
+            <div
+              onClick={() => onSetThumbnail(img._id)}
+              className="absolute left-2 top-2 p-2 cursor-pointer text-gray-500 hover:text-gray-800 bg-gray-100 dark:text-gray-400 dark:bg-gray-700 dark:hover:text-gray-200"
+            >
+              {img._id === thumbnail ? <BsPinFill /> : <BsPin />}
+            </div>
+          )}
           <CldThumbnailImage
             publicId={img.cloudinaryPublicId}
             width={200}
