@@ -18,7 +18,7 @@ const Manufacturers = () => {
 
     const fetchSelfData = async () => {
       const selfData = await getUserByMe();
-      if (selfData.roles.includes("admin")) {
+      if (selfData?.roles?.includes("admin")) {
         setIsAdmin(true);
       }
     };

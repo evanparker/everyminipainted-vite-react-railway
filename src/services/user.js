@@ -6,6 +6,10 @@ async function getMinisByUsername(username) {
 }
 
 async function getUserByMe() {
+  const token = JSON.parse(localStorage.getItem('token'));
+  if (!token) {
+    return {};
+  }
   const response = await apiClient.get(`/users/me`);
   return response;
 }

@@ -27,8 +27,12 @@ const User = () => {
       setUser(userData);
     };
     const fetchSelfData = async () => {
-      const selfData = await getUserByMe();
-      setSelf(selfData);
+      try {
+        const selfData = await getUserByMe();
+        setSelf(selfData);
+      } catch (e) {
+        console.log(e.message);
+      }
     };
 
     fetchUserData();
@@ -44,9 +48,11 @@ const User = () => {
             <UserAvatar user={user} />
           </div>
 
-          {user?.description && <div className="format dark:format-invert">
-            <Markdown>{user?.description}</Markdown>
-          </div>}
+          {user?.description && (
+            <div className="format dark:format-invert">
+              <Markdown>{user?.description}</Markdown>
+            </div>
+          )}
 
           {user?.website && (
             <div className="max-w-md">
