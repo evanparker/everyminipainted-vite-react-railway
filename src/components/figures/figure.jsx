@@ -71,7 +71,7 @@ const Figure = () => {
           </Button>
         </div>
       )}
-      {minis && (
+      {minis?.length > 0 && (
         <>
           <h3 className="mt-5 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
             Minis

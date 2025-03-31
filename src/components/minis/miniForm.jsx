@@ -100,7 +100,7 @@ const MiniForm = ({ mode }) => {
       {mini && token && (userId === mini?.userId?._id || mode === "new") && (
         <div>
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-            <div className="max-w-lg mb-2 block">
+            <div className="max-w-lg block">
               <Label htmlFor="name1">Name</Label>
               <TextInput
                 id="name1"
@@ -110,7 +110,17 @@ const MiniForm = ({ mode }) => {
               />
             </div>
 
-            <div className="max-w-lg mb-2 block">
+            <div className="block max-w-lg">
+              <Label htmlFor="description1">Description</Label>
+              <Textarea
+                id="description1"
+                rows={4}
+                onChange={handleDescriptionChange}
+                value={mini.description}
+              />
+            </div>
+
+            <div className="max-w-lg block">
               <Label htmlFor="figure1">Figure</Label>
               {selectedFigure && (
                 <div className="dark:text-white">{selectedFigure.name}</div>
@@ -146,17 +156,7 @@ const MiniForm = ({ mode }) => {
               )}
             </div>
 
-            <div className="mb-2 block max-w-lg">
-              <Label htmlFor="description1">Description</Label>
-              <Textarea
-                id="description1"
-                rows={4}
-                onChange={handleDescriptionChange}
-                value={mini.description}
-              />
-            </div>
-
-            <div className="mb-2 block">
+            <div className="block">
               <div className="max-w-lg">
                 <Label htmlFor="images1">Images</Label>
                 <CldDragAndDrop addImages={addImages} />

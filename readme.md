@@ -38,9 +38,9 @@ npm run dev
     * [ ] `description`
     * [ ] `socials[]`
   * [ ] Figures
-    * [ ] `partNumber` - Model/part number
-    * [ ] `description`
-    * [ ] `website` - Link to manufactuerer's site's page for it
+    * [x] `partNumber` - Model/part number
+    * [x] `description`
+    * [x] `website` - Link to manufactuerer's site's page for it
   * [ ] Mini
     * [x] `description`
   * [ ] User
@@ -66,6 +66,7 @@ npm run dev
     * `partNumber` - Model/part number
     * `description`
     * `website` - Link to manufactuerer's site's page for it
+    * [ ] `sculptor`
   * [x] Mini
     * `description`
   * [x] User

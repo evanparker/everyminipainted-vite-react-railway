@@ -1,15 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CldDragAndDrop from "../images/CldDragAndDrop";
-import { getFigure, putFigure } from "../../services/figure";
+import { getFigure, postFigure, putFigure } from "../../services/figure";
 import { postImage } from "../../services/image";
-import { Button, Label, TextInput } from "flowbite-react";
+import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import { getUserByMe } from "../../services/user";
 import ImageSortContainer from "../images/imageSortContainer";
 import { getManufacturersBySearch } from "../../services/manufacturer";
 
 const FigureForm = ({ mode }) => {
-  const [figure, setFigure] = useState({ name: "", images: [] });
+  const [figure, setFigure] = useState({
+    name: "",
+    partNumber: "",
+    website: "",
+    description: "",
+    images: [],
+  });
   const [isAdmin, setIsAdmin] = useState(false);
   const [manufacturerSearch, setManufacturerSearch] = useState("");
   const [manufacturerResults, setManufacturerResults] = useState();
@@ -87,6 +93,21 @@ const FigureForm = ({ mode }) => {
     setFigure((prevFigure) => ({ ...prevFigure, name: e.target.value }));
   };
 
+  const handleDescriptionChange = (e) => {
+    e.preventDefault();
+    setFigure((prevFigure) => ({ ...prevFigure, description: e.target.value }));
+  };
+
+  const handleWebsiteChange = (e) => {
+    e.preventDefault();
+    setFigure((prevFigure) => ({ ...prevFigure, website: e.target.value }));
+  };
+
+  const handlePartNumberChange = (e) => {
+    e.preventDefault();
+    setFigure((prevFigure) => ({ ...prevFigure, partNumber: e.target.value }));
+  };
+
   const chooseManufacturer = (manufacturer) => {
     setSelectedManufacturer(manufacturer);
     setManufacturerSearch(manufacturer?.name || "");
@@ -105,11 +126,8 @@ const FigureForm = ({ mode }) => {
     <>
       {figure && isAdmin && (
         <div>
-          <form
-            onSubmit={handleSubmit}
-            className="max-w-lg flex flex-col gap-5"
-          >
-            <div className="mb-2 block">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <div className="max-w-lg block">
               <Label htmlFor="name1">Name</Label>
               <TextInput
                 id="name1"
@@ -119,7 +137,37 @@ const FigureForm = ({ mode }) => {
               />
             </div>
 
-            <div className="mb-2 block">
+            <div className="max-w-lg block">
+              <Label htmlFor="partNumber1">Part Number</Label>
+              <TextInput
+                id="partNumber1"
+                type="text"
+                value={figure.partNumber}
+                onChange={handlePartNumberChange}
+              />
+            </div>
+
+            <div className="max-w-lg block">
+              <Label htmlFor="website1">Website</Label>
+              <TextInput
+                id="website1"
+                type="text"
+                value={figure.website}
+                onChange={handleWebsiteChange}
+              />
+            </div>
+
+            <div className="max-w-lg block">
+              <Label htmlFor="description1">Description</Label>
+              <Textarea
+                id="description1"
+                rows={4}
+                onChange={handleDescriptionChange}
+                value={figure.description}
+              />
+            </div>
+
+            <div className="max-w-lg block">
               <Label htmlFor="manufacturer1">Manufacturer</Label>
               {selectedManufacturer && (
                 <div className="dark:text-white">
@@ -157,10 +205,11 @@ const FigureForm = ({ mode }) => {
               )}
             </div>
 
-            <div className="mb-2 block">
-              <Label htmlFor="images1">Images</Label>
-              <CldDragAndDrop addImages={addImages} />
-
+            <div className="block">
+              <div className="max-w-lg">
+                <Label htmlFor="images1">Images</Label>
+                <CldDragAndDrop addImages={addImages} />
+              </div>
               <div className="mt-5">
                 <ImageSortContainer
                   onSort={handleSort}
@@ -169,7 +218,9 @@ const FigureForm = ({ mode }) => {
                 />
               </div>
             </div>
-            <Button type="submit">Save</Button>
+            <div className="max-w-lg">
+              <Button type="submit">Save</Button>
+            </div>
           </form>
         </div>
       )}
