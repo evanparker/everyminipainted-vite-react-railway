@@ -13,6 +13,7 @@ npm run dev
 * ~~Purchase Domain and Deployment~~
 * Error pages (404, etc)
 * Show form errors
+  * Validate fields on client
 * Fix sort order for images by adding explicit order
 * ~~Improvements to miniEdit~~
   * ~~Deleting Images~~
@@ -28,20 +29,20 @@ npm run dev
   * Deleting
   * Saving
   * Logging out
-* Scrape reaper site for data
+* Scrape reaper/wizkids site for data
 * Serve robots/rich links
 * ~~Share forms between edit/create pages (still todo: figures forms, mini forms)~~
 * Add markdown component for descriptions/bios/etc
 * Add new fields to forms and relevant views:
-  * [ ] Manufacturer
-    * [ ] `website`
-    * [ ] `description`
-    * [ ] `socials[]`
-  * [ ] Figures
+  * [x] Manufacturer
+    * [x] `website`
+    * [x] `description`
+    * [x] `socials[]`
+  * [x] Figures
     * [x] `partNumber` - Model/part number
     * [x] `description`
     * [x] `website` - Link to manufactuerer's site's page for it
-  * [ ] Mini
+  * [x] Mini
     * [x] `description`
   * [ ] User
     * [ ] `website`
@@ -66,7 +67,7 @@ npm run dev
     * `partNumber` - Model/part number
     * `description`
     * `website` - Link to manufactuerer's site's page for it
-    * [ ] `sculptor`
+    * [ ] `artist`
   * [x] Mini
     * `description`
   * [x] User

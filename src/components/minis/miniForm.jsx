@@ -169,9 +169,9 @@ const MiniForm = ({ mode }) => {
                 />
               </div>
             </div>
-            <Button type="submit" className="max-w-lg">
-              Save
-            </Button>
+            <div className="max-w-lg">
+              <Button type="submit">Save</Button>
+            </div>
           </form>
         </div>
       )}
