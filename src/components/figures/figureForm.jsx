@@ -68,9 +68,8 @@ const FigureForm = ({ mode }) => {
         manufacturer: selectedManufacturer,
       });
     }
-    console.log(figureData);
     if (figureData) {
-      navigate(`/figures/${id? id : ""}`);
+      navigate(`/figures/${id || figureData._id || ""}`);
     }
   };
 

@@ -2,41 +2,67 @@
 
 A miniatures portfolio website
 
+## To run project
+
+```
+npm run dev
+```
 
 ## TODO:
 * ~~User data/avatars~~
 * ~~Purchase Domain and Deployment~~
-* Add createdOn/updatedOn/etc.
 * Error pages (404, etc)
+* Show form errors
 * Fix sort order for images by adding explicit order
 * ~~Improvements to miniEdit~~
   * ~~Deleting Images~~
   * ~~Deleting Mini~~
   * ~~Reordering Images~~
-* Manufacturers/~~Figures~~
+* ~~Manufacturers~~/~~Figures~~
 * Moderation
 * Search
 * Change api to use json:api format 
   * https://jsonapi.org/ 
   * https://www.npmjs.com/package/jsonapi-serializer#relationship-deserializer
-* Tags
 * Add alerts/toasts for
   * Deleting
   * Saving
   * Logging out
 * Scrape reaper site for data
 * Serve robots/rich links
-* Share forms between edit/create pages (still todo: ~~figures forms~~, mini forms)
+* ~~Share forms between edit/create pages (still todo: figures forms, mini forms)~~
+* Add markdown component for descriptions/bios/etc
 
+### Migrations
+* Rename Figures to Models?
+* Rename instances of `userId` to `user`
+* Change mini.figures to an array for kitbashes and such? (maybe not, they can do that in descripton)
+* Add fields
+  * [ ] All:
+    * createdOn
+    * updatedOn
+    * etc...
+  * [x] Manufacturer
+    * `website`
+    * `description`
+    * `socials[]`
+  * [x] Figures
+    * `partNumber` - Model/part number
+    * `description`
+    * `website` - Link to manufactuerer's site's page for it
+  * [x] Mini
+    * `description`
+  * [x] User
+    * `website`
+    * `description`
+    * `socials[]`
+  * [ ] Images
+    * Order?
+    * `description`
+* Add collections
+  * [ ] Tags
+    * Name/text
 
----
-title: Vite + React
-description: The default Vite + React starter, utilizing `Caddy` to serve the built app
-tags:
-  - node
-  - vite
-  - react
----
 
 # Vite + React + Caddy
 

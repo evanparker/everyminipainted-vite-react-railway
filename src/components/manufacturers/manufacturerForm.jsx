@@ -60,7 +60,7 @@ const ManufacturerForm = ({ mode }) => {
       manufacturerData = await postManufacturer(manufacturer);
     }
     if (manufacturerData) {
-      navigate(`/manufacturers/${id? id : ""}`);
+      navigate(`/manufacturers/${id || manufacturerData._id || ""}`);
     }
   };
 
