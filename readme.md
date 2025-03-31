@@ -32,6 +32,22 @@ npm run dev
 * Serve robots/rich links
 * ~~Share forms between edit/create pages (still todo: figures forms, mini forms)~~
 * Add markdown component for descriptions/bios/etc
+* Add new fields to forms and relevant views:
+  * [ ] Manufacturer
+    * [ ] `website`
+    * [ ] `description`
+    * [ ] `socials[]`
+  * [ ] Figures
+    * [ ] `partNumber` - Model/part number
+    * [ ] `description`
+    * [ ] `website` - Link to manufactuerer's site's page for it
+  * [ ] Mini
+    * [x] `description`
+  * [ ] User
+    * [ ] `website`
+    * [ ] `description`
+    * [ ] `socials[]`
+
 
 ### Migrations
 * Rename Figures to Models?

@@ -2,6 +2,8 @@
 
 @plugin 'flowbite-react/plugin/tailwindcss';
 
+@plugin "flowbite-typography";
+
 @source '../.flowbite-react/class-list.json';
 
 /*

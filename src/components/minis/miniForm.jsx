@@ -4,7 +4,7 @@ import useUserData from "../../useUserData";
 import CldDragAndDrop from "../images/CldDragAndDrop";
 import { getMini, postMini, putMini } from "../../services/mini";
 import { postImage } from "../../services/image";
-import { Button, Label, TextInput } from "flowbite-react";
+import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import { getFiguresBySearch } from "../../services/figure";
 import ImageSortContainer from "../images/imageSortContainer";
 
@@ -76,6 +76,11 @@ const MiniForm = ({ mode }) => {
     setMini((prevMini) => ({ ...prevMini, name: e.target.value }));
   };
 
+  const handleDescriptionChange = (e) => {
+    e.preventDefault();
+    setMini((prevMini) => ({ ...prevMini, description: e.target.value }));
+  };
+
   const chooseFigure = (figure) => {
     setSelectedFigure(figure);
     setFigureSearch(figure?.name || "");
@@ -94,10 +99,7 @@ const MiniForm = ({ mode }) => {
     <>
       {mini && token && (userId === mini?.userId?._id || mode === "new") && (
         <div>
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-5"
-          >
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="max-w-lg mb-2 block">
               <Label htmlFor="name1">Name</Label>
               <TextInput
@@ -144,6 +146,16 @@ const MiniForm = ({ mode }) => {
               )}
             </div>
 
+            <div className="mb-2 block max-w-lg">
+              <Label htmlFor="description1">Description</Label>
+              <Textarea
+                id="description1"
+                rows={4}
+                onChange={handleDescriptionChange}
+                value={mini.description}
+              />
+            </div>
+
             <div className="mb-2 block">
               <div className="max-w-lg">
                 <Label htmlFor="images1">Images</Label>
@@ -157,7 +169,9 @@ const MiniForm = ({ mode }) => {
                 />
               </div>
             </div>
-            <Button type="submit" className="max-w-lg" >Save</Button>
+            <Button type="submit" className="max-w-lg">
+              Save
+            </Button>
           </form>
         </div>
       )}
