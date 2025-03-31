@@ -2,12 +2,13 @@ import { HiOutlineUser } from "react-icons/hi";
 import CldThumbnailImage from "../images/CldThumbnailImage";
 import { Avatar } from "flowbite-react";
 import PropTypes from "prop-types";
+import SocialsBlock from "../socialsBlock";
 
-const UserAvater = ({ user }) => {
+const UserAvatar = ({ user }) => {
   return (
     <>
       {user && (
-        <div className="w-xs flex bg-gray-100 dark:bg-gray-700 pl-5 pr-5 pt-3 pb-3 rounded-lg">
+        <div className="w-xs flex items-center bg-gray-100 dark:bg-gray-700 pl-5 pr-5 pt-3 pb-3 rounded-lg">
           <Avatar
             rounded
             className=""
@@ -32,16 +33,18 @@ const UserAvater = ({ user }) => {
           ></Avatar>
           <div className="ml-5 space-y-1 font-medium  dark:text-white">
             <div>{user.username}</div>
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              Joined in August 2014
-            </div>
+            {user.socials?.length > 0 && (
+              <div className="text-sm text-gray-500 dark:text-gray-400">
+                <SocialsBlock socials={user.socials} compact={true} />
+              </div>
+            )}
           </div>
         </div>
       )}
     </>
   );
 };
-UserAvater.propTypes = {
+UserAvatar.propTypes = {
   user: PropTypes.object,
 };
-export default UserAvater;
+export default UserAvatar;

@@ -31,6 +31,7 @@ npm run dev
   * Logging out
 * Scrape reaper/wizkids site for data
 * Serve robots/rich links
+* Sanatize text fields
 * ~~Share forms between edit/create pages (still todo: figures forms, mini forms)~~
 * Add markdown component for descriptions/bios/etc
 * Add new fields to forms and relevant views:
@@ -44,10 +45,10 @@ npm run dev
     * [x] `website` - Link to manufactuerer's site's page for it
   * [x] Mini
     * [x] `description`
-  * [ ] User
-    * [ ] `website`
-    * [ ] `description`
-    * [ ] `socials[]`
+  * [x] User
+    * [x] `website`
+    * [x] `description`
+    * [x] `socials[]`
 
 
 ### Migrations

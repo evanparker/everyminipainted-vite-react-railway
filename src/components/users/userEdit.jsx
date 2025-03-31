@@ -1,26 +1,29 @@
 import { useEffect, useState } from "react";
 import { getUserByMe, putUser } from "../../services/user";
-import { Button, Label, TextInput } from "flowbite-react";
+import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import CldDragAndDrop from "../images/CldDragAndDrop";
 import { postImage } from "../../services/image";
 import { useNavigate } from "react-router-dom";
-import UserAvater from "./userAvatar";
+import UserAvatar from "./userAvatar";
+import SocialsForm from "../socialsForm";
 
 const UserEdit = () => {
   const [user, setUser] = useState();
   const navigate = useNavigate();
+  const [socials, setSocials] = useState([]);
 
   useEffect(() => {
     const fetchUserData = async () => {
       const userData = await getUserByMe();
       setUser(userData);
+      setSocials(userData.socials);
     };
     fetchUserData();
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const responseData = await putUser(user._id, user);
+    const responseData = await putUser(user._id, { ...user, socials });
     if (responseData) {
       navigate(`/users/${user.username}`);
     }
@@ -36,18 +39,31 @@ const UserEdit = () => {
     setUser((prevUser) => ({ ...prevUser, email: e.target.value }));
   };
 
+  const handleDescriptionChange = (e) => {
+    e.preventDefault();
+    setUser((prevUser) => ({
+      ...prevUser,
+      description: e.target.value,
+    }));
+  };
+
+  const handleWebsiteChange = (e) => {
+    e.preventDefault();
+    setUser((prevUser) => ({
+      ...prevUser,
+      website: e.target.value,
+    }));
+  };
+
   return (
     <>
       {user && (
         <>
-          <div>
-            <UserAvater user={user} />
+          <div className="mb-5">
+            <UserAvatar user={user} />
           </div>
-          <form
-            onSubmit={handleSubmit}
-            className="max-w-lg flex flex-col gap-5"
-          >
-            <div className=" mb-2 block">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <div className="max-w-lg">
               <Label htmlFor="email1">Email</Label>
               <TextInput
                 id="email1"
@@ -56,9 +72,38 @@ const UserEdit = () => {
                 onChange={handleEmailChange}
               />
             </div>
-            <CldDragAndDrop addImages={addImages} />
 
-            <Button type="submit">Save</Button>
+            <div className="block max-w-lg">
+              <Label htmlFor="description1">Description</Label>
+              <Textarea
+                id="description1"
+                rows={4}
+                onChange={handleDescriptionChange}
+                value={user.description}
+              />
+            </div>
+
+            <div className="max-w-lg">
+              <Label htmlFor="website1">Website</Label>
+              <TextInput
+                id="website1"
+                type="text"
+                onChange={handleWebsiteChange}
+                value={user?.website}
+              />
+            </div>
+
+            <div className="max-w-lg">
+              <SocialsForm socials={socials} setSocials={setSocials} />
+            </div>
+
+            <div className="max-w-lg">
+              <Label htmlFor="images1">Profile Image</Label>
+              <CldDragAndDrop addImages={addImages} />
+            </div>
+            <div className="max-w-lg">
+              <Button type="submit">Save</Button>
+            </div>
           </form>
         </>
       )}

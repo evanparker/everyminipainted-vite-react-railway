@@ -20,14 +20,14 @@ const DisplayManufacturer = ({ manufacturer }) => {
         image={selectedImage}
         show={!!selectedImage}
       />
-      <div>
-        <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+      <div className="flex flex-col gap-5">
+        <h1 className="text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
           {manufacturer?.name || "Untitled Manufacturer"}
         </h1>
         <div className="format dark:format-invert">
           <Markdown>{manufacturer?.description}</Markdown>
         </div>
-        <div className="mt-5 flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4">
           {manufacturer?.images?.map((img) => (
             <div
               key={img._id}
@@ -46,7 +46,7 @@ const DisplayManufacturer = ({ manufacturer }) => {
         {manufacturer?.website && (
           <div className="max-w-md">
             <Link to={manufacturer.website}>
-              <div className="mt-5 p-3 cursor-pointer rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 text-gray-900 dark:text-white">
+              <div className="p-3 cursor-pointer rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 text-gray-900 dark:text-white">
                 <div className="mb-1 text-xs text-gray-600 dark:text-gray-400">
                   Website:
                 </div>

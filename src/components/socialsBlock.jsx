@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import Socials from "../constants/socials";
 
-const SocialsBlock = ({socials}) => {
+const SocialsBlock = ({socials, compact}) => {
   return (
     <>
-      {socials?.length > 0 && (
+      {socials?.length > 0 && !compact && (
         <div className="max-w-md">
-          <div className="mt-5 p-3 cursor-pointer rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 text-gray-900 dark:text-white">
+          <div className="p-3 cursor-pointer rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 text-gray-900 dark:text-white">
             <div className="mb-1 text-xs text-gray-600 dark:text-gray-400">
               Socials:
             </div>
@@ -21,6 +21,20 @@ const SocialsBlock = ({socials}) => {
               );
             })}
           </div>
+        </div>
+      )}
+      {socials?.length > 0 && compact && (
+        <div className="flex gap-2">
+        {socials.map((social, index) => {
+          const Icon = Socials[social.service].icon;
+          return (
+            <Link key={`social${index}`} to={social.link}>
+              <div className="text-md text-gray-700 dark:text-gray-200 hover:text-black hover:dark:text-white">
+                <Icon />
+              </div>
+            </Link>
+          );
+        })}
         </div>
       )}
     </>
