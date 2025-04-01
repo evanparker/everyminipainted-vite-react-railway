@@ -7,7 +7,7 @@ import { postImage } from "../../services/image";
 import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import { getFiguresBySearch } from "../../services/figure";
 import ImageSortContainer from "../images/imageSortContainer";
-import { HiSearch } from "react-icons/hi";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 
 const MiniForm = ({ mode }) => {
   const [mini, setMini] = useState({ name: "", images: [] });
@@ -135,7 +135,7 @@ const MiniForm = ({ mode }) => {
               <TextInput
                 id="figure1"
                 type="text"
-                icon={HiSearch}
+                icon={FaMagnifyingGlass}
                 value={figureSearch}
                 onChange={handleFigureSearchChange}
                 onFocus={handleFigureSearchChange}

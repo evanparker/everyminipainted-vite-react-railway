@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import DisplayManufacturer from "./displayManufacturer";
-import { deleteManufacturer, getManufacturer, getManufacturerFigures } from "../../services/manufacturer";
+import {
+  deleteManufacturer,
+  getManufacturer,
+  getManufacturerFigures,
+} from "../../services/manufacturer";
 import { Button } from "flowbite-react";
 import DeleteModal from "../deleteModal";
-import { BsFillTrash3Fill, BsFillPencilFill } from "react-icons/bs";
 import { getUserByMe } from "../../services/user";
 import DisplayFigures from "../figures/displayFigures";
+import { FaPencil, FaTrashCan } from "react-icons/fa6";
 
 const Manufacturer = () => {
   const navigate = useNavigate();
@@ -59,7 +63,7 @@ const Manufacturer = () => {
             as={Link}
             to={"/manufacturers/" + id + "/edit"}
           >
-            <BsFillPencilFill className="mr-2 h-5 w-5" />
+            <FaPencil className="mr-2 h-5 w-5" />
             Edit
           </Button>
           <Button
@@ -67,7 +71,7 @@ const Manufacturer = () => {
             className="max-w-36 mt-5"
             onClick={() => setShowDeleteModal(true)}
           >
-            <BsFillTrash3Fill className="mr-2 h-5 w-5" /> Delete
+            <FaTrashCan className="mr-2 h-5 w-5" /> Delete
           </Button>
         </div>
       )}

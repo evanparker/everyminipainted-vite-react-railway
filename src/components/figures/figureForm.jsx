@@ -7,7 +7,7 @@ import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import { getUserByMe } from "../../services/user";
 import ImageSortContainer from "../images/imageSortContainer";
 import { getManufacturersBySearch } from "../../services/manufacturer";
-import { HiSearch } from "react-icons/hi";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 
 const FigureForm = ({ mode }) => {
   const [figure, setFigure] = useState({
@@ -198,7 +198,7 @@ const FigureForm = ({ mode }) => {
               <TextInput
                 id="manufacturer1"
                 type="text"
-                icon={HiSearch}
+                icon={FaMagnifyingGlass}
                 value={manufacturerSearch}
                 onChange={handleManufacturerSearchChange}
                 onFocus={handleManufacturerSearchChange}

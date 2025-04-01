@@ -5,8 +5,8 @@ import DisplayMini from "./displayMini";
 import { deleteMini, getMini } from "../../services/mini";
 import { Button } from "flowbite-react";
 import DeleteModal from "../deleteModal";
-import { BsFillTrash3Fill, BsFillPencilFill } from "react-icons/bs";
 import UserAvatar from "../users/userAvatar";
+import { FaPencil, FaTrashCan } from "react-icons/fa6";
 
 const Mini = () => {
   const navigate = useNavigate();
@@ -50,7 +50,7 @@ const Mini = () => {
             as={Link}
             to={"/minis/" + id + "/edit"}
           >
-            <BsFillPencilFill className="mr-2 h-5 w-5" />
+            <FaPencil className="mr-2 h-5 w-5" />
             Edit
           </Button>
         )}
@@ -60,7 +60,7 @@ const Mini = () => {
             className="max-w-36 mt-5"
             onClick={() => setShowDeleteModal(true)}
           >
-            <BsFillTrash3Fill className="mr-2 h-5 w-5" /> Delete
+            <FaTrashCan className="mr-2 h-5 w-5" /> Delete
           </Button>
         )}
       </div>

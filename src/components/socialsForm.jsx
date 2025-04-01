@@ -1,4 +1,4 @@
-import { FaTrash } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa6";
 import Socials from "../constants/socials";
 import { Dropdown, DropdownItem, Label, TextInput } from "flowbite-react";
 

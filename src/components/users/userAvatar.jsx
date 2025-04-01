@@ -1,9 +1,9 @@
-import { HiOutlineUser } from "react-icons/hi";
 import CldThumbnailImage from "../images/CldThumbnailImage";
 import { Avatar } from "flowbite-react";
 import PropTypes from "prop-types";
 import SocialsBlock from "../socialsBlock";
 import { Link } from "react-router-dom";
+import { FaUser } from "react-icons/fa6";
 
 const UserAvatar = ({ user }) => {
   return (
@@ -27,7 +27,7 @@ const UserAvatar = ({ user }) => {
                     </div>
                   )) || (
                     <div className="rounded-full p-2 bg-gray-200 dark:bg-gray-600 dark:text-white">
-                      <HiOutlineUser />
+                      <FaUser />
                     </div>
                   )}
                 </>

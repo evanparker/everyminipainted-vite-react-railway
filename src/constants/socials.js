@@ -1,16 +1,22 @@
 import {
+  FaBluesky,
   FaFacebook,
   FaInstagram,
   FaTwitch,
   FaTwitter,
   FaYoutube,
-} from "react-icons/fa";
+} from "react-icons/fa6";
 
 const Socials = {
   facebook: {
     name: "Facebook",
     service: "facebook",
     icon: FaFacebook,
+  },
+  bluesky: {
+    name: "Bluesky",
+    service: "bluesky",
+    icon: FaBluesky,
   },
   twitter: {
     name: "Twitter",

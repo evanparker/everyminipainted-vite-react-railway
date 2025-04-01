@@ -12,8 +12,8 @@ import {
 } from "flowbite-react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { HiOutlineUser, HiPlus } from "react-icons/hi";
 import CldThumbnailImage from "./images/CldThumbnailImage";
+import { FaPlus, FaUser } from "react-icons/fa6";
 
 function Navigation({ user }) {
   return (
@@ -47,7 +47,7 @@ function Navigation({ user }) {
                       </div>
                     )) || (
                       <div className="rounded-full p-2 bg-gray-200 dark:bg-gray-600 dark:text-white">
-                        <HiOutlineUser />
+                        <FaUser />
                       </div>
                     )}
                   </>
@@ -113,7 +113,7 @@ function Navigation({ user }) {
         </NavbarLink>
         {user && (
           <NavbarLink as={Link} to={"/minis/new"}>
-            <HiPlus className="inline" /> New Mini
+            <FaPlus className="inline" /> New Mini
           </NavbarLink>
         )}
       </NavbarCollapse>

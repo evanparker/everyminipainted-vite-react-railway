@@ -4,7 +4,7 @@ import { Button, Card } from "flowbite-react";
 import { Link } from "react-router-dom";
 import CldThumbnailImage from "../images/CldThumbnailImage";
 import { getUserByMe } from "../../services/user";
-import { HiPlus } from "react-icons/hi";
+import { FaPlus } from "react-icons/fa6";
 
 const Manufacturers = () => {
   const [manufacturers, setManufacturers] = useState([]);
@@ -32,7 +32,7 @@ const Manufacturers = () => {
       {isAdmin && (
         <div className="mb-5 flex gap-5">
           <Button as={Link} to={`/manufacturers/new`}>
-            <HiPlus className="inline" /> New Manufacturer
+            <FaPlus className="inline" /> New Manufacturer
           </Button>
         </div>
       )}

@@ -3,8 +3,8 @@ import { getFigures } from "../../services/figure";
 import { Button, Card } from "flowbite-react";
 import { Link } from "react-router-dom";
 import CldThumbnailImage from "../images/CldThumbnailImage";
-import { HiPlus } from "react-icons/hi";
 import { getUserByMe } from "../../services/user";
+import { FaPlus } from "react-icons/fa6";
 
 const Figures = () => {
   const [figures, setFigures] = useState([]);
@@ -31,7 +31,7 @@ const Figures = () => {
       {isAdmin && (
         <div className="mb-5 flex gap-5">
           <Button as={Link} to={`/figures/new`}>
-            <HiPlus className="inline" /> New Figure
+            <FaPlus className="inline" /> New Figure
           </Button>
         </div>
       )}

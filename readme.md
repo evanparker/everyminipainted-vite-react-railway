@@ -15,8 +15,8 @@ npm run dev
 - Error pages (404, etc)
 - Show form errors
   - Validate fields on client
-- Fix sort order for images by adding explicit order
-  - Perhaps a thumbnail field...
+- ~~Fix sort order for images by adding explicit order~~
+  - ~~Perhaps a thumbnail field...~~
 - ~~Improvements to miniEdit~~
   - ~~Deleting Images~~
   - ~~Deleting Mini~~
@@ -35,23 +35,23 @@ npm run dev
 - Serve robots/rich links
 - Sanatize text fields
 - ~~Share forms between edit/create pages (still todo: figures forms, mini forms)~~
-- Add markdown component for descriptions/bios/etc
+- ~~Add markdown component for descriptions/bios/etc~~
 - Consolodate search pickers (figure, manufacturer)
 - Add new fields to forms and relevant views:
   - [x] Manufacturer
     - [x] `website`
     - [x] `description`
     - [x] `socials[]`
-    - [ ] `thumbnail`
+    - [x] `thumbnail`
   - [x] Figures
     - [x] `partNumber` - Model/part number
     - [x] `description`
     - [x] `website` - Link to manufactuerer's site's page for it
-    - [ ] `artist`
-    - [ ] `thumbnail`
+    - [x] `artist`
+    - [x] `thumbnail`
   - [x] Mini
     - [x] `description`
-    - [ ] `thumbnail`
+    - [x] `thumbnail`
   - [x] User
     - [x] `website`
     - [x] `description`

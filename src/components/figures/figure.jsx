@@ -4,9 +4,9 @@ import DisplayFigure from "./displayFigure";
 import { deleteFigure, getFigure, getFigureMinis } from "../../services/figure";
 import { Button } from "flowbite-react";
 import DeleteModal from "../deleteModal";
-import { BsFillTrash3Fill, BsFillPencilFill } from "react-icons/bs";
 import { getUserByMe } from "../../services/user";
 import DisplayMinis from "../minis/displayMinis";
+import { FaPencil, FaTrashCan } from "react-icons/fa6";
 
 const Figure = () => {
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ const Figure = () => {
             as={Link}
             to={"/figures/" + id + "/edit"}
           >
-            <BsFillPencilFill className="mr-2 h-5 w-5" />
+            <FaPencil className="mr-2 h-5 w-5" />
             Edit
           </Button>
           <Button
@@ -67,7 +67,7 @@ const Figure = () => {
             className="max-w-36 mt-5"
             onClick={() => setShowDeleteModal(true)}
           >
-            <BsFillTrash3Fill className="mr-2 h-5 w-5" /> Delete
+            <FaTrashCan className="mr-2 h-5 w-5" /> Delete
           </Button>
         </div>
       )}
