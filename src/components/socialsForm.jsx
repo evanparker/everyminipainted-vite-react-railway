@@ -1,6 +1,12 @@
 import { FaTrash } from "react-icons/fa6";
 import Socials from "../constants/socials";
-import { Dropdown, DropdownItem, Label, TextInput } from "flowbite-react";
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  Label,
+  TextInput,
+} from "flowbite-react";
 
 const SocialsForm = ({ socials, setSocials }) => {
   const addSocialField = (social) => {
@@ -49,7 +55,7 @@ const SocialsForm = ({ socials, setSocials }) => {
 
         <div className="flex flex-col gap-2">
           {socials?.map((social, index) => (
-            <div className="flex gap-2" key={`socials${index}`}>
+            <div className="flex gap-2 items-center" key={`socials${index}`}>
               <TextInput
                 icon={Socials[social.service].icon}
                 type="search"
@@ -60,12 +66,13 @@ const SocialsForm = ({ socials, setSocials }) => {
                 value={social.link}
                 onChange={(e) => handleSocialFieldChange(e, social, index)}
               />
-              <div
+              <Button
                 onClick={() => deleteSocialField(index)}
-                className=" p-3 rounded-md cursor-pointer text-gray-500 hover:text-gray-800 bg-gray-100 dark:text-gray-400 dark:bg-gray-700 dark:hover:text-gray-200"
+                color="gray"
+                className=" px-3 cursor-pointer text-gray-500 hover:text-gray-800 bg-gray-100 dark:text-gray-400 dark:bg-gray-700 dark:hover:text-gray-200"
               >
                 <FaTrash />
-              </div>
+              </Button>
             </div>
           ))}
         </div>

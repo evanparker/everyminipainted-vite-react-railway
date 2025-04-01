@@ -2,6 +2,7 @@ import {
   FaBluesky,
   FaFacebook,
   FaInstagram,
+  FaMastodon,
   FaTwitch,
   FaTwitter,
   FaYoutube,
@@ -18,10 +19,10 @@ const Socials = {
     service: "bluesky",
     icon: FaBluesky,
   },
-  twitter: {
-    name: "Twitter",
-    service: "twitter",
-    icon: FaTwitter,
+  mastodon: {
+    name: "Mastodon",
+    service: "mastodon",
+    icon: FaMastodon,
   },
   instagram: {
     name: "Instagram",
@@ -37,6 +38,11 @@ const Socials = {
     name: "YouTube",
     service: "youtube",
     icon: FaYoutube,
+  },
+  twitter: {
+    name: "Twitter",
+    service: "twitter",
+    icon: FaTwitter,
   },
 };
 

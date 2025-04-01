@@ -31,7 +31,10 @@ npm run dev
   - Deleting
   - Saving
   - Logging out
+  - Errors
 - Scrape reaper/wizkids site for data
+  - Reach out to companies
+  - Reaper APIs: https://www.reapermini.com/retailsupport/resources
 - Serve robots/rich links
 - Sanatize text fields
 - ~~Share forms between edit/create pages (still todo: figures forms, mini forms)~~
