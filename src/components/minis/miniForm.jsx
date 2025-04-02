@@ -80,7 +80,11 @@ const MiniForm = ({ mode }) => {
       const newImage = await postImage({ cloudinaryPublicId: publicId });
       images = [newImage, ...images];
     }
-    setMini((prevMini) => ({ ...prevMini, images }));
+    setMini((prevMini) => ({
+      ...prevMini,
+      images,
+      thumbnail: prevMini.thumbnail || images[0]._id,
+    }));
   };
 
   const handleNameChange = (e) => {
