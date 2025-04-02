@@ -11,6 +11,8 @@ import DeleteModal from "../deleteModal";
 import { getUserByMe } from "../../services/user";
 import DisplayFigures from "../figures/displayFigures";
 import { FaPencil, FaTrashCan } from "react-icons/fa6";
+import DeleteToast from "../toasts/deleteToast";
+import { toast } from "react-toastify/unstyled";
 
 const Manufacturer = () => {
   const navigate = useNavigate();
@@ -44,6 +46,10 @@ const Manufacturer = () => {
   const handleDeleteManufacturer = async () => {
     const deletedManufacturer = await deleteManufacturer(id);
     if (deletedManufacturer) {
+      toast(DeleteToast, {
+        data: { message: `${manufacturer.name} Deleted` },
+      });
+
       navigate("/manufacturers");
     }
   };

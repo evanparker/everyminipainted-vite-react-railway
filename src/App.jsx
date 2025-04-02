@@ -22,6 +22,7 @@ import Manufacturers from "./components/manufacturers/manufacturers";
 import Manufacturer from "./components/manufacturers/manufacturer";
 import ManufacturerEdit from "./components/manufacturers/manufacturerEdit";
 import ManufacturerNew from "./components/manufacturers/manufacturerNew";
+import { ToastContainer } from "react-toastify/unstyled";
 
 function App() {
   const { token, setUserData, resetUserData } = useUserData();
@@ -44,7 +45,18 @@ function App() {
   return (
     <>
       <ThemeModeScript />
-      <div className="mb-5"><Navigation user={user}/></div>
+      <ToastContainer
+        position="bottom-right"
+        closeButton={false}
+        closeOnClick={true}
+        hideProgressBar={true}
+        pauseOnHover={true}
+      />
+
+      <div className="mb-5">
+        <Navigation user={user} />
+      </div>
+
       <Routes>
         <Route path="/" element={<Minis />} />
 

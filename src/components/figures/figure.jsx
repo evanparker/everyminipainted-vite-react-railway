@@ -7,6 +7,8 @@ import DeleteModal from "../deleteModal";
 import { getUserByMe } from "../../services/user";
 import DisplayMinis from "../minis/displayMinis";
 import { FaPencil, FaTrashCan } from "react-icons/fa6";
+import DeleteToast from "../toasts/deleteToast";
+import { toast } from "react-toastify/unstyled";
 
 const Figure = () => {
   const navigate = useNavigate();
@@ -40,6 +42,10 @@ const Figure = () => {
   const handleDeleteFigure = async () => {
     const deletedFigure = await deleteFigure(id);
     if (deletedFigure) {
+      toast(DeleteToast, {
+        data: { message: `${figure.name} Deleted` },
+      });
+
       navigate("/figures");
     }
   };

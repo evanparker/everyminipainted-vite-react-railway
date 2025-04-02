@@ -7,6 +7,8 @@ import { Button } from "flowbite-react";
 import DeleteModal from "../deleteModal";
 import UserAvatar from "../users/userAvatar";
 import { FaPencil, FaTrashCan } from "react-icons/fa6";
+import DeleteToast from "../toasts/deleteToast";
+import { toast } from "react-toastify/unstyled";
 
 const Mini = () => {
   const navigate = useNavigate();
@@ -17,15 +19,24 @@ const Mini = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const miniData = await getMini(id);
-      setMini(miniData);
+      try {
+        const miniData = await getMini(id);
+        setMini(miniData);
+      } catch (e) {
+        if (e.status === 404) {
+          navigate("/404");
+        }
+      }
     };
     fetchData();
-  }, [id]);
+  }, [id, navigate]);
 
   const handleDeleteMini = async () => {
     const deletedMini = await deleteMini(id);
     if (deletedMini) {
+      toast(DeleteToast, {
+        data: { message: `${mini.name} Deleted` },
+      });
       navigate("/");
     }
   };

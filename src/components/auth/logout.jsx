@@ -1,18 +1,20 @@
-import PropTypes from 'prop-types'
-import { useNavigate } from 'react-router-dom';
-import { postLogout } from '../../services/auth';
-import { Button } from 'flowbite-react';
+import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+import { postLogout } from "../../services/auth";
+import { Button } from "flowbite-react";
+import LogoutToast from "../toasts/logoutToast";
+import { toast } from "react-toastify/unstyled";
 
-const Logout = ({resetUserData}) => {
-
+const Logout = ({ resetUserData }) => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await postLogout({});
     resetUserData();
-    navigate('/');
-}
+    toast(LogoutToast);
+    navigate("/");
+  };
 
   return (
     <>
@@ -22,12 +24,12 @@ const Logout = ({resetUserData}) => {
         </form>
       </div>
     </>
-  )
-}
+  );
+};
 
 Logout.propTypes = {
   resetUserData: PropTypes.func.isRequired,
-  token: PropTypes.string
-}
+  token: PropTypes.string,
+};
 
-export default Logout
+export default Logout;

@@ -11,6 +11,8 @@ import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import { getUserByMe } from "../../services/user";
 import ImageSortContainer from "../images/imageSortContainer";
 import SocialsForm from "../socialsForm";
+import { toast } from "react-toastify/unstyled";
+import SaveToast from "../toasts/saveToast";
 
 const ManufacturerForm = ({ mode }) => {
   const [manufacturer, setManufacturer] = useState({ name: "", images: [] });
@@ -73,6 +75,11 @@ const ManufacturerForm = ({ mode }) => {
       manufacturerData = await postManufacturer({ ...manufacturer, socials });
     }
     if (manufacturerData) {
+      toast(SaveToast, {
+        data: {
+          message: `${manufacturer.name} Saved.`,
+        },
+      });
       navigate(`/manufacturers/${id || manufacturerData._id || ""}`);
     }
   };

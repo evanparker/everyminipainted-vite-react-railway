@@ -6,6 +6,8 @@ import { postImage } from "../../services/image";
 import { useNavigate } from "react-router-dom";
 import UserAvatar from "./userAvatar";
 import SocialsForm from "../socialsForm";
+import { toast } from "react-toastify/unstyled";
+import SaveToast from "../toasts/saveToast";
 
 const UserEdit = () => {
   const [user, setUser] = useState();
@@ -25,6 +27,7 @@ const UserEdit = () => {
     e.preventDefault();
     const responseData = await putUser(user._id, { ...user, socials });
     if (responseData) {
+      toast(SaveToast, { data: { message: `${user.username} Saved.` } });
       navigate(`/users/${user.username}`);
     }
   };

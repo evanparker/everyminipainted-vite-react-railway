@@ -63,7 +63,7 @@ const User = () => {
             </div>
           )}
 
-          <SocialsBlock socials={user.socials} />
+          <SocialsBlock socials={user?.socials} />
 
           {self?._id === user?._id && (
             <div className="flex">

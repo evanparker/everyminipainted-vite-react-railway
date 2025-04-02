@@ -8,6 +8,8 @@ import { getUserByMe } from "../../services/user";
 import ImageSortContainer from "../images/imageSortContainer";
 import { getManufacturersBySearch } from "../../services/manufacturer";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { toast } from "react-toastify/unstyled";
+import SaveToast from "../toasts/saveToast";
 
 const FigureForm = ({ mode }) => {
   const [figure, setFigure] = useState({
@@ -81,6 +83,11 @@ const FigureForm = ({ mode }) => {
       });
     }
     if (figureData) {
+      toast(SaveToast, {
+        data: {
+          message: `${figure.name} Saved.`,
+        },
+      });
       navigate(`/figures/${id || figureData._id || ""}`);
     }
   };

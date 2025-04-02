@@ -8,6 +8,8 @@ import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import { getFiguresBySearch } from "../../services/figure";
 import ImageSortContainer from "../images/imageSortContainer";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { toast } from "react-toastify/unstyled";
+import SaveToast from "../toasts/saveToast";
 
 const MiniForm = ({ mode }) => {
   const [mini, setMini] = useState({ name: "", images: [] });
@@ -63,6 +65,11 @@ const MiniForm = ({ mode }) => {
       });
     }
     if (miniData) {
+      toast(SaveToast, {
+        data: {
+          message: `${mini.name} Saved.`,
+        },
+      });
       navigate(`/minis/${id || miniData?._id || ""}`);
     }
   };

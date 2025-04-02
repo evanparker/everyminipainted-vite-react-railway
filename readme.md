@@ -10,11 +10,29 @@ npm run dev
 
 ## TODO:
 
-- ~~User data/avatars~~
-- ~~Purchase Domain and Deployment~~
 - Error pages (404, etc)
 - Show form errors
   - Validate fields on client
+- Moderation
+- Search
+- Change api to use json:api format
+  - https://jsonapi.org/
+  - https://www.npmjs.com/package/jsonapi-serializer#relationship-deserializer
+- Add alerts/toasts for
+  - [x] Deleting
+  - [x] Saving
+  - [x] Logging out
+  - [ ] Errors
+- Change Password
+- Reset Password
+- Scrape reaper/wizkids site for data
+  - Reach out to companies
+  - Reaper APIs: https://www.reapermini.com/retailsupport/resources
+- Serve robots/rich links
+- Sanatize text fields
+- Consolodate search pickers (figure, manufacturer)
+- ~~User data/avatars~~
+- ~~Purchase Domain and Deployment~~
 - ~~Fix sort order for images by adding explicit order~~
   - ~~Perhaps a thumbnail field...~~
 - ~~Improvements to miniEdit~~
@@ -22,24 +40,8 @@ npm run dev
   - ~~Deleting Mini~~
   - ~~Reordering Images~~
 - ~~Manufacturers~~/~~Figures~~
-- Moderation
-- Search
-- Change api to use json:api format
-  - https://jsonapi.org/
-  - https://www.npmjs.com/package/jsonapi-serializer#relationship-deserializer
-- Add alerts/toasts for
-  - Deleting
-  - Saving
-  - Logging out
-  - Errors
-- Scrape reaper/wizkids site for data
-  - Reach out to companies
-  - Reaper APIs: https://www.reapermini.com/retailsupport/resources
-- Serve robots/rich links
-- Sanatize text fields
 - ~~Share forms between edit/create pages (still todo: figures forms, mini forms)~~
 - ~~Add markdown component for descriptions/bios/etc~~
-- Consolodate search pickers (figure, manufacturer)
 - Add new fields to forms and relevant views:
   - [x] Manufacturer
     - [x] `website`
