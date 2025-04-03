@@ -11,10 +11,13 @@ npm run dev
 ## TODO:
 
 - Error pages (404, etc)
+- About page
 - Show form errors
   - Validate fields on client
 - Moderation
 - Search
+- Pagination
+- Figure out how to merge duplicate records
 - Change api to use json:api format
   - https://jsonapi.org/
   - https://www.npmjs.com/package/jsonapi-serializer#relationship-deserializer
@@ -26,8 +29,9 @@ npm run dev
 - Change Password
 - Reset Password
 - Scrape reaper/wizkids site for data
-  - Reach out to companies
+  - [ ] Reach out to companies
   - Reaper APIs: https://www.reapermini.com/retailsupport/resources
+  - Wizkids unpainted essentials page: https://wizkids.com/upmessentials/
 - Serve robots/rich links
 - Sanatize text fields
 - Consolodate search pickers (figure, manufacturer)

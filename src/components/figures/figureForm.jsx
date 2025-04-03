@@ -98,7 +98,11 @@ const FigureForm = ({ mode }) => {
       const newImage = await postImage({ cloudinaryPublicId: publicId });
       images = [newImage, ...images];
     }
-    setFigure((prevFigure) => ({ ...prevFigure, images }));
+    setFigure((prevFigure) => ({
+      ...prevFigure,
+      images,
+      thumbnail: prevFigure.thumbnail || images[0]._id,
+    }));
   };
 
   const handleNameChange = (e) => {

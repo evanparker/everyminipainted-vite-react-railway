@@ -90,7 +90,11 @@ const ManufacturerForm = ({ mode }) => {
       const newImage = await postImage({ cloudinaryPublicId: publicId });
       images = [newImage, ...images];
     }
-    setManufacturer((prevManufacturer) => ({ ...prevManufacturer, images }));
+    setManufacturer((prevManufacturer) => ({
+      ...prevManufacturer,
+      images,
+      thumbnail: prevManufacturer.thumbnail || images[0]._id,
+    }));
   };
 
   const handleNameChange = (e) => {
