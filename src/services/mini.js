@@ -1,7 +1,9 @@
 import { apiClient } from "./apiClient";
 
-async function getMinis() {
-  const response = await apiClient.get(`/minis/?thumbnails="true"`);
+async function getMinis({ limit = 20, offset = 0 }) {
+  const response = await apiClient.get(
+    `/minis/?limit=${limit}&offset=${offset}`
+  );
   return response;
 }
 

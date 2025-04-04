@@ -1,7 +1,9 @@
 import { apiClient } from "./apiClient";
 
-async function getManufacturers() {
-  const response = await apiClient.get(`/manufacturers/?thumbnails="true"`);
+async function getManufacturers({ limit = 20, offset = 0 }) {
+  const response = await apiClient.get(
+    `/manufacturers/?limit=${limit}&offset=${offset}`
+  );
   return response;
 }
 
@@ -10,15 +12,18 @@ async function getManufacturer(id) {
   return response;
 }
 
-async function getManufacturerFigures(id) {
-  const response = await apiClient.get(`/manufacturers/${id}/figures`);
+async function getManufacturerFigures(id, { limit = 20, offset = 0 }) {
+  const response = await apiClient.get(
+    `/manufacturers/${id}/figures?limit=${limit}&offset=${offset}`
+  );
   return response;
 }
 
-async function getManufacturersBySearch(query) {
-  const response = await apiClient.get(`/manufacturers/search?query=${query}`);
+async function getManufacturersBySearch(search, { limit = 20, offset = 0 }) {
+  const response = await apiClient.get(
+    `/manufacturers/search?search=${search}&limit=${limit}&offset=${offset}`
+  );
   return response;
-
 }
 
 async function postManufacturer(manufacturer) {

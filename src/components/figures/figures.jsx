@@ -1,20 +1,34 @@
 import { useEffect, useState } from "react";
 import { getFigures } from "../../services/figure";
-import { Button, Card } from "flowbite-react";
+import { Button } from "flowbite-react";
 import { Link } from "react-router-dom";
-import CldThumbnailImage from "../images/CldThumbnailImage";
 import { getUserByMe } from "../../services/user";
 import { FaPlus } from "react-icons/fa6";
+import { Pagination } from "flowbite-react";
+import DisplayFigures from "./displayFigures";
+
+const itemsPerPage = 20;
 
 const Figures = () => {
   const [figures, setFigures] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
-      const figuresData = await getFigures();
-      setFigures(figuresData);
+      const results = await getFigures({
+        limit: itemsPerPage,
+        offset: (currentPage - 1) * itemsPerPage,
+      });
+      setTotalPages(results.totalPages);
+      setFigures(results.docs);
     };
+
+    fetchData();
+  }, [currentPage]);
+
+  useEffect(() => {
     const fetchSelfData = async () => {
       const selfData = await getUserByMe();
       if (selfData?.roles?.includes("admin")) {
@@ -22,9 +36,10 @@ const Figures = () => {
       }
     };
 
-    fetchData();
     fetchSelfData();
   }, []);
+
+  const onPageChange = (page) => setCurrentPage(page);
 
   return (
     <>
@@ -36,28 +51,13 @@ const Figures = () => {
         </div>
       )}
 
-      <div className="flex flex-wrap gap-4">
-        {figures.map((figure) => {
-          const publicId = figure?.thumbnail?.cloudinaryPublicId;
-          return (
-            <Link key={figure._id} to={"/figures/" + figure._id}>
-              <Card
-                className="w-60 overflow-hidden text-gray-900 dark:text-white"
-                renderImage={() =>
-                  publicId && (
-                    <CldThumbnailImage
-                      publicId={publicId}
-                      width={200}
-                      height={200}
-                    />
-                  )
-                }
-              >
-                {figure.name}
-              </Card>
-            </Link>
-          );
-        })}
+      <DisplayFigures figures={figures} />
+      <div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+        />
       </div>
     </>
   );

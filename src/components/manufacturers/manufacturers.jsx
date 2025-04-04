@@ -5,17 +5,31 @@ import { Link } from "react-router-dom";
 import CldThumbnailImage from "../images/CldThumbnailImage";
 import { getUserByMe } from "../../services/user";
 import { FaPlus } from "react-icons/fa6";
+import { Pagination } from "flowbite-react";
+
+const itemsPerPage = 20;
 
 const Manufacturers = () => {
   const [manufacturers, setManufacturers] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
-      const manufacturersData = await getManufacturers();
+      const results = await getManufacturers({
+        limit: itemsPerPage,
+        offset: (currentPage - 1) * itemsPerPage,
+      });
+      setTotalPages(results.totalPages);
+      const manufacturersData = results.docs;
       setManufacturers(manufacturersData);
     };
 
+    fetchData();
+  }, [currentPage]);
+
+  useEffect(() => {
     const fetchSelfData = async () => {
       const selfData = await getUserByMe();
       if (selfData?.roles?.includes("admin")) {
@@ -23,9 +37,10 @@ const Manufacturers = () => {
       }
     };
 
-    fetchData();
     fetchSelfData();
   }, []);
+
+  const onPageChange = (page) => setCurrentPage(page);
 
   return (
     <>
@@ -61,6 +76,13 @@ const Manufacturers = () => {
             </Link>
           );
         })}
+      </div>
+      <div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+        />
       </div>
     </>
   );

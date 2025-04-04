@@ -139,9 +139,12 @@ const FigureForm = ({ mode }) => {
   const handleManufacturerSearchChange = async (e) => {
     e.preventDefault();
     setManufacturerSearch(e.target.value);
-    const manufacturers = await getManufacturersBySearch(e.target.value);
+    const manufacturers = await getManufacturersBySearch(e.target.value, {
+      limit: 20,
+      offset: 0,
+    });
     setManufacturerDropdownOpen(true);
-    setManufacturerResults(manufacturers);
+    setManufacturerResults(manufacturers.docs);
   };
 
   return (

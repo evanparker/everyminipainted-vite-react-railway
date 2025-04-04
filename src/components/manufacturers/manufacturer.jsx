@@ -6,13 +6,15 @@ import {
   getManufacturer,
   getManufacturerFigures,
 } from "../../services/manufacturer";
-import { Button } from "flowbite-react";
+import { Button, Pagination } from "flowbite-react";
 import DeleteModal from "../deleteModal";
 import { getUserByMe } from "../../services/user";
 import DisplayFigures from "../figures/displayFigures";
 import { FaPencil, FaTrashCan } from "react-icons/fa6";
 import DeleteToast from "../toasts/deleteToast";
 import { toast } from "react-toastify/unstyled";
+
+const itemsPerPage = 20;
 
 const Manufacturer = () => {
   const navigate = useNavigate();
@@ -21,16 +23,10 @@ const Manufacturer = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const { id } = useParams();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    const fetchManufacturerData = async () => {
-      const manufacturerData = await getManufacturer(id);
-      setManufacturer(manufacturerData);
-    };
-    const fetchManufacturerMinisData = async () => {
-      const figureData = await getManufacturerFigures(id);
-      setFigures(figureData);
-    };
     const fetchSelfData = async () => {
       const selfData = await getUserByMe();
       if (selfData?.roles?.includes("admin")) {
@@ -38,10 +34,32 @@ const Manufacturer = () => {
       }
     };
 
-    fetchManufacturerData();
-    fetchManufacturerMinisData();
     fetchSelfData();
+  }, []);
+
+  useEffect(() => {
+    const fetchManufacturerData = async () => {
+      const manufacturerData = await getManufacturer(id);
+      setManufacturer(manufacturerData);
+    };
+
+    fetchManufacturerData();
   }, [id]);
+
+  useEffect(() => {
+    const fetchManufacturerFiguresData = async () => {
+      const results = await getManufacturerFigures(id, {
+        limit: itemsPerPage,
+        offset: (currentPage - 1) * itemsPerPage,
+      });
+      setTotalPages(results.totalPages);
+      setFigures(results.docs);
+    };
+
+    fetchManufacturerFiguresData();
+  }, [currentPage, id]);
+
+  const onPageChange = (page) => setCurrentPage(page);
 
   const handleDeleteManufacturer = async () => {
     const deletedManufacturer = await deleteManufacturer(id);
@@ -88,6 +106,13 @@ const Manufacturer = () => {
           </h3>
           <div className="mt-5">
             <DisplayFigures figures={figures} />
+          </div>
+          <div>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={onPageChange}
+            />
           </div>
         </>
       )}
