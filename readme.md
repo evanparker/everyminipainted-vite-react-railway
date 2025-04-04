@@ -20,7 +20,7 @@ npm run dev
   - [x] Figures
   - [x] Minis
   - [x] Manufacturers
-  - [x] Users?
+  - [x] Users
 - Comments
 - Keyboard support
   - Arrow key to change images being viewed

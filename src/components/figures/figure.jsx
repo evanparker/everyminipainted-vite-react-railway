@@ -63,6 +63,10 @@ const Figure = () => {
     fetchFigureMinisData();
   }, [currentPage, id]);
 
+  useEffect(() => {
+    setCurrentPage(parseInt(searchParams.get("page") || 1));
+  }, [searchParams]);
+
   const handleDeleteFigure = async () => {
     const deletedFigure = await deleteFigure(id);
     if (deletedFigure) {
@@ -76,7 +80,7 @@ const Figure = () => {
 
   const onPageChange = (page) => {
     setCurrentPage(page);
-    setSearchParams({ page }, { replace: true });
+    setSearchParams({ page }, { replace: false });
   };
 
   return (

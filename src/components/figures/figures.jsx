@@ -32,6 +32,10 @@ const Figures = () => {
   }, [currentPage]);
 
   useEffect(() => {
+    setCurrentPage(parseInt(searchParams.get("page") || 1));
+  }, [searchParams]);
+
+  useEffect(() => {
     const fetchSelfData = async () => {
       const selfData = await getUserByMe();
       if (selfData?.roles?.includes("admin")) {
@@ -44,7 +48,7 @@ const Figures = () => {
 
   const onPageChange = (page) => {
     setCurrentPage(page);
-    setSearchParams({ page }, { replace: true });
+    setSearchParams({ page }, { replace: false });
   };
 
   return (

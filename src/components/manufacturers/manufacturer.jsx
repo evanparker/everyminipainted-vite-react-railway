@@ -67,9 +67,13 @@ const Manufacturer = () => {
     fetchManufacturerFiguresData();
   }, [currentPage, id]);
 
+  useEffect(() => {
+    setCurrentPage(parseInt(searchParams.get("page") || 1));
+  }, [searchParams]);
+
   const onPageChange = (page) => {
     setCurrentPage(page);
-    setSearchParams({ page }, { replace: true });
+    setSearchParams({ page }, { replace: false });
   };
 
   const handleDeleteManufacturer = async () => {
