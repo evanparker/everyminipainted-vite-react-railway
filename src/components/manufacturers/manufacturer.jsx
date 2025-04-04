@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import DisplayManufacturer from "./displayManufacturer";
 import {
   deleteManufacturer,
@@ -23,8 +28,11 @@ const Manufacturer = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const { id } = useParams();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(searchParams.get("page") || 1)
+  );
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const fetchSelfData = async () => {
@@ -59,7 +67,10 @@ const Manufacturer = () => {
     fetchManufacturerFiguresData();
   }, [currentPage, id]);
 
-  const onPageChange = (page) => setCurrentPage(page);
+  const onPageChange = (page) => {
+    setCurrentPage(page);
+    setSearchParams({ page }, { replace: true });
+  };
 
   const handleDeleteManufacturer = async () => {
     const deletedManufacturer = await deleteManufacturer(id);

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getFigures } from "../../services/figure";
 import { Button } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { getUserByMe } from "../../services/user";
 import { FaPlus } from "react-icons/fa6";
 import { Pagination } from "flowbite-react";
@@ -12,8 +12,11 @@ const itemsPerPage = 20;
 const Figures = () => {
   const [figures, setFigures] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(searchParams.get("page") || 1)
+  );
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +42,10 @@ const Figures = () => {
     fetchSelfData();
   }, []);
 
-  const onPageChange = (page) => setCurrentPage(page);
+  const onPageChange = (page) => {
+    setCurrentPage(page);
+    setSearchParams({ page }, { replace: true });
+  };
 
   return (
     <>

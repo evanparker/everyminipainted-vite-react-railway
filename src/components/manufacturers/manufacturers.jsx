@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getManufacturers } from "../../services/manufacturer";
 import { Button, Card } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import CldThumbnailImage from "../images/CldThumbnailImage";
 import { getUserByMe } from "../../services/user";
 import { FaPlus } from "react-icons/fa6";
@@ -12,8 +12,11 @@ const itemsPerPage = 20;
 const Manufacturers = () => {
   const [manufacturers, setManufacturers] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(searchParams.get("page") || 1)
+  );
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,8 +25,7 @@ const Manufacturers = () => {
         offset: (currentPage - 1) * itemsPerPage,
       });
       setTotalPages(results.totalPages);
-      const manufacturersData = results.docs;
-      setManufacturers(manufacturersData);
+      setManufacturers(results.docs);
     };
 
     fetchData();
@@ -40,7 +42,10 @@ const Manufacturers = () => {
     fetchSelfData();
   }, []);
 
-  const onPageChange = (page) => setCurrentPage(page);
+  const onPageChange = (page) => {
+    setCurrentPage(page);
+    setSearchParams({ page }, { replace: true });
+  };
 
   return (
     <>

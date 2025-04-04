@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import {
   getMinisByUsername,
   getUserByMe,
@@ -19,8 +19,11 @@ const User = () => {
   const [user, setUser] = useState();
   const [self, setSelf] = useState();
   const { username } = useParams();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(searchParams.get("page") || 1)
+  );
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const fetchSelfData = async () => {
@@ -52,7 +55,10 @@ const User = () => {
     fetchMinisData();
   }, [currentPage, username]);
 
-  const onPageChange = (page) => setCurrentPage(page);
+  const onPageChange = (page) => {
+    setCurrentPage(page);
+    setSearchParams({ page }, { replace: true });
+  };
 
   return (
     <>

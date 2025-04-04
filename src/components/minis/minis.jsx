@@ -2,13 +2,17 @@ import { useEffect, useState } from "react";
 import { getMinis } from "../../services/mini";
 import DisplayMinis from "./displayMinis";
 import { Pagination } from "flowbite-react";
+import { useSearchParams } from "react-router-dom";
 
 const itemsPerPage = 20;
 
 const Minis = () => {
   const [minis, setMinis] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(searchParams.get("page") || 1)
+  );
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +27,10 @@ const Minis = () => {
     fetchData();
   }, [currentPage]);
 
-  const onPageChange = (page) => setCurrentPage(page);
+  const onPageChange = (page) => {
+    setCurrentPage(page);
+    setSearchParams({ page }, { replace: true });
+  };
 
   return (
     <>
