@@ -1,21 +1,41 @@
 import { useEffect, useState } from "react";
 import { getManufacturers } from "../../services/manufacturer";
 import { Button, Card } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import CldThumbnailImage from "../images/CldThumbnailImage";
 import { getUserByMe } from "../../services/user";
 import { FaPlus } from "react-icons/fa6";
+import { Pagination } from "flowbite-react";
+
+const itemsPerPage = 20;
 
 const Manufacturers = () => {
   const [manufacturers, setManufacturers] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(searchParams.get("page") || 1)
+  );
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
-      const manufacturersData = await getManufacturers();
-      setManufacturers(manufacturersData);
+      const results = await getManufacturers({
+        limit: itemsPerPage,
+        offset: (currentPage - 1) * itemsPerPage,
+      });
+      setTotalPages(results.totalPages);
+      setManufacturers(results.docs);
     };
 
+    fetchData();
+  }, [currentPage]);
+
+  useEffect(() => {
+    setCurrentPage(parseInt(searchParams.get("page") || 1));
+  }, [searchParams]);
+
+  useEffect(() => {
     const fetchSelfData = async () => {
       const selfData = await getUserByMe();
       if (selfData?.roles?.includes("admin")) {
@@ -23,9 +43,13 @@ const Manufacturers = () => {
       }
     };
 
-    fetchData();
     fetchSelfData();
   }, []);
+
+  const onPageChange = (page) => {
+    setCurrentPage(page);
+    setSearchParams({ page }, { replace: false });
+  };
 
   return (
     <>
@@ -61,6 +85,13 @@ const Manufacturers = () => {
             </Link>
           );
         })}
+      </div>
+      <div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+        />
       </div>
     </>
   );

@@ -16,11 +16,21 @@ npm run dev
   - Validate fields on client
 - Moderation
 - Search
-- Pagination
+- [x] Pagination (using mongoose-paginate-v2)
+  - [x] Figures
+  - [x] Minis
+  - [x] Manufacturers
+  - [x] Users
+- Comments
+- Keyboard support
+  - Arrow key to change images being viewed
 - Figure out how to merge duplicate records
-- Change api to use json:api format
+- Change api to use json:api format?
   - https://jsonapi.org/
   - https://www.npmjs.com/package/jsonapi-serializer#relationship-deserializer
+  - https://jsonapi.org/implementations/#related-tools-playground
+  - https://github.com/holidayextras/jsonapi-server?tab=readme-ov-file
+  - https://github.com/holidayextras/jsonapi-store-mongodb
 - Add alerts/toasts for
   - [x] Deleting
   - [x] Saving
@@ -29,7 +39,7 @@ npm run dev
 - Change Password
 - Reset Password
 - Scrape reaper/wizkids site for data
-  - [ ] Reach out to companies
+  - [x] Reach out to companies
   - Reaper APIs: https://www.reapermini.com/retailsupport/resources
   - Wizkids unpainted essentials page: https://wizkids.com/upmessentials/
 - Serve robots/rich links

@@ -1,12 +1,16 @@
 import { apiClient } from "./apiClient";
 
-async function getFigures() {
-  const response = await apiClient.get(`/figures/?thumbnails="true"`);
+async function getFigures({ limit = 20, offset = 0 }) {
+  const response = await apiClient.get(
+    `/figures/?limit=${limit}&offset=${offset}`
+  );
   return response;
 }
 
-async function getFiguresBySearch(query) {
-  const response = await apiClient.get(`/figures/search?query=${query}`);
+async function getFiguresBySearch(search, { limit = 20, offset = 0 }) {
+  const response = await apiClient.get(
+    `/figures/search?search=${search}&limit=${limit}&offset=${offset}`
+  );
   return response;
 }
 
@@ -15,8 +19,10 @@ async function getFigure(id) {
   return response;
 }
 
-async function getFigureMinis(id) {
-  const response = await apiClient.get(`/figures/${id}/minis`);
+async function getFigureMinis(id, { limit = 20, offset = 0 }) {
+  const response = await apiClient.get(
+    `/figures/${id}/minis?limit=${limit}&offset=${offset}`
+  );
   return response;
 }
 

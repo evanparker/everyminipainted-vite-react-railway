@@ -1,9 +1,8 @@
 import CldThumbnailImage from "../images/CldThumbnailImage";
-import PropTypes from "prop-types";
 import { Card } from "flowbite-react";
 import { Link } from "react-router-dom";
 
-const DisplayMinis = ({ figures }) => {
+const DisplayFigures = ({ figures }) => {
   return (
     <div className="flex flex-wrap gap-4">
       {figures.map((figure) => {
@@ -31,7 +30,4 @@ const DisplayMinis = ({ figures }) => {
   );
 };
 
-DisplayMinis.propTypes = {
-  figures: PropTypes.arrayOf(PropTypes.object),
-};
-export default DisplayMinis;
+export default DisplayFigures;

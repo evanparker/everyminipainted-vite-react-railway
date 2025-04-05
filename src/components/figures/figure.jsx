@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import DisplayFigure from "./displayFigure";
 import { deleteFigure, getFigure, getFigureMinis } from "../../services/figure";
-import { Button } from "flowbite-react";
+import { Button, Pagination } from "flowbite-react";
 import DeleteModal from "../deleteModal";
 import { getUserByMe } from "../../services/user";
 import DisplayMinis from "../minis/displayMinis";
 import { FaPencil, FaTrashCan } from "react-icons/fa6";
 import DeleteToast from "../toasts/deleteToast";
 import { toast } from "react-toastify/unstyled";
+
+const itemsPerPage = 20;
 
 const Figure = () => {
   const navigate = useNavigate();
@@ -17,16 +24,13 @@ const Figure = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const { id } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(searchParams.get("page") || 1)
+  );
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    const fetchFigureData = async () => {
-      const figureData = await getFigure(id);
-      setFigure(figureData);
-    };
-    const fetchFigureMinisData = async () => {
-      const miniData = await getFigureMinis(id);
-      setMinis(miniData);
-    };
     const fetchSelfData = async () => {
       const selfData = await getUserByMe();
       if (selfData?.roles?.includes("admin")) {
@@ -34,10 +38,34 @@ const Figure = () => {
       }
     };
 
-    fetchFigureData();
-    fetchFigureMinisData();
     fetchSelfData();
+  }, []);
+
+  useEffect(() => {
+    const fetchFigureData = async () => {
+      const figureData = await getFigure(id);
+      setFigure(figureData);
+    };
+
+    fetchFigureData();
   }, [id]);
+
+  useEffect(() => {
+    const fetchFigureMinisData = async () => {
+      const results = await getFigureMinis(id, {
+        limit: itemsPerPage,
+        offset: (currentPage - 1) * itemsPerPage,
+      });
+      setTotalPages(results.totalPages);
+      setMinis(results.docs);
+    };
+
+    fetchFigureMinisData();
+  }, [currentPage, id]);
+
+  useEffect(() => {
+    setCurrentPage(parseInt(searchParams.get("page") || 1));
+  }, [searchParams]);
 
   const handleDeleteFigure = async () => {
     const deletedFigure = await deleteFigure(id);
@@ -48,6 +76,11 @@ const Figure = () => {
 
       navigate("/figures");
     }
+  };
+
+  const onPageChange = (page) => {
+    setCurrentPage(page);
+    setSearchParams({ page }, { replace: false });
   };
 
   return (
@@ -84,6 +117,13 @@ const Figure = () => {
           </h3>
           <div className="mt-5">
             <DisplayMinis minis={minis} />
+          </div>
+          <div>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={onPageChange}
+            />
           </div>
         </>
       )}

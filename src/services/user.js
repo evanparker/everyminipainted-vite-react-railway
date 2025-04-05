@@ -1,12 +1,14 @@
 import { apiClient } from "./apiClient";
 
-async function getMinisByUsername(username) {
-  const response = await apiClient.get(`/users/${username}/minis?thumbnails=true`);
+async function getMinisByUsername(username, { limit = 20, offset = 0 }) {
+  const response = await apiClient.get(
+    `/users/${username}/minis?limit=${limit}&offset=${offset}`
+  );
   return response;
 }
 
 async function getUserByMe() {
-  const token = JSON.parse(localStorage.getItem('token'));
+  const token = JSON.parse(localStorage.getItem("token"));
   if (!token) {
     return {};
   }

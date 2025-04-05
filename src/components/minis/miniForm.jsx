@@ -106,7 +106,11 @@ const MiniForm = ({ mode }) => {
   const handleFigureSearchChange = async (e) => {
     e.preventDefault();
     setFigureSearch(e.target.value);
-    const figures = await getFiguresBySearch(e.target.value);
+    const results = await getFiguresBySearch(e.target.value, {
+      limit: 20,
+      offset: 0,
+    });
+    const figures = results.docs;
     setFigureDropdownOpen(true);
     setFigureResults(figures);
   };

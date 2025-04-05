@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import {
   getMinisByUsername,
   getUserByMe,
@@ -10,31 +10,59 @@ import UserAvatar from "./userAvatar";
 import { Button } from "flowbite-react";
 import SocialsBlock from "../socialsBlock";
 import Markdown from "react-markdown";
+import { Pagination } from "flowbite-react";
+
+const itemsPerPage = 20;
 
 const User = () => {
   const [minis, setMinis] = useState();
   const [user, setUser] = useState();
   const [self, setSelf] = useState();
   const { username } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(searchParams.get("page") || 1)
+  );
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    const fetchMinisData = async () => {
-      const minisData = await getMinisByUsername(username);
-      setMinis(minisData);
-    };
-    const fetchUserData = async () => {
-      const userData = await getUserByUsername(username);
-      setUser(userData);
-    };
     const fetchSelfData = async () => {
       const selfData = await getUserByMe();
       setSelf(selfData);
     };
 
-    fetchUserData();
-    fetchMinisData();
     fetchSelfData();
+  }, []);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userData = await getUserByUsername(username);
+      setUser(userData);
+    };
+    fetchUserData();
   }, [username]);
+
+  useEffect(() => {
+    const fetchMinisData = async () => {
+      const results = await getMinisByUsername(username, {
+        limit: itemsPerPage,
+        offset: (currentPage - 1) * itemsPerPage,
+      });
+      setTotalPages(results.totalPages);
+      setMinis(results.docs);
+    };
+
+    fetchMinisData();
+  }, [currentPage, username]);
+
+  useEffect(() => {
+    setCurrentPage(parseInt(searchParams.get("page") || 1));
+  }, [searchParams]);
+
+  const onPageChange = (page) => {
+    setCurrentPage(page);
+    setSearchParams({ page }, { replace: false });
+  };
 
   return (
     <>
@@ -74,6 +102,13 @@ const User = () => {
           )}
 
           <DisplayMinis minis={minis} />
+          <div>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={onPageChange}
+            />
+          </div>
         </div>
       )}
     </>
