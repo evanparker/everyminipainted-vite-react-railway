@@ -16,6 +16,7 @@ npm run dev
   - Validate fields on client
 - Moderation
 - Search
+- Tagging
 - [x] Pagination (using mongoose-paginate-v2)
   - [x] Figures
   - [x] Minis
@@ -36,7 +37,6 @@ npm run dev
   - [x] Saving
   - [x] Logging out
   - [ ] Errors
-- Change Password
 - Reset Password
 - Scrape reaper/wizkids site for data
   - [x] Reach out to companies
@@ -45,6 +45,7 @@ npm run dev
 - Serve robots/rich links
 - Sanatize text fields
 - Consolodate search pickers (figure, manufacturer)
+- ~~Change Password~~
 - ~~User data/avatars~~
 - ~~Purchase Domain and Deployment~~
 - ~~Fix sort order for images by adding explicit order~~
@@ -81,10 +82,8 @@ npm run dev
 - Rename `Figures` to `Models`?
 - Rename instances of `userId` to `user`
 - Add fields
-  - [ ] All:
-    - createdOn
-    - updatedOn
-    - etc...
+  - [x] All:
+    - [x] createdAt
   - [x] Manufacturer
     - `website`
     - `description`

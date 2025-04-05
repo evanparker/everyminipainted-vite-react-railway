@@ -94,9 +94,12 @@ const User = () => {
           <SocialsBlock socials={user?.socials} />
 
           {self?._id === user?._id && (
-            <div className="flex">
+            <div className="flex gap-5">
               <Button as={Link} to={`/users/edit`}>
                 Edit Profile
+              </Button>
+              <Button as={Link} to={`/password`} outline>
+                Edit Password
               </Button>
             </div>
           )}

@@ -11,8 +11,13 @@ async function postSignup(signupInfo) {
 }
 
 async function postLogout() {
-  const response = await apiClient.post(`/auth/logout/`);
+  const response = await apiClient.post(`/auth/logout`);
   return response;
 }
 
-export { postLogin, postSignup, postLogout };
+async function putPassword(passwordInfo) {
+  const response = await apiClient.put(`/auth/password`, passwordInfo);
+  return response;
+}
+
+export { postLogin, postSignup, postLogout, putPassword };

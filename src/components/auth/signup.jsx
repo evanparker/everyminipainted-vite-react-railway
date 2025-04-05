@@ -16,7 +16,7 @@ const Signup = () => {
       username,
       email,
       password,
-      invite
+      invite,
     });
     if (userData) {
       navigate("/login");
@@ -26,9 +26,9 @@ const Signup = () => {
   return (
     <div>
       <form onSubmit={handleSubmit} className="flex max-w-md flex-col gap-4">
-      <div>
+        <div>
           <div className="mb-2 block">
-            <Label htmlFor="username1" >Username</Label>
+            <Label htmlFor="username1">Username</Label>
           </div>
           <TextInput
             id="username1"
@@ -45,12 +45,13 @@ const Signup = () => {
             id="email1"
             type="email"
             required
+            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="password1" >Password</Label>
+            <Label htmlFor="password1">Password</Label>
           </div>
           <TextInput
             id="password1"

@@ -133,6 +133,7 @@ const ManufacturerForm = ({ mode }) => {
                 type="text"
                 value={manufacturer.name}
                 onChange={handleNameChange}
+                required={true}
               />
             </div>
 

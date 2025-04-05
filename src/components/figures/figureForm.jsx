@@ -159,6 +159,7 @@ const FigureForm = ({ mode }) => {
                 type="text"
                 value={figure.name}
                 onChange={handleNameChange}
+                required={true}
               />
             </div>
 

@@ -23,6 +23,7 @@ import Manufacturer from "./components/manufacturers/manufacturer";
 import ManufacturerEdit from "./components/manufacturers/manufacturerEdit";
 import ManufacturerNew from "./components/manufacturers/manufacturerNew";
 import { ToastContainer } from "react-toastify/unstyled";
+import PasswordForm from "./components/auth/passwordForm";
 
 function App() {
   const { token, setUserData, resetUserData } = useUserData();
@@ -66,6 +67,7 @@ function App() {
           path="/logout"
           element={<Logout resetUserData={resetUserData} />}
         />
+        <Route path="/password" element={<PasswordForm />} />
 
         <Route path="/minis" element={<Minis />} />
         <Route path="/minis/:id" element={<Mini />} />
