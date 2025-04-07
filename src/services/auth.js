@@ -20,4 +20,21 @@ async function putPassword(passwordInfo) {
   return response;
 }
 
-export { postLogin, postSignup, postLogout, putPassword };
+async function postForgotPassword(emailInfo) {
+  const response = await apiClient.post(`/auth/forgotpassword`, emailInfo);
+  return response;
+}
+
+async function postResetPassword(info) {
+  const response = await apiClient.post(`/auth/resetpassword`, info);
+  return response;
+}
+
+export {
+  postLogin,
+  postSignup,
+  postLogout,
+  putPassword,
+  postForgotPassword,
+  postResetPassword,
+};

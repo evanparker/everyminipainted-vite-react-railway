@@ -1,23 +1,37 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { postLogin } from "../../services/auth";
-import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+import { Button, HelperText, Label, TextInput } from "flowbite-react";
+import LogoutToast from "../toasts/logoutToast";
+import { toast } from "react-toastify/unstyled";
 
 const Login = ({ setUserData }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [errorText, setErrorText] = useState();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = await postLogin({
-      email,
-      password,
-    });
-
-    setUserData(userData);
-    navigate("/");
+    setErrorText();
+    try {
+      const userData = await postLogin({
+        email,
+        password,
+      });
+      setUserData(userData);
+      toast(LogoutToast, {
+        data: {
+          message: `Logged in as ${email}.`,
+        },
+      });
+      navigate("/");
+    } catch (error) {
+      if (error.status === 401) {
+        setErrorText("Invalid username or password.");
+      }
+    }
   };
 
   return (
@@ -45,11 +59,20 @@ const Login = ({ setUserData }) => {
             required
             onChange={(e) => setPassword(e.target.value)}
           />
+          <HelperText color="failure">{errorText}</HelperText>
+          <HelperText>
+            <Link
+              to="/forgotpassword"
+              className="ml-1 font-medium text-cyan-600 hover:underline dark:text-cyan-500"
+            >
+              Forgot Password?
+            </Link>
+          </HelperText>
         </div>
-        <div className="flex items-center gap-2">
+        {/* <div className="flex items-center gap-2">
           <Checkbox id="remember" />
           <Label htmlFor="remember">Remember me</Label>
-        </div>
+        </div> */}
         <Button type="submit">Submit</Button>
       </form>
     </div>

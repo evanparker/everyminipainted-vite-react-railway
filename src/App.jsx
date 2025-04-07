@@ -1,29 +1,31 @@
-import { Route, Routes } from "react-router-dom";
-import useUserData from "./useUserData";
-import "./App.css";
-import Login from "./components/auth/login";
-import Logout from "./components/auth/logout";
-import Minis from "./components/minis/minis";
-import Mini from "./components/minis/mini";
-import MiniEdit from "./components/minis/miniEdit";
-import MiniNew from "./components/minis/miniNew";
-import Figures from "./components/figures/figures";
-import FigureNew from "./components/figures/figureNew";
-import Figure from "./components/figures/figure";
-import FigureEdit from "./components/figures/figureEdit";
-import User from "./components/users/user";
-import UserEdit from "./components/users/userEdit";
-import Navigation from "./components/navigation";
-import Signup from "./components/auth/signup";
 import { initThemeMode, ThemeModeScript } from "flowbite-react";
 import { useEffect, useState } from "react";
-import { getUserByMe } from "./services/user";
-import Manufacturers from "./components/manufacturers/manufacturers";
+import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify/unstyled";
+import "./App.css";
+import ForgotPasswordForm from "./components/auth/forgotPasswordForm";
+import Login from "./components/auth/login";
+import Logout from "./components/auth/logout";
+import PasswordForm from "./components/auth/passwordForm";
+import ResetPasswordForm from "./components/auth/resetPasswordForm";
+import Signup from "./components/auth/signup";
+import Figure from "./components/figures/figure";
+import FigureEdit from "./components/figures/figureEdit";
+import FigureNew from "./components/figures/figureNew";
+import Figures from "./components/figures/figures";
 import Manufacturer from "./components/manufacturers/manufacturer";
 import ManufacturerEdit from "./components/manufacturers/manufacturerEdit";
 import ManufacturerNew from "./components/manufacturers/manufacturerNew";
-import { ToastContainer } from "react-toastify/unstyled";
-import PasswordForm from "./components/auth/passwordForm";
+import Manufacturers from "./components/manufacturers/manufacturers";
+import Mini from "./components/minis/mini";
+import MiniEdit from "./components/minis/miniEdit";
+import MiniNew from "./components/minis/miniNew";
+import Minis from "./components/minis/minis";
+import Navigation from "./components/navigation";
+import User from "./components/users/user";
+import UserEdit from "./components/users/userEdit";
+import { getUserByMe } from "./services/user";
+import useUserData from "./useUserData";
 
 function App() {
   const { token, setUserData, resetUserData } = useUserData();
@@ -68,6 +70,8 @@ function App() {
           element={<Logout resetUserData={resetUserData} />}
         />
         <Route path="/password" element={<PasswordForm />} />
+        <Route path="/forgotpassword" element={<ForgotPasswordForm />} />
+        <Route path="/passwordreset" element={<ResetPasswordForm />} />
 
         <Route path="/minis" element={<Minis />} />
         <Route path="/minis/:id" element={<Mini />} />

@@ -1,35 +1,32 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { putPassword } from "../../services/auth";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { postResetPassword } from "../../services/auth";
 import { Button, Label, TextInput } from "flowbite-react";
 import { toast } from "react-toastify/unstyled";
-import { getUserByMe } from "../../services/user";
 import SaveToast from "../toasts/saveToast";
 
-const PasswordForm = () => {
+const ResetPasswordForm = () => {
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [userId, setUserId] = useState("");
+  const [token, setToken] = useState("");
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    const fetchSelfData = async () => {
-      const selfData = await getUserByMe();
-      setUsername(selfData.username);
-    };
-
-    fetchSelfData();
-  }, []);
+    setToken(searchParams.get("token"));
+    setUserId(searchParams.get("id"));
+  }, [searchParams]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = await putPassword({ password });
+    const userData = await postResetPassword({ userId, token, password });
     if (userData) {
       toast(SaveToast, {
         data: {
-          message: `Password for ${username} updated.`,
+          message: `Password was reset.`,
         },
       });
-      navigate(`/users/${username}`);
+      navigate(`/login`);
     }
   };
 
@@ -53,4 +50,4 @@ const PasswordForm = () => {
   );
 };
 
-export default PasswordForm;
+export default ResetPasswordForm;

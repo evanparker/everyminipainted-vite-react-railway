@@ -14,6 +14,7 @@ npm run dev
 - About page
 - Show form errors
   - Validate fields on client
+- mongoose schema: `timestamps: true`
 - Moderation
 - Search
 - Tagging
