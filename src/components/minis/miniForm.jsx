@@ -144,7 +144,10 @@ const MiniForm = ({ mode }) => {
               <Label htmlFor="figure1">Figure</Label>
               {selectedFigure && (
                 <div className="py-2 dark:text-white">
-                  {selectedFigure.name}
+                  {selectedFigure.name}{" "}
+                  <span className="text-gray-700 dark:text-gray-500">
+                    {selectedFigure.partNumber}
+                  </span>
                 </div>
               )}
               <TextInput
@@ -171,7 +174,10 @@ const MiniForm = ({ mode }) => {
                         onClick={() => chooseFigure(f)}
                         className="w-full py-2 text-sm rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600 font-medium text-gray-900 dark:text-gray-300"
                       >
-                        {f.name}
+                        {f.name}{" "}
+                        <span className="text-gray-700 dark:text-gray-500">
+                          {f.partNumber}
+                        </span>
                       </div>
                     </li>
                   ))}

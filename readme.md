@@ -11,8 +11,8 @@ npm run dev
 ## TODO:
 
 - Error pages (404, etc)
-- About page
-- Footer
+- ~~About page~~
+- ~~Footer~~
 - Show form errors
   - Validate fields on client
 - mongoose schema: `timestamps: true`
