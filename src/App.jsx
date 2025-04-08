@@ -26,6 +26,9 @@ import User from "./components/users/user";
 import UserEdit from "./components/users/userEdit";
 import { getUserByMe } from "./services/user";
 import useUserData from "./useUserData";
+import PageFooter from "./components/pageFooter";
+import AboutPage from "./components/aboutPage";
+import ContactPage from "./components/contactPage";
 
 function App() {
   const { token, setUserData, resetUserData } = useUserData();
@@ -62,6 +65,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Minis />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
 
         <Route path="/login" element={<Login setUserData={setUserData} />} />
         <Route path="/signup" element={<Signup />} />
@@ -91,6 +96,10 @@ function App() {
         <Route path="/users/:username" element={<User />} />
         <Route path="/users/edit" element={<UserEdit />} />
       </Routes>
+
+      <div className="mt-5">
+        <PageFooter />
+      </div>
     </>
   );
 }

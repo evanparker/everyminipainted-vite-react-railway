@@ -12,17 +12,14 @@ npm run dev
 
 - Error pages (404, etc)
 - About page
+- Footer
 - Show form errors
   - Validate fields on client
 - mongoose schema: `timestamps: true`
 - Moderation
 - Search
 - Tagging
-- [x] Pagination (using mongoose-paginate-v2)
-  - [x] Figures
-  - [x] Minis
-  - [x] Manufacturers
-  - [x] Users
+- Style and write email templates
 - Comments
 - Keyboard support
   - Arrow key to change images being viewed
@@ -38,7 +35,6 @@ npm run dev
   - [x] Saving
   - [x] Logging out
   - [ ] Errors
-- Reset Password
 - Scrape reaper/wizkids site for data
   - [x] Reach out to companies
   - Reaper APIs: https://www.reapermini.com/retailsupport/resources
@@ -47,6 +43,7 @@ npm run dev
 - Sanatize text fields
 - Consolodate search pickers (figure, manufacturer)
 - ~~Change Password~~
+- ~~ Forgot/Reset Password~~
 - ~~User data/avatars~~
 - ~~Purchase Domain and Deployment~~
 - ~~Fix sort order for images by adding explicit order~~
@@ -58,6 +55,11 @@ npm run dev
 - ~~Manufacturers~~/~~Figures~~
 - ~~Share forms between edit/create pages (still todo: figures forms, mini forms)~~
 - ~~Add markdown component for descriptions/bios/etc~~
+- [x] ~~Pagination (using mongoose-paginate-v2)~~
+  - [x] Figures
+  - [x] Minis
+  - [x] Manufacturers
+  - [x] Users
 - Add new fields to forms and relevant views:
   - [x] Manufacturer
     - [x] `website`
@@ -78,10 +80,10 @@ npm run dev
     - [x] `description`
     - [x] `socials[]`
 
-### Migrations
+### Migrations/DB Changes
 
-- Rename `Figures` to `Models`?
-- Rename instances of `userId` to `user`
+- [ ] Rename `Figures` to `Models`?
+- [ ] Rename instances of `userId` to `user`
 - Add fields
   - [x] All:
     - [x] createdAt
@@ -108,6 +110,7 @@ npm run dev
 - Add collections
   - [ ] Tags
     - Name/text
+  - [ ] Collection (of figures, like a boxed set or something)
 
 # Vite + React + Caddy
 
