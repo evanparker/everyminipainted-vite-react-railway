@@ -27,4 +27,11 @@ async function deleteMini(id) {
   return response;
 }
 
-export { getMini, getMinis, postMini, putMini, deleteMini };
+async function getMinisBySearch(search, { limit = 20, offset = 0 }) {
+  const response = await apiClient.get(
+    `/minis/search?search=${search}&limit=${limit}&offset=${offset}`
+  );
+  return response;
+}
+
+export { getMini, getMinis, postMini, putMini, deleteMini, getMinisBySearch };

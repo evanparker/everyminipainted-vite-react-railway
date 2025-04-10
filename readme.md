@@ -16,7 +16,9 @@ npm run dev
 - Show form errors
   - Validate fields on client
 - mongoose schema: `timestamps: true`
+- Favorites
 - Moderation
+- Reputation
 - Search
 - Tagging
 - Style and write email templates
@@ -37,6 +39,9 @@ npm run dev
   - [ ] Errors
 - Scrape reaper/wizkids site for data
   - [x] Reach out to companies
+    - [ ] Archon Studios
+    - [ ] Steamforged
+    - [ ] ... GW?
   - Reaper APIs: https://www.reapermini.com/retailsupport/resources
   - Wizkids unpainted essentials page: https://wizkids.com/upmessentials/
 - Serve robots/rich links

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getFigures } from "../../services/figure";
+import { getFigures, getFiguresBySearch } from "../../services/figure";
 import { Button } from "flowbite-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { getUserByMe } from "../../services/user";
@@ -17,19 +17,30 @@ const Figures = () => {
     parseInt(searchParams.get("page") || 1)
   );
   const [totalPages, setTotalPages] = useState(0);
+  const searchString = searchParams.get("search");
 
   useEffect(() => {
     const fetchData = async () => {
-      const results = await getFigures({
-        limit: itemsPerPage,
-        offset: (currentPage - 1) * itemsPerPage,
-      });
-      setTotalPages(results.totalPages);
-      setFigures(results.docs);
+      let results;
+      if (searchString) {
+        results = await getFiguresBySearch(searchString, {
+          limit: itemsPerPage,
+          offset: (currentPage - 1) * itemsPerPage,
+        });
+        setTotalPages(results.totalPages);
+        setFigures(results.docs);
+      } else {
+        results = await getFigures({
+          limit: itemsPerPage,
+          offset: (currentPage - 1) * itemsPerPage,
+        });
+        setTotalPages(results.totalPages);
+        setFigures(results.docs);
+      }
     };
 
     fetchData();
-  }, [currentPage]);
+  }, [searchString, currentPage]);
 
   useEffect(() => {
     setCurrentPage(parseInt(searchParams.get("page") || 1));
@@ -48,7 +59,7 @@ const Figures = () => {
 
   const onPageChange = (page) => {
     setCurrentPage(page);
-    setSearchParams({ page }, { replace: false });
+    setSearchParams({ page, search: searchString }, { replace: false });
   };
 
   return (

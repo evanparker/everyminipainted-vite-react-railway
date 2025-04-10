@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { getManufacturers } from "../../services/manufacturer";
+import {
+  getManufacturers,
+  getManufacturersBySearch,
+} from "../../services/manufacturer";
 import { Button, Card } from "flowbite-react";
 import { Link, useSearchParams } from "react-router-dom";
 import CldThumbnailImage from "../images/CldThumbnailImage";
@@ -17,19 +20,28 @@ const Manufacturers = () => {
     parseInt(searchParams.get("page") || 1)
   );
   const [totalPages, setTotalPages] = useState(0);
+  const searchString = searchParams.get("search");
 
   useEffect(() => {
     const fetchData = async () => {
-      const results = await getManufacturers({
-        limit: itemsPerPage,
-        offset: (currentPage - 1) * itemsPerPage,
-      });
+      let results;
+      if (searchString) {
+        results = await getManufacturersBySearch(searchString, {
+          limit: itemsPerPage,
+          offset: (currentPage - 1) * itemsPerPage,
+        });
+      } else {
+        results = await getManufacturers({
+          limit: itemsPerPage,
+          offset: (currentPage - 1) * itemsPerPage,
+        });
+      }
       setTotalPages(results.totalPages);
       setManufacturers(results.docs);
     };
 
     fetchData();
-  }, [currentPage]);
+  }, [searchString, currentPage]);
 
   useEffect(() => {
     setCurrentPage(parseInt(searchParams.get("page") || 1));
@@ -48,7 +60,7 @@ const Manufacturers = () => {
 
   const onPageChange = (page) => {
     setCurrentPage(page);
-    setSearchParams({ page }, { replace: false });
+    setSearchParams({ page, search: searchString }, { replace: false });
   };
 
   return (

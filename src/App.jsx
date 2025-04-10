@@ -29,6 +29,7 @@ import useUserData from "./useUserData";
 import PageFooter from "./components/pageFooter";
 import AboutPage from "./components/aboutPage";
 import ContactPage from "./components/contactPage";
+import SearchBar from "./components/searchBar";
 
 function App() {
   const { token, setUserData, resetUserData } = useUserData();
@@ -61,6 +62,7 @@ function App() {
 
       <div className="mb-5">
         <Navigation user={user} />
+        <SearchBar />
       </div>
 
       <Routes>

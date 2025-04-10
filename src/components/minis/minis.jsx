@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMinis } from "../../services/mini";
+import { getMinis, getMinisBySearch } from "../../services/mini";
 import DisplayMinis from "./displayMinis";
 import { Pagination } from "flowbite-react";
 import { useSearchParams } from "react-router-dom";
@@ -13,19 +13,27 @@ const Minis = () => {
     parseInt(searchParams.get("page") || 1)
   );
   const [totalPages, setTotalPages] = useState(0);
+  const searchString = searchParams.get("search");
 
   useEffect(() => {
     const fetchData = async () => {
-      const results = await getMinis({
-        limit: itemsPerPage,
-        offset: (currentPage - 1) * itemsPerPage,
-      });
+      let results;
+      if (searchString) {
+        results = await getMinisBySearch(searchString, {
+          limit: itemsPerPage,
+          offset: (currentPage - 1) * itemsPerPage,
+        });
+      } else {
+        results = await getMinis({
+          limit: itemsPerPage,
+          offset: (currentPage - 1) * itemsPerPage,
+        });
+      }
       setTotalPages(results.totalPages);
-      const minisData = results.docs;
-      setMinis(minisData);
+      setMinis(results.docs);
     };
     fetchData();
-  }, [currentPage]);
+  }, [searchString, currentPage]);
 
   useEffect(() => {
     setCurrentPage(parseInt(searchParams.get("page") || 1));
@@ -33,7 +41,7 @@ const Minis = () => {
 
   const onPageChange = (page) => {
     setCurrentPage(page);
-    setSearchParams({ page }, { replace: false });
+    setSearchParams({ page, search: searchString }, { replace: false });
   };
 
   return (
