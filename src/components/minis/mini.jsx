@@ -9,6 +9,7 @@ import UserAvatar from "../users/userAvatar";
 import { FaPencil, FaTrashCan } from "react-icons/fa6";
 import DeleteToast from "../toasts/deleteToast";
 import { toast } from "react-toastify/unstyled";
+import HeadTags from "../headTags";
 
 const Mini = () => {
   const navigate = useNavigate();
@@ -43,6 +44,13 @@ const Mini = () => {
 
   return (
     <div>
+      {mini && (
+        <HeadTags
+          name={mini.name}
+          description={mini.description}
+          thumbnail={mini.images[0]}
+        />
+      )}
       <DeleteModal
         show={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}

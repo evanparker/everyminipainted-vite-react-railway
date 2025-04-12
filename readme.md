@@ -10,16 +10,14 @@ npm run dev
 
 ## TODO:
 
+- Serve robots/rich links
 - Error pages (404, etc)
-- ~~About page~~
-- ~~Footer~~
 - Show form errors
   - Validate fields on client
 - mongoose schema: `timestamps: true`
 - Favorites
 - Moderation
 - Reputation
-- Search
 - Tagging
 - Style and write email templates
 - Comments
@@ -44,11 +42,13 @@ npm run dev
     - [ ] ... GW?
   - Reaper APIs: https://www.reapermini.com/retailsupport/resources
   - Wizkids unpainted essentials page: https://wizkids.com/upmessentials/
-- Serve robots/rich links
 - Sanatize text fields
 - Consolodate search pickers (figure, manufacturer)
+- ~~Search~~
+- ~~About page~~
+- ~~Footer~~
 - ~~Change Password~~
-- ~~ Forgot/Reset Password~~
+- ~~Forgot/Reset Password~~
 - ~~User data/avatars~~
 - ~~Purchase Domain and Deployment~~
 - ~~Fix sort order for images by adding explicit order~~
