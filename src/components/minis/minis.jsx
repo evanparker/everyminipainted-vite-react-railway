@@ -41,7 +41,11 @@ const Minis = () => {
 
   const onPageChange = (page) => {
     setCurrentPage(page);
-    setSearchParams({ page, search: searchString }, { replace: false });
+    const searchParams = { page };
+    if (searchString) {
+      searchParams.search = searchString;
+    }
+    setSearchParams(searchParams, { replace: false });
   };
 
   return (
