@@ -18,7 +18,7 @@ function HeadTags({ name, description, thumbnail }) {
 
   return (
     <>
-      <title>Every Mini Painted - {name}</title>
+      <title>{`EMP - ${name}`}</title>
       <meta name="description" content={description} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://linkfork.co/" />

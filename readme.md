@@ -11,6 +11,8 @@ npm run dev
 ## TODO:
 
 - Serve robots/rich links
+- Migrate off cloudinary?
+  - https://docs.imgproxy.net
 - Error pages (404, etc)
 - Show form errors
   - Validate fields on client

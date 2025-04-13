@@ -60,6 +60,8 @@ function App() {
         pauseOnHover={true}
       />
 
+      <title>Every Mini Painted</title>
+
       <div className="mb-5">
         <Navigation user={user} />
         <SearchBar />
