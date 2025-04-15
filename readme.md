@@ -10,13 +10,17 @@ npm run dev
 
 ## TODO:
 
-- Serve robots/rich links
+- [x] Serve robots/rich links
+  - [ ] Explicitly serve `thumbnail` instead of `images[0]`
 - Migrate off cloudinary?
   - https://docs.imgproxy.net
 - Error pages (404, etc)
 - Show form errors
   - Validate fields on client
-- mongoose schema: `timestamps: true`
+- mongoose schema:
+  - `timestamps: true`
+  - immutable? (on things like username)
+- Design homepage
 - Favorites
 - Moderation
 - Reputation

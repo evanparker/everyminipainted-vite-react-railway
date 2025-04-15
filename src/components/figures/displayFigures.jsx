@@ -8,9 +8,13 @@ const DisplayFigures = ({ figures }) => {
       {figures.map((figure) => {
         const publicId = figure?.thumbnail?.cloudinaryPublicId;
         return (
-          <Link key={figure._id} to={"/figures/" + figure._id}>
+          <Link
+            key={figure._id}
+            to={"/figures/" + figure._id}
+            className="w-full sm:w-60"
+          >
             <Card
-              className="w-60 overflow-hidden text-gray-900 dark:text-white"
+              className="overflow-hidden text-gray-900 dark:text-white"
               renderImage={() =>
                 publicId && (
                   <CldThumbnailImage

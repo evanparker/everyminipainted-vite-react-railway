@@ -9,9 +9,13 @@ const DisplayMinis = ({ minis }) => {
       {minis.map((mini) => {
         const publicId = mini?.thumbnail?.cloudinaryPublicId;
         return (
-          <Link key={mini._id} to={"/minis/" + mini._id}>
+          <Link
+            key={mini._id}
+            to={"/minis/" + mini._id}
+            className="w-full sm:w-60"
+          >
             <Card
-              className="w-60 overflow-hidden text-gray-900 dark:text-white"
+              className="overflow-hidden text-gray-900 dark:text-white"
               renderImage={() =>
                 publicId && (
                   <CldThumbnailImage
