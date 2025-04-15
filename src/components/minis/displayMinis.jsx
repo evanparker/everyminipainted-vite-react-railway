@@ -5,15 +5,11 @@ import { Link } from "react-router-dom";
 
 const DisplayMinis = ({ minis }) => {
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
       {minis.map((mini) => {
         const publicId = mini?.thumbnail?.cloudinaryPublicId;
         return (
-          <Link
-            key={mini._id}
-            to={"/minis/" + mini._id}
-            className="w-full sm:w-60 grow"
-          >
+          <Link key={mini._id} to={"/minis/" + mini._id}>
             <Card
               className="overflow-hidden text-gray-900 dark:text-white"
               renderImage={() =>

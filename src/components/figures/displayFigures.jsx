@@ -4,15 +4,11 @@ import { Link } from "react-router-dom";
 
 const DisplayFigures = ({ figures }) => {
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
       {figures.map((figure) => {
         const publicId = figure?.thumbnail?.cloudinaryPublicId;
         return (
-          <Link
-            key={figure._id}
-            to={"/figures/" + figure._id}
-            className="w-full sm:w-60 grow"
-          >
+          <Link key={figure._id} to={"/figures/" + figure._id}>
             <Card
               className="overflow-hidden text-gray-900 dark:text-white"
               renderImage={() =>

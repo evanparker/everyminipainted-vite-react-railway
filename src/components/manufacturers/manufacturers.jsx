@@ -76,14 +76,13 @@ const Manufacturers = () => {
           </Button>
         </div>
       )}
-      <div className="flex flex-wrap gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {manufacturers.map((manufacturer) => {
           const publicId = manufacturer?.thumbnail?.cloudinaryPublicId;
           return (
             <Link
               key={manufacturer._id}
               to={"/manufacturers/" + manufacturer._id}
-              className="w-full sm:w-60 grow"
             >
               <Card
                 className="overflow-hidden text-gray-900 dark:text-white"
