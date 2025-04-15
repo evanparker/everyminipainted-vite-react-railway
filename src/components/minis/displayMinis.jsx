@@ -12,7 +12,7 @@ const DisplayMinis = ({ minis }) => {
           <Link
             key={mini._id}
             to={"/minis/" + mini._id}
-            className="w-full sm:w-60"
+            className="w-full sm:w-60 grow"
           >
             <Card
               className="overflow-hidden text-gray-900 dark:text-white"

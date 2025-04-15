@@ -83,7 +83,7 @@ const Manufacturers = () => {
             <Link
               key={manufacturer._id}
               to={"/manufacturers/" + manufacturer._id}
-              className="w-full sm:w-60"
+              className="w-full sm:w-60 grow"
             >
               <Card
                 className="overflow-hidden text-gray-900 dark:text-white"
