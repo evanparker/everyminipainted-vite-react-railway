@@ -19,8 +19,8 @@ const DisplayFigures = ({ figures }) => {
                 publicId && (
                   <CldThumbnailImage
                     publicId={publicId}
-                    width={200}
-                    height={200}
+                    width={400}
+                    height={400}
                   />
                 )
               }
