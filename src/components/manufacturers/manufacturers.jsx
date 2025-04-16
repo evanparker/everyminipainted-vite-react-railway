@@ -88,11 +88,11 @@ const Manufacturers = () => {
               <Card
                 className="overflow-hidden text-gray-900 dark:text-white"
                 renderImage={() =>
-                  img.type === "s3Image" ? (
+                  img?.type === "s3Image" ? (
                     <S3Image image={img} width={400} height={400} />
                   ) : (
                     <CldThumbnailImage
-                      publicId={img.cloudinaryPublicId}
+                      publicId={img?.cloudinaryPublicId}
                       width={400}
                       height={400}
                     />
