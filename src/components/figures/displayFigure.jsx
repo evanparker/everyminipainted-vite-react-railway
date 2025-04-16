@@ -27,7 +27,7 @@ const DisplayFigure = ({ figure }) => {
         <div className="format dark:format-invert">
           <Markdown>{figure?.description}</Markdown>
         </div>
-        <div className="mt-5 flex flex-wrap gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {figure?.images?.map((img) => (
             <div
               key={img._id}

@@ -28,7 +28,7 @@ const DisplayManufacturer = ({ manufacturer }) => {
         <div className="format dark:format-invert">
           <Markdown>{manufacturer?.description}</Markdown>
         </div>
-        <div className="flex flex-wrap gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {manufacturer?.images?.map((img) => (
             <div
               key={img._id}

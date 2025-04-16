@@ -27,7 +27,7 @@ const DisplayMini = ({ mini }) => {
         <div className="format dark:format-invert">
           <Markdown>{mini?.description}</Markdown>
         </div>
-        <div className="mt-5 flex flex-wrap gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {mini?.images?.map((img) => (
             <div
               key={img._id}
