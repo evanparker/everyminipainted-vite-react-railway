@@ -9,6 +9,7 @@ import CldThumbnailImage from "../images/CldThumbnailImage";
 import { getUserByMe } from "../../services/user";
 import { FaPlus } from "react-icons/fa6";
 import { Pagination } from "flowbite-react";
+import S3Image from "../images/s3Image";
 
 const itemsPerPage = 20;
 
@@ -78,7 +79,7 @@ const Manufacturers = () => {
       )}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {manufacturers.map((manufacturer) => {
-          const publicId = manufacturer?.thumbnail?.cloudinaryPublicId;
+          const img = manufacturer?.thumbnail;
           return (
             <Link
               key={manufacturer._id}
@@ -87,9 +88,11 @@ const Manufacturers = () => {
               <Card
                 className="overflow-hidden text-gray-900 dark:text-white"
                 renderImage={() =>
-                  publicId && (
+                  img.type === "s3Image" ? (
+                    <S3Image image={img} width={400} height={400} />
+                  ) : (
                     <CldThumbnailImage
-                      publicId={publicId}
+                      publicId={img.cloudinaryPublicId}
                       width={400}
                       height={400}
                     />

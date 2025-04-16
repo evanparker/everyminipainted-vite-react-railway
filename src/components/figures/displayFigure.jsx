@@ -4,6 +4,7 @@ import CldThumbnailImage from "../images/CldThumbnailImage";
 import ImageModal from "../images/imageModal";
 import { Link } from "react-router-dom";
 import Markdown from "react-markdown";
+import S3Image from "../images/s3Image";
 
 const DisplayFigure = ({ figure }) => {
   const [selectedImage, setSelectedImage] = useState();
@@ -33,11 +34,15 @@ const DisplayFigure = ({ figure }) => {
               onClick={() => setSelectedImage(img)}
               className="cursor-pointer max-w-md flex rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800"
             >
-              <CldThumbnailImage
-                publicId={img.cloudinaryPublicId}
-                width={400}
-                height={400}
-              />
+              {img.type === "s3Image" ? (
+                <S3Image image={img} width={400} height={400} />
+              ) : (
+                <CldThumbnailImage
+                  publicId={img.cloudinaryPublicId}
+                  width={400}
+                  height={400}
+                />
+              )}
             </div>
           ))}
         </div>

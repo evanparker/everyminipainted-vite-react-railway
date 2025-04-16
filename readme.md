@@ -20,6 +20,7 @@ npm run dev
 - mongoose schema:
   - `timestamps: true`
   - immutable? (on things like username)
+  - use joi?
 - Design homepage
 - Favorites
 - Moderation
@@ -50,6 +51,41 @@ npm run dev
   - Wizkids unpainted essentials page: https://wizkids.com/upmessentials/
 - Sanatize text fields
 - Consolodate search pickers (figure, manufacturer)
+
+### Migrations/DB Changes
+
+- [ ] Rename `Figures` to `Models`?
+- [ ] Rename instances of `userId` to `user`
+- Add fields
+  - [x] All:
+    - [x] createdAt
+  - [x] Manufacturer
+    - `website`
+    - `description`
+    - `socials[]`
+    - [x] `thumbnail`
+  - [x] Figures
+    - `partNumber` - Model/part number
+    - `description`
+    - `website` - Link to manufactuerer's site's page for it
+    - [x] `artist`
+    - [x] `thumbnail`
+  - [x] Mini
+    - `description`
+    - [x] `thumbnail`
+  - [x] User
+    - `website`
+    - `description`
+    - `socials[]`
+  - [ ] Images
+    - `description`
+- Add collections
+  - [ ] Tags
+    - Name/text
+  - [ ] Collection (of figures, like a boxed set or something)
+
+## DONE:
+
 - ~~Search~~
 - ~~About page~~
 - ~~Footer~~
@@ -90,38 +126,6 @@ npm run dev
     - [x] `website`
     - [x] `description`
     - [x] `socials[]`
-
-### Migrations/DB Changes
-
-- [ ] Rename `Figures` to `Models`?
-- [ ] Rename instances of `userId` to `user`
-- Add fields
-  - [x] All:
-    - [x] createdAt
-  - [x] Manufacturer
-    - `website`
-    - `description`
-    - `socials[]`
-    - [x] `thumbnail`
-  - [x] Figures
-    - `partNumber` - Model/part number
-    - `description`
-    - `website` - Link to manufactuerer's site's page for it
-    - [x] `artist`
-    - [x] `thumbnail`
-  - [x] Mini
-    - `description`
-    - [x] `thumbnail`
-  - [x] User
-    - `website`
-    - `description`
-    - `socials[]`
-  - [ ] Images
-    - `description`
-- Add collections
-  - [ ] Tags
-    - Name/text
-  - [ ] Collection (of figures, like a boxed set or something)
 
 # Vite + React + Caddy
 

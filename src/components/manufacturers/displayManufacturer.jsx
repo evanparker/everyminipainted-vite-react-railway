@@ -5,6 +5,7 @@ import ImageModal from "../images/imageModal";
 import Markdown from "react-markdown";
 import { Link } from "react-router-dom";
 import SocialsBlock from "../socialsBlock";
+import S3Image from "../images/s3Image";
 
 const DisplayManufacturer = ({ manufacturer }) => {
   const [selectedImage, setSelectedImage] = useState();
@@ -34,11 +35,15 @@ const DisplayManufacturer = ({ manufacturer }) => {
               onClick={() => setSelectedImage(img)}
               className="cursor-pointer max-w-md flex rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800"
             >
-              <CldThumbnailImage
-                publicId={img.cloudinaryPublicId}
-                width={400}
-                height={400}
-              />
+              {img.type === "s3Image" ? (
+                <S3Image image={img} width={400} height={400} />
+              ) : (
+                <CldThumbnailImage
+                  publicId={img.cloudinaryPublicId}
+                  width={400}
+                  height={400}
+                />
+              )}
             </div>
           ))}
         </div>
@@ -57,7 +62,6 @@ const DisplayManufacturer = ({ manufacturer }) => {
         )}
 
         <SocialsBlock socials={manufacturer?.socials} />
-
       </div>
     </>
   );

@@ -41,6 +41,19 @@ class APIClient {
     });
   }
 
+  postFormData(url, formData, signal) {
+    const token = JSON.parse(localStorage.getItem("token"));
+    return this.request(url, {
+      method: "POST",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        authorization: "Bearer " + token,
+      },
+      body: formData,
+      signal,
+    });
+  }
+
   put(url, data) {
     const token = JSON.parse(localStorage.getItem("token"));
     return this.request(url, {

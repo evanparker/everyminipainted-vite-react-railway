@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import CldThumbnailImage from "./CldThumbnailImage";
 import { FaRegStar, FaStar, FaTrashCan } from "react-icons/fa6";
+import S3Image from "./s3Image";
 
 const ImageSortContainer = ({
   onSort,
@@ -38,11 +39,20 @@ const ImageSortContainer = ({
               {img._id === thumbnail ? <FaStar /> : <FaRegStar />}
             </div>
           )}
-          <CldThumbnailImage
-            publicId={img.cloudinaryPublicId}
-            width={200}
-            height={200}
-          />
+          {img.type === "s3Image" ? (
+            <S3Image
+              image={img}
+              width={400}
+              height={400}
+              className="w-48 h-48"
+            />
+          ) : (
+            <CldThumbnailImage
+              publicId={img.cloudinaryPublicId}
+              width={200}
+              height={200}
+            />
+          )}
         </div>
       ))}
     </div>
