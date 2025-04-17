@@ -12,6 +12,7 @@ npm run dev
 
 - [x] Trim whitespace on signup inputs
 - [ ] Make api errors consistent `({message: "text"})`
+- [ ] Validate email on signup (before allowing posting)
 - Show form errors
   - Validate fields on client
 - [ ] Make list of reserved usernames (such as `me`, `admin`, `evanparker`)
