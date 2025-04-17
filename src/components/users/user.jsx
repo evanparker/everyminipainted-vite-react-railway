@@ -68,8 +68,8 @@ const User = () => {
     <>
       {minis && (
         <div className="flex flex-col gap-5">
-          <div className="">
-            <UserAvatar user={user} />
+          <div className="w-xs">
+            <UserAvatar user={user} isLink={false} />
           </div>
 
           {user?.description && (

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { getUserByMe, putUser } from "../../services/user";
 import { Button, Label, Textarea, TextInput } from "flowbite-react";
-import CldDragAndDrop from "../images/CldDragAndDrop";
-import { postImage } from "../../services/image";
 import { useNavigate } from "react-router-dom";
 import UserAvatar from "./userAvatar";
 import SocialsForm from "../socialsForm";
 import { toast } from "react-toastify/unstyled";
 import SaveToast from "../toasts/saveToast";
+import S3DragAndDrop from "../images/s3DragAndDrop";
 
 const UserEdit = () => {
   const [user, setUser] = useState();
@@ -32,8 +31,8 @@ const UserEdit = () => {
     }
   };
 
-  const addImages = async (publicIds) => {
-    const newImage = await postImage({ cloudinaryPublicId: publicIds[0] });
+  const addImages = async (newImages) => {
+    const newImage = newImages[0];
     setUser((prevUser) => ({ ...prevUser, avatar: newImage }));
   };
 
@@ -62,8 +61,8 @@ const UserEdit = () => {
     <>
       {user && (
         <>
-          <div className="mb-5">
-            <UserAvatar user={user} />
+          <div className="w-xs mb-5">
+            <UserAvatar user={user} isLink={false} />
           </div>
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="max-w-lg">
@@ -102,7 +101,14 @@ const UserEdit = () => {
 
             <div className="max-w-lg">
               <Label htmlFor="images1">Profile Image</Label>
-              <CldDragAndDrop addImages={addImages} />
+              <div className="flex gap-3">
+                <div className="h-16 w-20 mb-3">
+                  <UserAvatar user={user} isLink={false} showText={false} />
+                </div>
+                <div className="grow">
+                  <S3DragAndDrop addImages={addImages} />
+                </div>
+              </div>
             </div>
             <div className="max-w-lg">
               <Button type="submit">Save</Button>

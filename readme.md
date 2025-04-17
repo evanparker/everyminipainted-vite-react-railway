@@ -10,13 +10,15 @@ npm run dev
 
 ## TODO:
 
-- [x] Trim whitespace on signup inputs
 - [ ] Make api errors consistent `({message: "text"})`
 - [ ] Validate email on signup (before allowing posting)
+- [ ] In page profile pic cropping
+  - Croppie? https://foliotek.github.io/Croppie/
 - Show form errors
   - Validate fields on client
 - [ ] Make list of reserved usernames (such as `me`, `admin`, `evanparker`)
   - [ ] maybe have a min length of 3?
+  - [ ] attatch to validation?
 - Error pages (404, etc)
 - mongoose schema:
   - `timestamps: true`
@@ -32,6 +34,7 @@ npm run dev
 - Keyboard support
   - Arrow key to change images being viewed
 - Figure out how to merge duplicate records
+  - Find a way to search for likely duplicates
 - Change api to use json:api format?
   - https://jsonapi.org/
   - https://www.npmjs.com/package/jsonapi-serializer#relationship-deserializer
@@ -131,6 +134,7 @@ npm run dev
   - [x] Explicitly serve `thumbnail` instead of `images[0]`
 - [x] Migrate off cloudinary?
   - https://docs.imgproxy.net
+- [x] Trim whitespace on signup inputs
 
 # Vite + React + Caddy
 
