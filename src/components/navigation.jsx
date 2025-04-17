@@ -29,87 +29,80 @@ function Navigation({ user }) {
       </NavbarBrand>
       <div className="flex md:order-2 gap-5">
         <DarkThemeToggle />
-        {
-          <Dropdown
-            arrowIcon={false}
-            inline
-            label={
-              <Avatar
-                rounded
-                className="cursor-pointer"
-                img={(props) => (
-                  <>
-                    {(user?.avatar && (
-                      <div className="w-10 h-10 overflow-hidden rounded-full">
-                        {user?.avatar.type === "s3Image" ? (
-                          <S3Image
-                            image={user?.avatar}
-                            width={40}
-                            height={40}
-                          />
-                        ) : (
-                          <CldThumbnailImage
-                            publicId={user?.avatar?.cloudinaryPublicId}
-                            width={40}
-                            height={40}
-                            {...props}
-                          />
-                        )}
-                      </div>
-                    )) || (
-                      <div className="cursor-pointer rounded-full p-2 bg-gray-200 dark:bg-gray-600 dark:text-white">
-                        <FaUser />
-                      </div>
-                    )}
-                  </>
-                )}
-              ></Avatar>
-            }
-          >
-            {user && (
-              <>
-                <DropdownHeader className="dark:text-white">
-                  <span className="block text-sm">{user.username}</span>
-                  <span className="block truncate text-sm font-medium">
-                    {user.email}
-                  </span>
-                </DropdownHeader>
-                <DropdownItem
-                  className="dark:text-white"
-                  as={Link}
-                  to={`/users/${user.username}`}
-                >
-                  Profile
-                </DropdownItem>
-                <DropdownItem
-                  className="dark:text-white"
-                  as={Link}
-                  to={"/logout"}
-                >
-                  Sign out
-                </DropdownItem>
-              </>
-            )}
-            {!user && (
-              <>
-                <DropdownItem
-                  className="dark:text-white"
-                  as={Link}
-                  to={`/login`}
-                >
-                  Login
-                </DropdownItem>
-                <DropdownItem
-                  className="dark:text-white"
-                  as={Link}
-                  to={`/signup`}
-                >
-                  Signup
-                </DropdownItem>
-              </>
-            )}
-          </Dropdown>
-        }
+
+        <Dropdown
+          arrowIcon={false}
+          inline
+          className="z-20"
+          label={
+            <Avatar
+              rounded
+              className="cursor-pointer"
+              img={(props) => (
+                <>
+                  {(user?.avatar && (
+                    <div className="w-10 h-10 overflow-hidden rounded-full">
+                      {user?.avatar.type === "s3Image" ? (
+                        <S3Image image={user?.avatar} width={40} height={40} />
+                      ) : (
+                        <CldThumbnailImage
+                          publicId={user?.avatar?.cloudinaryPublicId}
+                          width={40}
+                          height={40}
+                          {...props}
+                        />
+                      )}
+                    </div>
+                  )) || (
+                    <div className="cursor-pointer rounded-full p-2 bg-gray-200 dark:bg-gray-600 dark:text-white">
+                      <FaUser />
+                    </div>
+                  )}
+                </>
+              )}
+            ></Avatar>
+          }
+        >
+          {user && (
+            <>
+              <DropdownHeader className="dark:text-white">
+                <span className="block text-sm">{user.username}</span>
+                <span className="block truncate text-sm font-medium">
+                  {user.email}
+                </span>
+              </DropdownHeader>
+              <DropdownItem
+                className="dark:text-white"
+                as={Link}
+                to={`/users/${user.username}`}
+              >
+                Profile
+              </DropdownItem>
+              <DropdownItem
+                className="dark:text-white"
+                as={Link}
+                to={"/logout"}
+              >
+                Sign out
+              </DropdownItem>
+            </>
+          )}
+          {!user && (
+            <>
+              <DropdownItem className="dark:text-white" as={Link} to={`/login`}>
+                Login
+              </DropdownItem>
+              <DropdownItem
+                className="dark:text-white"
+                as={Link}
+                to={`/signup`}
+              >
+                Signup
+              </DropdownItem>
+            </>
+          )}
+        </Dropdown>
+
         <NavbarToggle />
       </div>
       <NavbarCollapse>
