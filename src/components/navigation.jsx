@@ -20,8 +20,8 @@ function Navigation({ user }) {
   return (
     <Navbar fluid rounded>
       <NavbarBrand as={Link} to={"/"}>
-        <img src="/emplogo.png" className="mr-3 h-6 sm:h-9" alt="EMP Logo" />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+        <img src="/emplogo.png" className="mr-3 h-9" alt="EMP Logo" />
+        <span className="invisible sm:visible self-center whitespace-nowrap text-xl font-semibold dark:text-white">
           Every Mini Painted
         </span>
       </NavbarBrand>
@@ -34,7 +34,7 @@ function Navigation({ user }) {
             label={
               <Avatar
                 rounded
-                className=""
+                className="cursor-pointer"
                 img={(props) => (
                   <>
                     {(user?.avatar && (
@@ -55,7 +55,7 @@ function Navigation({ user }) {
                         )}
                       </div>
                     )) || (
-                      <div className="rounded-full p-2 bg-gray-200 dark:bg-gray-600 dark:text-white">
+                      <div className="cursor-pointer rounded-full p-2 bg-gray-200 dark:bg-gray-600 dark:text-white">
                         <FaUser />
                       </div>
                     )}
