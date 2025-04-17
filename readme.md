@@ -10,10 +10,13 @@ npm run dev
 
 ## TODO:
 
-- Trim whitespace on signup inputs
-- Error pages (404, etc)
+- [x] Trim whitespace on signup inputs
+- [ ] Make api errors consistent `({message: "text"})`
 - Show form errors
   - Validate fields on client
+- [ ] Make list of reserved usernames (such as `me`, `admin`, `evanparker`)
+  - [ ] maybe have a min length of 3?
+- Error pages (404, etc)
 - mongoose schema:
   - `timestamps: true`
   - immutable? (on things like username)

@@ -19,11 +19,10 @@ const ForgotPasswordForm = () => {
             message: `Forgot password email sent to ${email}`,
           },
         });
-        console.log(data);
-        // navigate(`/login`);
+        navigate(`/login`);
       }
     } catch (error) {
-      console.log(error, error.message);
+      console.error(error);
     }
   };
 
