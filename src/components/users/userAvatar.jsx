@@ -53,8 +53,6 @@ const UserAvatar = ({
 };
 
 const ProfilePicture = ({ user, props }) => {
-  console.log(props);
-
   return (
     <>
       {(user.avatar && (
