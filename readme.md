@@ -10,10 +10,7 @@ npm run dev
 
 ## TODO:
 
-- [x] Serve robots/rich links
-  - [ ] Explicitly serve `thumbnail` instead of `images[0]`
-- Migrate off cloudinary?
-  - https://docs.imgproxy.net
+- Trim whitespace on signup inputs
 - Error pages (404, etc)
 - Show form errors
   - Validate fields on client
@@ -126,6 +123,10 @@ npm run dev
     - [x] `website`
     - [x] `description`
     - [x] `socials[]`
+- [x] Serve robots/rich links
+  - [x] Explicitly serve `thumbnail` instead of `images[0]`
+- [x] Migrate off cloudinary?
+  - https://docs.imgproxy.net
 
 # Vite + React + Caddy
 

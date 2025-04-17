@@ -10,7 +10,12 @@ class APIClient {
     if (!response.ok) {
       const error = new Error("HTTP Error");
       error.status = response.status;
-      // error.response = await response.json();
+      try {
+        error.response = await response.json();
+      } catch (err) {
+        console.error(err);
+        throw error;
+      }
       throw error;
     }
     return response.json();
