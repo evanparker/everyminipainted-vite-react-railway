@@ -10,7 +10,6 @@ import {
   DropdownHeader,
   Avatar,
 } from "flowbite-react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import CldThumbnailImage from "./images/CldThumbnailImage";
 import { FaPlus, FaUser } from "react-icons/fa6";
@@ -23,6 +22,9 @@ function Navigation({ user }) {
         <img src="/emplogo.png" className="mr-3 h-9" alt="EMP Logo" />
         <span className="hidden sm:block self-center whitespace-nowrap text-xl font-semibold dark:text-white">
           Every Mini Painted
+        </span>
+        <span className="block sm:hidden self-center whitespace-nowrap text-md font-semibold dark:text-white">
+          EMP
         </span>
       </NavbarBrand>
       <div className="flex md:order-2 gap-5">
@@ -129,8 +131,5 @@ function Navigation({ user }) {
     </Navbar>
   );
 }
-Navigation.propTypes = {
-  user: PropTypes.object,
-};
 
 export default Navigation;
