@@ -21,7 +21,7 @@ function Navigation({ user }) {
     <Navbar fluid rounded>
       <NavbarBrand as={Link} to={"/"}>
         <img src="/emplogo.png" className="mr-3 h-9" alt="EMP Logo" />
-        <span className="invisible sm:visible self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+        <span className="hidden sm:block self-center whitespace-nowrap text-xl font-semibold dark:text-white">
           Every Mini Painted
         </span>
       </NavbarBrand>
