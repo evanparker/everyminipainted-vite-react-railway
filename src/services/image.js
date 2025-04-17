@@ -5,8 +5,16 @@ async function getImage(id) {
   return response;
 }
 
-async function postImage(image) {
-  const response = await apiClient.post(`/images/`, image);
+async function postImage(imageFile, signal) {
+  const formData = new FormData();
+  const fields = {
+    file: imageFile,
+  };
+
+  Object.entries(fields).forEach(([key, value]) => {
+    formData.append(key, value);
+  });
+  const response = await apiClient.postFormData(`/images/`, formData, signal);
   return response;
 }
 

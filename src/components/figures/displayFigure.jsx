@@ -4,6 +4,7 @@ import CldThumbnailImage from "../images/CldThumbnailImage";
 import ImageModal from "../images/imageModal";
 import { Link } from "react-router-dom";
 import Markdown from "react-markdown";
+import S3Image from "../images/s3Image";
 
 const DisplayFigure = ({ figure }) => {
   const [selectedImage, setSelectedImage] = useState();
@@ -26,18 +27,22 @@ const DisplayFigure = ({ figure }) => {
         <div className="format dark:format-invert">
           <Markdown>{figure?.description}</Markdown>
         </div>
-        <div className="mt-5 flex flex-wrap gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {figure?.images?.map((img) => (
             <div
               key={img._id}
               onClick={() => setSelectedImage(img)}
               className="cursor-pointer max-w-md flex rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800"
             >
-              <CldThumbnailImage
-                publicId={img.cloudinaryPublicId}
-                width={400}
-                height={400}
-              />
+              {img.type === "s3Image" ? (
+                <S3Image image={img} width={400} height={400} />
+              ) : (
+                <CldThumbnailImage
+                  publicId={img.cloudinaryPublicId}
+                  width={400}
+                  height={400}
+                />
+              )}
             </div>
           ))}
         </div>

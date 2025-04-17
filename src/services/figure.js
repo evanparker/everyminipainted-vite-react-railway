@@ -27,12 +27,8 @@ async function getFigureMinis(id, { limit = 20, offset = 0 }) {
 }
 
 async function postFigure(figure) {
-  try {
-    const response = await apiClient.post(`/figures/`, figure);
-    return response;
-  } catch (e) {
-    console.log(e);
-  }
+  const response = await apiClient.post(`/figures/`, figure);
+  return response;
 }
 
 async function putFigure(id, figure) {

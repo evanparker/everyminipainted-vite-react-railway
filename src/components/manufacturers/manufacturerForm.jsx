@@ -1,18 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import CldDragAndDrop from "../images/CldDragAndDrop";
 import {
   getManufacturer,
   postManufacturer,
   putManufacturer,
 } from "../../services/manufacturer";
-import { postImage } from "../../services/image";
 import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import { getUserByMe } from "../../services/user";
 import ImageSortContainer from "../images/imageSortContainer";
 import SocialsForm from "../socialsForm";
 import { toast } from "react-toastify/unstyled";
 import SaveToast from "../toasts/saveToast";
+import S3DragAndDrop from "../images/s3DragAndDrop";
 
 const ManufacturerForm = ({ mode }) => {
   const [manufacturer, setManufacturer] = useState({ name: "", images: [] });
@@ -20,8 +19,6 @@ const ManufacturerForm = ({ mode }) => {
   const [socials, setSocials] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
-  const dragImage = useRef(0);
-  const draggedOverImage = useRef(0);
 
   useEffect(() => {
     const fetchManufacturerData = async () => {
@@ -42,11 +39,11 @@ const ManufacturerForm = ({ mode }) => {
     fetchSelfData();
   }, [mode, id]);
 
-  const handleSort = () => {
+  const handleSort = (position1, position2) => {
     const imagesClone = [...manufacturer.images];
-    const temp = imagesClone[dragImage.current];
-    imagesClone[dragImage.current] = imagesClone[draggedOverImage.current];
-    imagesClone[draggedOverImage.current] = temp;
+    const temp = imagesClone[position1];
+    imagesClone[position1] = imagesClone[position2];
+    imagesClone[position2] = temp;
     setManufacturer({ ...manufacturer, images: imagesClone });
   };
 
@@ -84,16 +81,13 @@ const ManufacturerForm = ({ mode }) => {
     }
   };
 
-  const addImages = async (publicIds) => {
+  const addImages = async (newImages) => {
     let images = manufacturer.images;
-    for (const publicId of publicIds) {
-      const newImage = await postImage({ cloudinaryPublicId: publicId });
-      images = [newImage, ...images];
-    }
+    images = [...newImages, ...images];
     setManufacturer((prevManufacturer) => ({
       ...prevManufacturer,
       images,
-      thumbnail: prevManufacturer.thumbnail || images[0]._id,
+      thumbnail: prevManufacturer.thumbnail || images[0]?._id,
     }));
   };
 
@@ -162,7 +156,7 @@ const ManufacturerForm = ({ mode }) => {
             <div className="block">
               <div className="block max-w-lg">
                 <Label htmlFor="images1">Images</Label>
-                <CldDragAndDrop addImages={addImages} />
+                <S3DragAndDrop addImages={addImages} />
               </div>
 
               <div className="mt-5">

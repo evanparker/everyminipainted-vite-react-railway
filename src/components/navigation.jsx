@@ -14,6 +14,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import CldThumbnailImage from "./images/CldThumbnailImage";
 import { FaPlus, FaUser } from "react-icons/fa6";
+import S3Image from "./images/s3Image";
 
 function Navigation({ user }) {
   return (
@@ -38,12 +39,20 @@ function Navigation({ user }) {
                   <>
                     {(user?.avatar && (
                       <div className="w-10 h-10 overflow-hidden rounded-full">
-                        <CldThumbnailImage
-                          publicId={user?.avatar?.cloudinaryPublicId}
-                          width={40}
-                          height={40}
-                          {...props}
-                        />
+                        {user?.avatar.type === "s3Image" ? (
+                          <S3Image
+                            image={user?.avatar}
+                            width={40}
+                            height={40}
+                          />
+                        ) : (
+                          <CldThumbnailImage
+                            publicId={user?.avatar?.cloudinaryPublicId}
+                            width={40}
+                            height={40}
+                            {...props}
+                          />
+                        )}
                       </div>
                     )) || (
                       <div className="rounded-full p-2 bg-gray-200 dark:bg-gray-600 dark:text-white">

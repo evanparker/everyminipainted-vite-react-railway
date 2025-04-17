@@ -1,25 +1,31 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postSignup } from "../../services/auth";
-import { Button, Label, TextInput } from "flowbite-react";
+import { Button, HelperText, Label, TextInput } from "flowbite-react";
 
 const Signup = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [invite, setInvite] = useState();
-  const [username, setUsername] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [invite, setInvite] = useState("");
+  const [username, setUsername] = useState("");
+  const [formError, setFormError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = await postSignup({
-      username,
-      email,
-      password,
-      invite,
-    });
-    if (userData) {
-      navigate("/login");
+    setFormError("");
+    try {
+      const userData = await postSignup({
+        username: username.trim(),
+        email: email.trim(),
+        password,
+        invite: invite.trim(),
+      });
+      if (userData) {
+        navigate("/login");
+      }
+    } catch (err) {
+      setFormError(err.response?.message);
     }
   };
 
@@ -72,6 +78,8 @@ const Signup = () => {
             onChange={(e) => setInvite(e.target.value)}
           />
         </div>
+        {formError && <HelperText color="failure">{formError}</HelperText>}
+
         <Button type="submit">Submit</Button>
       </form>
     </div>

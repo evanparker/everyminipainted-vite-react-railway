@@ -10,7 +10,12 @@ class APIClient {
     if (!response.ok) {
       const error = new Error("HTTP Error");
       error.status = response.status;
-      // error.response = await response.json();
+      try {
+        error.response = await response.json();
+      } catch (err) {
+        console.error(err);
+        throw error;
+      }
       throw error;
     }
     return response.json();
@@ -38,6 +43,19 @@ class APIClient {
         authorization: "Bearer " + token,
       },
       body: JSON.stringify(data),
+    });
+  }
+
+  postFormData(url, formData, signal) {
+    const token = JSON.parse(localStorage.getItem("token"));
+    return this.request(url, {
+      method: "POST",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        authorization: "Bearer " + token,
+      },
+      body: formData,
+      signal,
     });
   }
 

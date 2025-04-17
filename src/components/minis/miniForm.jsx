@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useUserData from "../../useUserData";
-import CldDragAndDrop from "../images/CldDragAndDrop";
 import { getMini, postMini, putMini } from "../../services/mini";
-import { postImage } from "../../services/image";
 import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import { getFiguresBySearch } from "../../services/figure";
 import ImageSortContainer from "../images/imageSortContainer";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { toast } from "react-toastify/unstyled";
 import SaveToast from "../toasts/saveToast";
+import S3DragAndDrop from "../images/s3DragAndDrop";
 
 const MiniForm = ({ mode }) => {
   const [mini, setMini] = useState({ name: "", images: [] });
@@ -74,16 +73,13 @@ const MiniForm = ({ mode }) => {
     }
   };
 
-  const addImages = async (publicIds) => {
+  const addImages = async (newImages) => {
     let images = mini.images;
-    for (const publicId of publicIds) {
-      const newImage = await postImage({ cloudinaryPublicId: publicId });
-      images = [newImage, ...images];
-    }
+    images = [...newImages, ...images];
     setMini((prevMini) => ({
       ...prevMini,
       images,
-      thumbnail: prevMini.thumbnail || images[0]._id,
+      thumbnail: prevMini.thumbnail || images[0]?._id,
     }));
   };
 
@@ -188,7 +184,7 @@ const MiniForm = ({ mode }) => {
             <div className="flex flex-col gap-5">
               <div className="max-w-lg">
                 <Label htmlFor="images1">Images</Label>
-                <CldDragAndDrop addImages={addImages} />
+                <S3DragAndDrop addImages={addImages} />
               </div>
               <div className="">
                 <ImageSortContainer
