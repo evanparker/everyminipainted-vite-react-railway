@@ -36,10 +36,10 @@ const UserEdit = () => {
     setUser((prevUser) => ({ ...prevUser, avatar: newImage }));
   };
 
-  const handleEmailChange = (e) => {
-    e.preventDefault();
-    setUser((prevUser) => ({ ...prevUser, email: e.target.value }));
-  };
+  // const handleEmailChange = (e) => {
+  //   e.preventDefault();
+  //   setUser((prevUser) => ({ ...prevUser, email: e.target.value }));
+  // };
 
   const handleDescriptionChange = (e) => {
     e.preventDefault();
@@ -65,7 +65,7 @@ const UserEdit = () => {
             <UserAvatar user={user} isLink={false} />
           </div>
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-            <div className="max-w-lg">
+            {/* <div className="max-w-lg">
               <Label htmlFor="email1">Email</Label>
               <TextInput
                 id="email1"
@@ -73,7 +73,7 @@ const UserEdit = () => {
                 value={user?.email}
                 onChange={handleEmailChange}
               />
-            </div>
+            </div> */}
 
             <div className="block max-w-lg">
               <Label htmlFor="description1">Description</Label>
@@ -102,11 +102,11 @@ const UserEdit = () => {
             <div className="max-w-lg">
               <Label htmlFor="images1">Profile Image</Label>
               <div className="flex gap-3">
-                <div className="h-16 w-20 mb-3">
-                  <UserAvatar user={user} isLink={false} showText={false} />
-                </div>
                 <div className="grow">
                   <S3DragAndDrop addImages={addImages} />
+                </div>
+                <div className="h-16 w-20 mb-3">
+                  <UserAvatar user={user} isLink={false} showText={false} />
                 </div>
               </div>
             </div>
