@@ -16,6 +16,7 @@ npm run dev
     - Validate fields on client
   - [ ] Make list of reserved usernames (such as `me`, `admin`, `evanparker`)
     - [ ] maybe have a min length of 3?
+    - [ ] force lowercase
     - [ ] attatch to validation?
   - Sanatize text fields
   - Error pages (404, etc)

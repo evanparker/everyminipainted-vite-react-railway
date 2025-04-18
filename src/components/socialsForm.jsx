@@ -62,9 +62,9 @@ const SocialsForm = ({ socials, setSocials }) => {
                 id={`socials${index}`}
                 key={`socials${index}`}
                 className="grow-1"
-                placeholder=""
                 value={social.link}
                 onChange={(e) => handleSocialFieldChange(e, social, index)}
+                placeholder="link to social media (including https://)"
               />
               <Button
                 onClick={() => deleteSocialField(index)}
