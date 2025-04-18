@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getUserByMe, putUser } from "../../services/user";
 import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
@@ -7,11 +7,18 @@ import SocialsForm from "../socialsForm";
 import { toast } from "react-toastify/unstyled";
 import SaveToast from "../toasts/saveToast";
 import S3DragAndDrop from "../images/s3DragAndDrop";
+import Croppie from "croppie";
+import "croppie/croppie.css";
+import getS3Url from "../images/getS3Url";
+import { postImage } from "../../services/image";
 
 const UserEdit = () => {
   const [user, setUser] = useState();
   const navigate = useNavigate();
   const [socials, setSocials] = useState([]);
+  const [croppie, setCroppie] = useState(null);
+  const [croppieImage, setCroppieImage] = useState("");
+  const abortControllerRef = useRef(new AbortController());
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -33,13 +40,73 @@ const UserEdit = () => {
 
   const addImages = async (newImages) => {
     const newImage = newImages[0];
-    setUser((prevUser) => ({ ...prevUser, avatar: newImage }));
+    const url = getS3Url({
+      key: newImage.s3Key,
+      bucket: newImage.s3Bucket,
+      options: "width:800",
+      extension: "png",
+    });
+    setCroppieImage(url);
+    const el = document.getElementById("croppie-image-helper");
+    if (el) {
+      const croppieInstance = new Croppie(el, {
+        enableExif: true,
+        viewport: {
+          height: 200,
+          width: 200,
+          type: "circle",
+        },
+        boundary: {
+          height: 300,
+          width: 300,
+        },
+        mouseWheelZoom: false,
+      });
+      croppieInstance.bind({
+        url: url,
+      });
+      setCroppie(croppieInstance);
+    }
   };
 
-  // const handleEmailChange = (e) => {
-  //   e.preventDefault();
-  //   setUser((prevUser) => ({ ...prevUser, email: e.target.value }));
-  // };
+  const handleCropButton = (e) => {
+    e.preventDefault();
+
+    if (croppie !== null) {
+      croppie
+        .result({
+          type: "blob",
+          size: {
+            width: 480,
+            height: 480,
+          },
+        })
+        .then(async (blob) => {
+          // Save image to backend
+          const file = new File([blob], "image.png", {
+            type: "image/png",
+            lastModified: new Date().getTime(),
+          });
+
+          abortControllerRef.current.abort();
+          abortControllerRef.current = new AbortController();
+          try {
+            const image = await postImage(
+              file,
+              abortControllerRef.current.signal
+            );
+
+            setUser((prevUser) => ({ ...prevUser, avatar: image }));
+            setCroppieImage("");
+            croppie.destroy();
+          } catch (error) {
+            if (error.name !== "AbortError") {
+              console.error(error);
+            }
+          }
+        });
+    }
+  };
 
   const handleDescriptionChange = (e) => {
     e.preventDefault();
@@ -65,16 +132,6 @@ const UserEdit = () => {
             <UserAvatar user={user} isLink={false} />
           </div>
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-            {/* <div className="max-w-lg">
-              <Label htmlFor="email1">Email</Label>
-              <TextInput
-                id="email1"
-                type="text"
-                value={user?.email}
-                onChange={handleEmailChange}
-              />
-            </div> */}
-
             <div className="block max-w-lg">
               <Label htmlFor="description1">Description</Label>
               <Textarea
@@ -108,6 +165,23 @@ const UserEdit = () => {
                 <div className="h-16 w-20 mb-3">
                   <UserAvatar user={user} isLink={false} showText={false} />
                 </div>
+              </div>
+              <div
+                className={
+                  croppieImage
+                    ? "mt-3 flex flex-col gap-5 rounded-lg border-2 border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-700 p-5"
+                    : ""
+                }
+              >
+                <div id="croppie-image-helper" />
+                {croppieImage && (
+                  <Button
+                    className="w-40 self-center"
+                    onClick={handleCropButton}
+                  >
+                    Crop
+                  </Button>
+                )}
               </div>
             </div>
             <div className="max-w-lg">

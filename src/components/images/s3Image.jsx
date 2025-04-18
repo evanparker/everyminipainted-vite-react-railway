@@ -1,16 +1,4 @@
-const getUrl = ({
-  signature = "insecure",
-  options = "",
-  key,
-  bucket,
-  extension = "jpg",
-}) => {
-  const s3address = `s3://${bucket}/${key}`;
-  const url = `${
-    import.meta.env.VITE_IMGPROXY_URL
-  }/${signature}/${options}/${window.btoa(s3address)}.${extension}`;
-  return url;
-};
+import getS3Url from "./getS3Url";
 
 const S3Image = ({ image, width, height, className }) => {
   const options = ["quality:80", "extend:1"];
@@ -22,7 +10,7 @@ const S3Image = ({ image, width, height, className }) => {
     options.push(`height:${height}`);
   }
 
-  const url = getUrl({
+  const url = getS3Url({
     options: options.join("/"),
     key: image.s3Key,
     bucket: image.s3Bucket,
