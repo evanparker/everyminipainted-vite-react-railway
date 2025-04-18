@@ -21,6 +21,7 @@ const ImageSortContainer = ({
           onDragStart={() => (dragImage.current = index)}
           onDragEnter={() => (draggedOverImage.current = index)}
           onDragEnd={() => onSort(dragImage.current, draggedOverImage.current)}
+          onDrop={(e) => e.preventDefault()}
           onDragOver={(e) => e.preventDefault()}
           key={img._id}
           className="relative cursor-move max-w-md flex rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800"

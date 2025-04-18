@@ -11,18 +11,20 @@ npm run dev
 ## TODO:
 
 - [ ] Make api errors consistent `({message: "text"})`
-- [ ] Validate email on signup (before allowing posting)
 - Show form errors
   - Validate fields on client
 - [ ] Make list of reserved usernames (such as `me`, `admin`, `evanparker`)
   - [ ] maybe have a min length of 3?
   - [ ] attatch to validation?
+- Sanatize text fields
 - Error pages (404, etc)
 - mongoose schema:
   - `timestamps: true`
   - immutable? (on things like username)
   - use joi?
+- [ ] Validate email on signup (before allowing posting)
 - Design homepage
+- Add blog/articles
 - Favorites
 - Moderation
 - Reputation
@@ -51,7 +53,6 @@ npm run dev
     - [ ] ... GW?
   - Reaper APIs: https://www.reapermini.com/retailsupport/resources
   - Wizkids unpainted essentials page: https://wizkids.com/upmessentials/
-- Sanatize text fields
 - Consolodate search pickers (figure, manufacturer)
 
 ### Bugs
