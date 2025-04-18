@@ -87,7 +87,7 @@ const ManufacturerForm = ({ mode }) => {
     setManufacturer((prevManufacturer) => ({
       ...prevManufacturer,
       images,
-      thumbnail: prevManufacturer.thumbnail || images[0]?._id,
+      thumbnail: prevManufacturer.thumbnail || images[0],
     }));
   };
 

@@ -95,7 +95,7 @@ const FigureForm = ({ mode }) => {
     setFigure((prevFigure) => ({
       ...prevFigure,
       images,
-      thumbnail: prevFigure.thumbnail || images[0]?._id,
+      thumbnail: prevFigure.thumbnail || images[0],
     }));
   };
 

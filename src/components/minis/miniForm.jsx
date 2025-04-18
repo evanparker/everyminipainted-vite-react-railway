@@ -79,7 +79,7 @@ const MiniForm = ({ mode }) => {
     setMini((prevMini) => ({
       ...prevMini,
       images,
-      thumbnail: prevMini.thumbnail || images[0]?._id,
+      thumbnail: prevMini.thumbnail || images[0],
     }));
   };
 

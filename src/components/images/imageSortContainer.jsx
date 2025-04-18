@@ -13,6 +13,8 @@ const ImageSortContainer = ({
   const dragImage = useRef(0);
   const draggedOverImage = useRef(0);
 
+  console.log(thumbnail);
+
   return (
     <div className="flex flex-wrap gap-4">
       {images?.map((img, index) => (
@@ -33,7 +35,7 @@ const ImageSortContainer = ({
           </div>
           {onSetThumbnail && (
             <div
-              onClick={() => onSetThumbnail(img._id)}
+              onClick={() => onSetThumbnail(img)}
               className="absolute left-2 top-2 p-2 cursor-pointer text-gray-500 hover:text-gray-800 bg-gray-100 dark:text-gray-400 dark:bg-gray-700 dark:hover:text-gray-200"
             >
               {img._id === thumbnail._id ? <FaStar /> : <FaRegStar />}

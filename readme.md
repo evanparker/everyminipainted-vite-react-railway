@@ -12,8 +12,6 @@ npm run dev
 
 - [ ] Make api errors consistent `({message: "text"})`
 - [ ] Validate email on signup (before allowing posting)
-- [ ] In page profile pic cropping
-  - Croppie? https://foliotek.github.io/Croppie/
 - Show form errors
   - Validate fields on client
 - [ ] Make list of reserved usernames (such as `me`, `admin`, `evanparker`)
@@ -55,6 +53,10 @@ npm run dev
   - Wizkids unpainted essentials page: https://wizkids.com/upmessentials/
 - Sanatize text fields
 - Consolodate search pickers (figure, manufacturer)
+
+### Bugs
+
+- When deleting an image from an entity that is set to be the thumbnail, the thumbnail doesn't update and remains the deleted image
 
 ### Migrations/DB Changes
 
@@ -135,6 +137,8 @@ npm run dev
 - [x] Migrate off cloudinary?
   - https://docs.imgproxy.net
 - [x] Trim whitespace on signup inputs
+- [x] In page profile pic cropping
+  - Croppie? https://foliotek.github.io/Croppie/
 
 # Vite + React + Caddy
 
