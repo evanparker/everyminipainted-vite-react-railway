@@ -45,13 +45,14 @@ const ImageSortContainer = ({
               image={img}
               width={400}
               height={400}
-              className="w-48 h-48"
+              className="w-44 h-44"
             />
           ) : (
             <CldThumbnailImage
               publicId={img.cloudinaryPublicId}
               width={200}
               height={200}
+              className="w-44 h-44"
             />
           )}
         </div>

@@ -9,7 +9,7 @@ const cld = new Cloudinary({
   },
 });
 
-const CldThumbnailImage = ({ publicId, width, height }) => {
+const CldThumbnailImage = ({ publicId, width, height, className }) => {
   let thumb = pad();
   if (width !== undefined) {
     thumb = thumb.width(width);
@@ -22,6 +22,12 @@ const CldThumbnailImage = ({ publicId, width, height }) => {
     .delivery(format("auto"))
     .delivery(quality("auto:good"))
     .resize(thumb);
-  return <AdvancedImage cldImg={myImage} style={{ maxWidth: "100%" }} />;
+  return (
+    <AdvancedImage
+      cldImg={myImage}
+      style={{ maxWidth: "100%" }}
+      className={className}
+    />
+  );
 };
 export default CldThumbnailImage;
