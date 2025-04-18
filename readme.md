@@ -56,7 +56,8 @@ npm run dev
 
 ### Bugs
 
-- When deleting an image from an entity that is set to be the thumbnail, the thumbnail doesn't update and remains the deleted image
+- [x] When deleting an image from an entity that is set to be the thumbnail, the thumbnail doesn't update and remains the deleted image
+- [x] Image cropper doesn't work on iOS.
 
 ### Migrations/DB Changes
 

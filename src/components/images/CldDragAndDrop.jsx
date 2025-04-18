@@ -100,6 +100,9 @@ const CldDragAndDrop = ({ addImages }) => {
             />
           </svg>
           <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+            Click here or
+          </p>
+          <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
             Drag and drop to upload
           </p>
         </div>

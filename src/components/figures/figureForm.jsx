@@ -57,8 +57,12 @@ const FigureForm = ({ mode }) => {
 
   const handleDelete = (index) => {
     const imagesClone = figure.images;
-    imagesClone.splice(index, 1);
-    setFigure({ ...figure, images: imagesClone });
+    const removedImages = imagesClone.splice(index, 1);
+    const newFigureObject = { ...figure, images: imagesClone };
+    if (removedImages[0]?._id === figure.thumbnail._id) {
+      newFigureObject.thumbnail = imagesClone[0];
+    }
+    setFigure(newFigureObject);
   };
 
   const handleSetThumbnail = (id) => {

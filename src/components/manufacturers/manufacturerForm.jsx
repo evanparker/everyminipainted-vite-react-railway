@@ -49,8 +49,12 @@ const ManufacturerForm = ({ mode }) => {
 
   const handleDelete = (index) => {
     const imagesClone = manufacturer.images;
-    imagesClone.splice(index, 1);
-    setManufacturer({ ...manufacturer, images: imagesClone });
+    const removedImages = imagesClone.splice(index, 1);
+    const newManufacturerObject = { ...manufacturer, images: imagesClone };
+    if (removedImages[0]?._id === manufacturer.thumbnail._id) {
+      newManufacturerObject.thumbnail = imagesClone[0];
+    }
+    setManufacturer(newManufacturerObject);
   };
 
   const handleSetThumbnail = (id) => {

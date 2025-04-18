@@ -13,8 +13,6 @@ const ImageSortContainer = ({
   const dragImage = useRef(0);
   const draggedOverImage = useRef(0);
 
-  console.log(thumbnail);
-
   return (
     <div className="flex flex-wrap gap-4">
       {images?.map((img, index) => (

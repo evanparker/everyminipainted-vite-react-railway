@@ -41,8 +41,14 @@ const MiniForm = ({ mode }) => {
 
   const handleDelete = (index) => {
     const imagesClone = mini.images;
-    imagesClone.splice(index, 1);
-    setMini({ ...mini, images: imagesClone });
+    const removedImages = imagesClone.splice(index, 1);
+
+    const newMiniObject = { ...mini, images: imagesClone };
+    if (removedImages[0]?._id === mini.thumbnail._id) {
+      newMiniObject.thumbnail = imagesClone[0];
+    }
+
+    setMini(newMiniObject);
   };
 
   const handleSetThumbnail = (id) => {
