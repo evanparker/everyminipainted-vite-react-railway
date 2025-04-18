@@ -58,12 +58,12 @@ const ProfilePicture = ({ user, props }) => {
       {(user.avatar && (
         <div className="w-10 h-10 overflow-hidden rounded-full">
           {user?.avatar.type === "s3Image" ? (
-            <S3Image image={user?.avatar} width={40} height={40} {...props} />
+            <S3Image image={user?.avatar} width={120} height={120} {...props} />
           ) : (
             <CldThumbnailImage
               publicId={user?.avatar?.cloudinaryPublicId}
-              width={40}
-              height={40}
+              width={120}
+              height={120}
               {...props}
             />
           )}

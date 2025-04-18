@@ -10,18 +10,19 @@ npm run dev
 
 ## TODO:
 
-- [ ] Make api errors consistent `({message: "text"})`
-- Show form errors
-  - Validate fields on client
-- [ ] Make list of reserved usernames (such as `me`, `admin`, `evanparker`)
-  - [ ] maybe have a min length of 3?
-  - [ ] attatch to validation?
-- Sanatize text fields
-- Error pages (404, etc)
-- mongoose schema:
-  - `timestamps: true`
-  - immutable? (on things like username)
-  - use joi?
+- Errors and Validation
+  - [ ] Make api errors consistent `({message: "text"})`
+  - Show form errors
+    - Validate fields on client
+  - [ ] Make list of reserved usernames (such as `me`, `admin`, `evanparker`)
+    - [ ] maybe have a min length of 3?
+    - [ ] attatch to validation?
+  - Sanatize text fields
+  - Error pages (404, etc)
+  - mongoose schema:
+    - `timestamps: true`
+    - immutable? (on things like username)
+    - use joi?
 - [ ] Validate email on signup (before allowing posting)
 - Design homepage
 - Add blog/articles
@@ -30,7 +31,7 @@ npm run dev
 - Reputation
 - Tagging
 - Style and write email templates
-- Comments
+- Comments on entities (minis etc)
 - Keyboard support
   - Arrow key to change images being viewed
 - Figure out how to merge duplicate records
