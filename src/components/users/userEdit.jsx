@@ -14,7 +14,9 @@ import SaveToast from "../toasts/saveToast";
 import UserAvatar from "./userAvatar";
 
 const UserEdit = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { user: userFromContext, setUser: setUserFromContext } =
+    useContext(UserContext);
+  const [user, setUser] = useState();
   const navigate = useNavigate();
   const [socials, setSocials] = useState([]);
   const [croppie, setCroppie] = useState(null);
@@ -22,14 +24,15 @@ const UserEdit = () => {
   const abortControllerRef = useRef(new AbortController());
 
   useEffect(() => {
-    setSocials(user?.socials);
-  }, [user]);
+    setUser(userFromContext);
+    setSocials(userFromContext?.socials);
+  }, [userFromContext]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const responseData = await putUser(user._id, { ...user, socials });
     if (responseData) {
-      setUser({ ...user, socials });
+      setUserFromContext({ ...user, socials });
       toast(SaveToast, { data: { message: `${user.username} Saved.` } });
       navigate(`/users/${user.username}`);
     }
