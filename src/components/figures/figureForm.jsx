@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getFigure, postFigure, putFigure } from "../../services/figure";
 import { Button, Label, Textarea, TextInput } from "flowbite-react";
-import { getUserByMe } from "../../services/user";
 import ImageSortContainer from "../images/imageSortContainer";
 import { getManufacturersBySearch } from "../../services/manufacturer";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { toast } from "react-toastify/unstyled";
 import SaveToast from "../toasts/saveToast";
 import S3DragAndDrop from "../images/s3DragAndDrop";
+import UserContext from "../../userContext";
 
 const FigureForm = ({ mode }) => {
+  const { user } = useContext(UserContext);
   const [figure, setFigure] = useState({
     name: "",
     partNumber: "",
@@ -21,7 +22,7 @@ const FigureForm = ({ mode }) => {
   });
   const [isAdmin, setIsAdmin] = useState(false);
   const [manufacturerSearch, setManufacturerSearch] = useState("");
-  const [manufacturerResults, setManufacturerResults] = useState();
+  const [manufacturerResults, setManufacturerResults] = useState([]);
   const [selectedManufacturer, setSelectedManufacturer] = useState();
   const [manufacturerDropdownOpen, setManufacturerDropdownOpen] =
     useState(false);
@@ -32,20 +33,27 @@ const FigureForm = ({ mode }) => {
     const fetchFigureData = async () => {
       const figureData = await getFigure(id);
       setSelectedManufacturer(figureData.manufacturer);
-      setFigure(figureData);
-    };
-    const fetchSelfData = async () => {
-      const selfData = await getUserByMe();
-      if (selfData?.roles?.includes("admin")) {
-        setIsAdmin(true);
-      }
+      setFigure({
+        name: "",
+        partNumber: "",
+        website: "",
+        description: "",
+        artist: "",
+        images: [],
+        ...figureData,
+      });
     };
 
     if (mode === "edit") {
       fetchFigureData();
     }
-    fetchSelfData();
   }, [mode, id]);
+
+  useEffect(() => {
+    if (user?.roles?.includes("admin")) {
+      setIsAdmin(true);
+    }
+  }, [user]);
 
   const handleSort = (position1, position2) => {
     const imagesClone = [...figure.images];

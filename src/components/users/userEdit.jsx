@@ -1,19 +1,20 @@
-import { useEffect, useState, useRef } from "react";
-import { getUserByMe, putUser } from "../../services/user";
-import { Button, Label, Textarea, TextInput } from "flowbite-react";
-import { useNavigate } from "react-router-dom";
-import UserAvatar from "./userAvatar";
-import SocialsForm from "../socialsForm";
-import { toast } from "react-toastify/unstyled";
-import SaveToast from "../toasts/saveToast";
-import S3DragAndDrop from "../images/s3DragAndDrop";
 import Croppie from "croppie";
 import "croppie/croppie.css";
-import getS3Url from "../images/getS3Url";
+import { Button, Label, Textarea, TextInput } from "flowbite-react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify/unstyled";
 import { postImage } from "../../services/image";
+import { putUser } from "../../services/user";
+import UserContext from "../../userContext";
+import getS3Url from "../images/getS3Url";
+import S3DragAndDrop from "../images/s3DragAndDrop";
+import SocialsForm from "../socialsForm";
+import SaveToast from "../toasts/saveToast";
+import UserAvatar from "./userAvatar";
 
 const UserEdit = () => {
-  const [user, setUser] = useState();
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [socials, setSocials] = useState([]);
   const [croppie, setCroppie] = useState(null);
@@ -21,18 +22,14 @@ const UserEdit = () => {
   const abortControllerRef = useRef(new AbortController());
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const userData = await getUserByMe();
-      setUser(userData);
-      setSocials(userData.socials);
-    };
-    fetchUserData();
-  }, []);
+    setSocials(user?.socials);
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const responseData = await putUser(user._id, { ...user, socials });
     if (responseData) {
+      setUser({ ...user, socials });
       toast(SaveToast, { data: { message: `${user.username} Saved.` } });
       navigate(`/users/${user.username}`);
     }

@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
+import { Button, Pagination } from "flowbite-react";
+import { useContext, useEffect, useState } from "react";
+import { FaPencil, FaTrashCan } from "react-icons/fa6";
 import {
   Link,
   useNavigate,
   useParams,
   useSearchParams,
 } from "react-router-dom";
-import DisplayFigure from "./displayFigure";
-import { deleteFigure, getFigure, getFigureMinis } from "../../services/figure";
-import { Button, Pagination } from "flowbite-react";
-import DeleteModal from "../deleteModal";
-import { getUserByMe } from "../../services/user";
-import DisplayMinis from "../minis/displayMinis";
-import { FaPencil, FaTrashCan } from "react-icons/fa6";
-import DeleteToast from "../toasts/deleteToast";
 import { toast } from "react-toastify/unstyled";
-
-const itemsPerPage = 20;
+import { itemsPerPage } from "../../constants/requestDefaults";
+import { deleteFigure, getFigure, getFigureMinis } from "../../services/figure";
+import UserContext from "../../userContext";
+import DeleteModal from "../deleteModal";
+import DisplayMinis from "../minis/displayMinis";
+import DeleteToast from "../toasts/deleteToast";
+import DisplayFigure from "./displayFigure";
 
 const Figure = () => {
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const [figure, setFigure] = useState();
   const [minis, setMinis] = useState();
@@ -31,15 +31,10 @@ const Figure = () => {
   const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    const fetchSelfData = async () => {
-      const selfData = await getUserByMe();
-      if (selfData?.roles?.includes("admin")) {
-        setIsAdmin(true);
-      }
-    };
-
-    fetchSelfData();
-  }, []);
+    if (user?.roles?.includes("admin")) {
+      setIsAdmin(true);
+    }
+  }, [user]);
 
   useEffect(() => {
     const fetchFigureData = async () => {

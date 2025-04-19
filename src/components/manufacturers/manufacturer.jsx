@@ -1,27 +1,27 @@
-import { useEffect, useState } from "react";
+import { Button, Pagination } from "flowbite-react";
+import { useContext, useEffect, useState } from "react";
+import { FaPencil, FaTrashCan } from "react-icons/fa6";
 import {
   Link,
   useNavigate,
   useParams,
   useSearchParams,
 } from "react-router-dom";
-import DisplayManufacturer from "./displayManufacturer";
+import { toast } from "react-toastify/unstyled";
+import { itemsPerPage } from "../../constants/requestDefaults";
 import {
   deleteManufacturer,
   getManufacturer,
   getManufacturerFigures,
 } from "../../services/manufacturer";
-import { Button, Pagination } from "flowbite-react";
+import UserContext from "../../userContext";
 import DeleteModal from "../deleteModal";
-import { getUserByMe } from "../../services/user";
 import DisplayFigures from "../figures/displayFigures";
-import { FaPencil, FaTrashCan } from "react-icons/fa6";
 import DeleteToast from "../toasts/deleteToast";
-import { toast } from "react-toastify/unstyled";
-
-const itemsPerPage = 20;
+import DisplayManufacturer from "./displayManufacturer";
 
 const Manufacturer = () => {
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const [manufacturer, setManufacturer] = useState();
   const [figures, setFigures] = useState();
@@ -35,15 +35,10 @@ const Manufacturer = () => {
   const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    const fetchSelfData = async () => {
-      const selfData = await getUserByMe();
-      if (selfData?.roles?.includes("admin")) {
-        setIsAdmin(true);
-      }
-    };
-
-    fetchSelfData();
-  }, []);
+    if (user?.roles?.includes("admin")) {
+      setIsAdmin(true);
+    }
+  }, [user]);
 
   useEffect(() => {
     const fetchManufacturerData = async () => {

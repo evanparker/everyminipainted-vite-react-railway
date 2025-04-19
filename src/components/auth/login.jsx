@@ -1,16 +1,17 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
-import { Link, useNavigate } from "react-router-dom";
-import { postLogin } from "../../services/auth";
 import { Button, HelperText, Label, TextInput } from "flowbite-react";
-import LogoutToast from "../toasts/logoutToast";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify/unstyled";
+import { postLogin } from "../../services/auth";
+import UserContext from "../../userContext";
+import LogoutToast from "../toasts/logoutToast";
 
-const Login = ({ setUserData }) => {
+const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [errorText, setErrorText] = useState();
   const navigate = useNavigate();
+  const { login } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +21,7 @@ const Login = ({ setUserData }) => {
         email,
         password,
       });
-      setUserData(userData);
+      login(userData);
       toast(LogoutToast, {
         data: {
           message: `Logged in as ${email}.`,
@@ -77,10 +78,6 @@ const Login = ({ setUserData }) => {
       </form>
     </div>
   );
-};
-
-Login.propTypes = {
-  setUserData: PropTypes.func.isRequired,
 };
 
 export default Login;

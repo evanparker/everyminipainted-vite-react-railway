@@ -1,24 +1,17 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { putPassword } from "../../services/auth";
 import { Button, Label, TextInput } from "flowbite-react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify/unstyled";
-import { getUserByMe } from "../../services/user";
+import { putPassword } from "../../services/auth";
+import UserContext from "../../userContext";
 import SaveToast from "../toasts/saveToast";
 
 const PasswordForm = () => {
+  const { user } = useContext(UserContext);
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchSelfData = async () => {
-      const selfData = await getUserByMe();
-      setUsername(selfData.username);
-    };
-
-    fetchSelfData();
-  }, []);
+  useEffect(() => {}, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,10 +19,10 @@ const PasswordForm = () => {
     if (userData) {
       toast(SaveToast, {
         data: {
-          message: `Password for ${username} updated.`,
+          message: `Password for ${user.username} updated.`,
         },
       });
-      navigate(`/users/${username}`);
+      navigate(`/users/${user.username}`);
     }
   };
 

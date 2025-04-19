@@ -1,20 +1,27 @@
-import { useEffect, useState } from "react";
+import { Button, Label, Textarea, TextInput } from "flowbite-react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify/unstyled";
 import {
   getManufacturer,
   postManufacturer,
   putManufacturer,
 } from "../../services/manufacturer";
-import { Button, Label, Textarea, TextInput } from "flowbite-react";
-import { getUserByMe } from "../../services/user";
+import UserContext from "../../userContext";
 import ImageSortContainer from "../images/imageSortContainer";
-import SocialsForm from "../socialsForm";
-import { toast } from "react-toastify/unstyled";
-import SaveToast from "../toasts/saveToast";
 import S3DragAndDrop from "../images/s3DragAndDrop";
+import SocialsForm from "../socialsForm";
+import SaveToast from "../toasts/saveToast";
 
 const ManufacturerForm = ({ mode }) => {
-  const [manufacturer, setManufacturer] = useState({ name: "", images: [] });
+  const { user } = useContext(UserContext);
+  const [manufacturer, setManufacturer] = useState({
+    name: "",
+    description: "",
+    website: "",
+    images: [],
+    socials: [],
+  });
   const [isAdmin, setIsAdmin] = useState(false);
   const [socials, setSocials] = useState([]);
   const { id } = useParams();
@@ -23,21 +30,26 @@ const ManufacturerForm = ({ mode }) => {
   useEffect(() => {
     const fetchManufacturerData = async () => {
       const manufacturerData = await getManufacturer(id);
-      setManufacturer(manufacturerData);
+      setManufacturer({
+        name: "",
+        description: "",
+        website: "",
+        images: [],
+        socials: [],
+        ...manufacturerData,
+      });
       setSocials(manufacturerData.socials);
     };
-    const fetchSelfData = async () => {
-      const selfData = await getUserByMe();
-      if (selfData?.roles?.includes("admin")) {
-        setIsAdmin(true);
-      }
-    };
-
     if (mode === "edit") {
       fetchManufacturerData();
     }
-    fetchSelfData();
   }, [mode, id]);
+
+  useEffect(() => {
+    if (user?.roles?.includes("admin")) {
+      setIsAdmin(true);
+    }
+  }, [user]);
 
   const handleSort = (position1, position2) => {
     const imagesClone = [...manufacturer.images];

@@ -1,18 +1,16 @@
-import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
-import { postLogout } from "../../services/auth";
 import { Button } from "flowbite-react";
-import LogoutToast from "../toasts/logoutToast";
-import { toast } from "react-toastify/unstyled";
+import PropTypes from "prop-types";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../../userContext";
 
-const Logout = ({ resetUserData }) => {
+const Logout = () => {
   const navigate = useNavigate();
+  const { logout } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await postLogout({});
-    resetUserData();
-    toast(LogoutToast);
+    logout();
     navigate("/");
   };
 

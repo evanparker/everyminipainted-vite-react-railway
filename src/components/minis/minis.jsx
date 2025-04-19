@@ -1,10 +1,9 @@
+import { Pagination } from "flowbite-react";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { itemsPerPage } from "../../constants/requestDefaults";
 import { getMinis, getMinisBySearch } from "../../services/mini";
 import DisplayMinis from "./displayMinis";
-import { Pagination } from "flowbite-react";
-import { useSearchParams } from "react-router-dom";
-
-const itemsPerPage = 20;
 
 const Minis = () => {
   const [minis, setMinis] = useState([]);

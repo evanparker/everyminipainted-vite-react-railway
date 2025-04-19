@@ -1,38 +1,24 @@
-import { useEffect, useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
-import {
-  getMinisByUsername,
-  getUserByMe,
-  getUserByUsername,
-} from "../../services/user";
-import DisplayMinis from "../minis/displayMinis";
-import UserAvatar from "./userAvatar";
-import { Button } from "flowbite-react";
-import SocialsBlock from "../socialsBlock";
+import { Button, Pagination } from "flowbite-react";
+import { useContext, useEffect, useState } from "react";
 import Markdown from "react-markdown";
-import { Pagination } from "flowbite-react";
-
-const itemsPerPage = 20;
+import { Link, useParams, useSearchParams } from "react-router-dom";
+import { itemsPerPage } from "../../constants/requestDefaults";
+import { getMinisByUsername, getUserByUsername } from "../../services/user";
+import UserContext from "../../userContext";
+import DisplayMinis from "../minis/displayMinis";
+import SocialsBlock from "../socialsBlock";
+import UserAvatar from "./userAvatar";
 
 const User = () => {
+  const { user: self } = useContext(UserContext);
   const [minis, setMinis] = useState();
   const [user, setUser] = useState();
-  const [self, setSelf] = useState();
   const { username } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(
     parseInt(searchParams.get("page") || 1)
   );
   const [totalPages, setTotalPages] = useState(0);
-
-  useEffect(() => {
-    const fetchSelfData = async () => {
-      const selfData = await getUserByMe();
-      setSelf(selfData);
-    };
-
-    fetchSelfData();
-  }, []);
 
   useEffect(() => {
     const fetchUserData = async () => {

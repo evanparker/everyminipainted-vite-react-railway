@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import { getFigures, getFiguresBySearch } from "../../services/figure";
-import { Button } from "flowbite-react";
-import { Link, useSearchParams } from "react-router-dom";
-import { getUserByMe } from "../../services/user";
+import { Button, Pagination } from "flowbite-react";
+import { useContext, useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
-import { Pagination } from "flowbite-react";
+import { Link, useSearchParams } from "react-router-dom";
+import { itemsPerPage } from "../../constants/requestDefaults";
+import { getFigures, getFiguresBySearch } from "../../services/figure";
+import UserContext from "../../userContext";
 import DisplayFigures from "./displayFigures";
 
-const itemsPerPage = 20;
-
 const Figures = () => {
+  const { user } = useContext(UserContext);
   const [figures, setFigures] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -47,15 +46,10 @@ const Figures = () => {
   }, [searchParams]);
 
   useEffect(() => {
-    const fetchSelfData = async () => {
-      const selfData = await getUserByMe();
-      if (selfData?.roles?.includes("admin")) {
-        setIsAdmin(true);
-      }
-    };
-
-    fetchSelfData();
-  }, []);
+    if (user?.roles?.includes("admin")) {
+      setIsAdmin(true);
+    }
+  }, [user]);
 
   const onPageChange = (page) => {
     setCurrentPage(page);

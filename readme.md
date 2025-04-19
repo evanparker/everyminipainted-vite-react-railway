@@ -25,6 +25,7 @@ npm run dev
     - immutable? (on things like username)
     - use joi?
 - [ ] Validate email on signup (before allowing posting)
+- [ ] Use context to manage authentication state
 - Design homepage
 - Add blog/articles
 - Favorites

@@ -1,21 +1,24 @@
 import {
+  Avatar,
+  DarkThemeToggle,
+  Dropdown,
+  DropdownHeader,
+  DropdownItem,
   Navbar,
   NavbarBrand,
-  NavbarToggle,
   NavbarCollapse,
   NavbarLink,
-  Dropdown,
-  DropdownItem,
-  DarkThemeToggle,
-  DropdownHeader,
-  Avatar,
+  NavbarToggle,
 } from "flowbite-react";
-import { Link } from "react-router-dom";
-import CldThumbnailImage from "./images/CldThumbnailImage";
+import { useContext } from "react";
 import { FaPlus, FaUser } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+import UserContext from "../userContext";
+import CldThumbnailImage from "./images/CldThumbnailImage";
 import S3Image from "./images/s3Image";
 
-function Navigation({ user }) {
+function Navigation() {
+  const { user, logout } = useContext(UserContext);
   return (
     <Navbar fluid rounded>
       <NavbarBrand as={Link} to={"/"}>
@@ -86,7 +89,8 @@ function Navigation({ user }) {
               <DropdownItem
                 className="dark:text-white"
                 as={Link}
-                to={"/logout"}
+                // to={"/logout"}
+                onClick={logout}
               >
                 Sign out
               </DropdownItem>
