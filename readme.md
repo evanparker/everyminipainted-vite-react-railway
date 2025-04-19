@@ -32,10 +32,12 @@ npm run dev
 - Moderation
 - Reputation
 - Tagging
+- Request a figure
 - Style and write email templates
 - Comments on entities (minis etc)
 - Keyboard support
   - Arrow key to change images being viewed
+- Search within other entities (search on a user page for example)
 - Figure out how to merge duplicate records
   - Find a way to search for likely duplicates
 - Change api to use json:api format?
@@ -94,6 +96,7 @@ npm run dev
   - [ ] Tags
     - Name/text
   - [ ] Collection (of figures, like a boxed set or something)
+- [x] Add types to images
 
 ## DONE:
 

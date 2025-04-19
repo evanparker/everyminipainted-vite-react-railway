@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Button,
   DarkThemeToggle,
   Dropdown,
   DropdownHeader,
@@ -89,7 +90,6 @@ function Navigation() {
               <DropdownItem
                 className="dark:text-white"
                 as={Link}
-                // to={"/logout"}
                 onClick={logout}
               >
                 Sign out
@@ -114,19 +114,28 @@ function Navigation() {
 
         <NavbarToggle />
       </div>
-      <NavbarCollapse>
-        <NavbarLink as={Link} to={"/minis"}>
-          Minis
-        </NavbarLink>
-        <NavbarLink as={Link} to={"/figures"}>
-          Figures
-        </NavbarLink>
-        <NavbarLink as={Link} to={"/manufacturers"}>
-          Manufacturers
-        </NavbarLink>
+      <NavbarCollapse list>
+        <div className="md:self-center">
+          <NavbarLink as={Link} to={"/minis"}>
+            Minis
+          </NavbarLink>
+        </div>
+        <div className="md:self-center">
+          <NavbarLink as={Link} to={"/figures"}>
+            Figures
+          </NavbarLink>
+        </div>
+
+        <div className="md:self-center">
+          <NavbarLink as={Link} to={"/manufacturers"}>
+            Manufacturers
+          </NavbarLink>
+        </div>
         {user && (
           <NavbarLink as={Link} to={"/minis/new"}>
-            <FaPlus className="inline" /> New Mini
+            <Button as={Link} to={`/minis/new`}>
+              <FaPlus className="inline" /> New Mini
+            </Button>
           </NavbarLink>
         )}
       </NavbarCollapse>
