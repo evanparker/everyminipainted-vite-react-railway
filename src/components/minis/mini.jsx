@@ -108,14 +108,14 @@ const Mini = () => {
             <FaTrashCan className="mr-2 h-5 w-5" /> Delete
           </Button>
         )}
-        {user && (
-          <Button className="max-w-36 mt-5" onClick={favorite}>
+        {mini && (
+          <Button className="max-w-36 mt-5" disabled={!user} onClick={favorite}>
             {favorited ? (
               <FaHeart className="mr-2 h-5 w-5" />
             ) : (
               <FaRegHeart className="mr-2 h-5 w-5" />
-            )}{" "}
-            {mini.favorites}
+            )}
+            <span>{mini.favorites}</span>
           </Button>
         )}
       </div>
