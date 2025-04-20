@@ -26,4 +26,27 @@ async function putUser(id, user) {
   return response;
 }
 
-export { getMinisByUsername, getUserByMe, getUserByUsername, putUser };
+async function addFavorite(id) {
+  const response = await apiClient.put(`/users/me/setfavorite`, {
+    id,
+    value: true,
+  });
+  return response;
+}
+
+async function removeFavorite(id) {
+  const response = await apiClient.put(`/users/me/setfavorite`, {
+    id,
+    value: false,
+  });
+  return response;
+}
+
+export {
+  getMinisByUsername,
+  getUserByMe,
+  getUserByUsername,
+  putUser,
+  addFavorite,
+  removeFavorite,
+};

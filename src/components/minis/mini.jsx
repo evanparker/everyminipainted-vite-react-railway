@@ -1,21 +1,23 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import useUserData from "../../useUserData";
-import DisplayMini from "./displayMini";
-import { deleteMini, getMini } from "../../services/mini";
 import { Button } from "flowbite-react";
-import DeleteModal from "../deleteModal";
-import UserAvatar from "../users/userAvatar";
-import { FaPencil, FaTrashCan } from "react-icons/fa6";
-import DeleteToast from "../toasts/deleteToast";
+import { useContext, useEffect, useState } from "react";
+import { FaHeart, FaPencil, FaRegHeart, FaTrashCan } from "react-icons/fa6";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify/unstyled";
+import { deleteMini, getMini } from "../../services/mini";
+import { addFavorite, removeFavorite } from "../../services/user";
+import UserContext from "../../userContext";
+import DeleteModal from "../deleteModal";
 import HeadTags from "../headTags";
+import DeleteToast from "../toasts/deleteToast";
+import UserAvatar from "../users/userAvatar";
+import DisplayMini from "./displayMini";
 
 const Mini = () => {
   const navigate = useNavigate();
   const [mini, setMini] = useState();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const { token, userId } = useUserData();
+  const [favorited, setFavorited] = useState(false);
+  const { user, setUser } = useContext(UserContext);
   const { id } = useParams();
 
   useEffect(() => {
@@ -32,6 +34,12 @@ const Mini = () => {
     fetchData();
   }, [id, navigate]);
 
+  useEffect(() => {
+    if (user?.favorites[id]) {
+      setFavorited(true);
+    }
+  }, [id, user]);
+
   const handleDeleteMini = async () => {
     const deletedMini = await deleteMini(id);
     if (deletedMini) {
@@ -39,6 +47,22 @@ const Mini = () => {
         data: { message: `${mini.name} Deleted` },
       });
       navigate("/");
+    }
+  };
+
+  const favorite = async () => {
+    try {
+      if (favorited) {
+        const updatedUser = await removeFavorite(id);
+        setFavorited(false);
+        setUser({ ...user, favorites: updatedUser.favorites });
+      } else {
+        const updatedUser = await addFavorite(id);
+        setFavorited(true);
+        setUser({ ...user, favorites: updatedUser.favorites });
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -63,7 +87,7 @@ const Mini = () => {
         </div>
       )}
       <div className="flex gap-5">
-        {token && userId === mini?.userId._id && (
+        {user?._id === mini?.userId._id && (
           <Button
             className="max-w-36 mt-5"
             as={Link}
@@ -73,13 +97,22 @@ const Mini = () => {
             Edit
           </Button>
         )}
-        {token && userId === mini?.userId._id && (
+        {user?._id === mini?.userId._id && (
           <Button
             color="red"
             className="max-w-36 mt-5"
             onClick={() => setShowDeleteModal(true)}
           >
             <FaTrashCan className="mr-2 h-5 w-5" /> Delete
+          </Button>
+        )}
+        {user && (
+          <Button className="max-w-36 mt-5" onClick={favorite}>
+            {favorited ? (
+              <FaHeart className="h-5 w-5" />
+            ) : (
+              <FaRegHeart className="h-5 w-5" />
+            )}
           </Button>
         )}
       </div>

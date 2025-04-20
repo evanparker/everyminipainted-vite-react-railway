@@ -28,7 +28,7 @@ npm run dev
 - [x] Use context to manage authentication state
 - Design homepage
 - Add blog/articles
-- Favorites
+- [x] Favorites
 - Moderation
 - Reputation
 - Tagging
