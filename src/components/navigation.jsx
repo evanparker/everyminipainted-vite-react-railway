@@ -114,7 +114,7 @@ function Navigation() {
 
         <NavbarToggle />
       </div>
-      <NavbarCollapse list>
+      <NavbarCollapse>
         <div className="md:self-center">
           <NavbarLink as={Link} to={"/minis"}>
             Minis
@@ -132,11 +132,9 @@ function Navigation() {
           </NavbarLink>
         </div>
         {user && (
-          <NavbarLink as={Link} to={"/minis/new"}>
-            <Button as={Link} to={`/minis/new`}>
-              <FaPlus className="inline" /> New Mini
-            </Button>
-          </NavbarLink>
+          <Button as={Link} to={`/minis/new`}>
+            <FaPlus className="inline" /> New Mini
+          </Button>
         )}
       </NavbarCollapse>
     </Navbar>
