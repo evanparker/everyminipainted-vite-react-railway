@@ -64,7 +64,7 @@ const Mini = () => {
         setMini({ ...mini, favorites: mini.favorites + 1 });
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
@@ -83,6 +83,18 @@ const Mini = () => {
         onConfirm={handleDeleteMini}
       />
       {mini && <DisplayMini mini={mini} />}
+
+      {mini && (
+        <Button className="max-w-36 mt-5" disabled={!user} onClick={favorite}>
+          {favorited ? (
+            <FaHeart className="mr-2 h-5 w-5" />
+          ) : (
+            <FaRegHeart className="mr-2 h-5 w-5" />
+          )}
+          <span>{mini.favorites}</span>
+        </Button>
+      )}
+
       {mini?.userId && (
         <div className="mt-5 w-xs">
           <UserAvatar user={mini?.userId} />
@@ -106,16 +118,6 @@ const Mini = () => {
             onClick={() => setShowDeleteModal(true)}
           >
             <FaTrashCan className="mr-2 h-5 w-5" /> Delete
-          </Button>
-        )}
-        {mini && (
-          <Button className="max-w-36 mt-5" disabled={!user} onClick={favorite}>
-            {favorited ? (
-              <FaHeart className="mr-2 h-5 w-5" />
-            ) : (
-              <FaRegHeart className="mr-2 h-5 w-5" />
-            )}
-            <span>{mini.favorites}</span>
           </Button>
         )}
       </div>
