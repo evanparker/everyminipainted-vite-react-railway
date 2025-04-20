@@ -56,10 +56,12 @@ const Mini = () => {
         const updatedUser = await removeFavorite(id);
         setFavorited(false);
         setUser({ ...user, favorites: updatedUser.favorites });
+        setMini({ ...mini, favorites: mini.favorites - 1 });
       } else {
         const updatedUser = await addFavorite(id);
         setFavorited(true);
         setUser({ ...user, favorites: updatedUser.favorites });
+        setMini({ ...mini, favorites: mini.favorites + 1 });
       }
     } catch (e) {
       console.log(e);
@@ -109,10 +111,11 @@ const Mini = () => {
         {user && (
           <Button className="max-w-36 mt-5" onClick={favorite}>
             {favorited ? (
-              <FaHeart className="h-5 w-5" />
+              <FaHeart className="mr-2 h-5 w-5" />
             ) : (
-              <FaRegHeart className="h-5 w-5" />
-            )}
+              <FaRegHeart className="mr-2 h-5 w-5" />
+            )}{" "}
+            {mini.favorites}
           </Button>
         )}
       </div>
