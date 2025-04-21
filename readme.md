@@ -10,21 +10,23 @@ npm run dev
 
 ## TODO:
 
+- [ ] Set up staging server
 - Errors and Validation
   - [ ] Make api errors consistent `({message: "text"})`
-  - Show form errors
-    - Validate fields on client
-  - [ ] Make list of reserved usernames (such as `me`, `admin`, `evanparker`)
-    - [ ] maybe have a min length of 3?
-    - [ ] force lowercase
-    - [ ] attatch to validation?
+  - [x] Show form errors
+    - [x] Validate fields on client
+  - [x] Make list of reserved usernames (such as `me`, `admin`, `evanparker`)
+    - [x] maybe have a min length of 3?
+    - [x] force lowercase
+    - [x] attatch to validation?
   - Sanatize text fields
   - Error pages (404, etc)
   - mongoose schema:
     - `timestamps: true`
-    - immutable? (on things like username)
-    - use joi?
+    - [x] immutable? (on things like username)
+    - ~~use joi?~~ (nah.)
 - [ ] Validate email on signup (before allowing posting)
+- [ ] Accessibility (a11y)
 - Design homepage
 - Add blog/articles
 - Moderation

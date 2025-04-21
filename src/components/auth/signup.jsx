@@ -40,7 +40,8 @@ const Signup = () => {
             id="username1"
             type="text"
             required
-            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value.toLowerCase())}
           />
         </div>
         <div>
@@ -51,7 +52,7 @@ const Signup = () => {
             id="email1"
             type="email"
             required
-            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+            pattern="^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
