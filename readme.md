@@ -10,7 +10,14 @@ npm run dev
 
 ## TODO:
 
-- [ ] Set up staging server
+- NSFW tagging/flagging/bluring
+- Flesh out delete flows
+
+  - [ ] Delete files from s3 when images deleted
+  - [ ] Delete images when entities are deleted.
+  - [ ] Delete all a user's minis when their account is deleted
+
+- [ ] Set up CDN
 - Errors and Validation
   - [ ] Make api errors consistent `({message: "text"})`
   - [x] Show form errors
@@ -31,6 +38,8 @@ npm run dev
 - Add blog/articles
 - Moderation
 - Reputation
+- Copyright notice in code
+- Choose source code license
 - Tagging
 - Request a figure
 - Style and write email templates
