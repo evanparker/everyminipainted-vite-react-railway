@@ -1,6 +1,6 @@
 import getS3Url from "./getS3Url";
 
-const S3Image = ({ image, width, height, className }) => {
+const S3Image = ({ image, width, height, blur, className }) => {
   const options = ["quality:80", "extend:1"];
 
   if (width) {
@@ -8,6 +8,9 @@ const S3Image = ({ image, width, height, className }) => {
   }
   if (height) {
     options.push(`height:${height}`);
+  }
+  if (blur) {
+    className += " blur-sm";
   }
 
   const url = getS3Url({

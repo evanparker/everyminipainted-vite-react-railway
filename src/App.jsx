@@ -4,6 +4,9 @@ import { Route, Routes } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify/unstyled";
 import "./App.css";
 import AboutPage from "./components/aboutPage";
+import AdminPanelUser from "./components/admin/adminPanelUser";
+import ModerationReport from "./components/admin/moderationReport";
+import ModerationReports from "./components/admin/moderationReports";
 import ForgotPasswordForm from "./components/auth/forgotPasswordForm";
 import Login from "./components/auth/login";
 import Logout from "./components/auth/logout";
@@ -29,14 +32,15 @@ import SearchBar from "./components/searchBar";
 import LogoutToast from "./components/toasts/logoutToast";
 import User from "./components/users/user";
 import UserEdit from "./components/users/userEdit";
+import { postLogout } from "./services/auth";
 import { getUserByMe } from "./services/user";
 import UserContext from "./userContext";
 import useUserData from "./useUserData";
-import { postLogout } from "./services/auth";
+import NotFound from "./404";
 
 function App() {
   const { token, setUserData, resetUserData } = useUserData();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(undefined);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -88,11 +92,11 @@ function App() {
         </div>
 
         <Routes>
-          <Route path="/" element={<Minis />} />
+          <Route exact path="/" element={<Minis />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
 
-          <Route path="/login" element={<Login setUserData={setUserData} />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/password" element={<PasswordForm />} />
@@ -119,6 +123,17 @@ function App() {
 
           <Route path="/users/:username" element={<User />} />
           <Route path="/users/edit" element={<UserEdit />} />
+
+          {/* Admin */}
+          <Route path="/admin" element={<ModerationReports />} />
+          <Route path="/admin/moderation" element={<ModerationReports />} />
+          <Route path="/admin/moderation/:id" element={<ModerationReport />} />
+          {/* <Route path="/admin/users" element={<></>} /> */}
+          <Route path="/admin/users/:username" element={<AdminPanelUser />} />
+
+          {/* Catch all */}
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
 
         <div className="mt-5">

@@ -10,13 +10,14 @@ npm run dev
 
 ## TODO:
 
-- NSFW tagging/flagging/bluring
-- Flesh out delete flows
-
-  - [ ] Delete files from s3 when images deleted
-  - [ ] Delete images when entities are deleted.
+- [x] NSFW tagging/flagging/bluring
+- [x] Moderation
+  - Not a mini
+  - NSFW (and not tagged)
+  - Hate speech
+  - Other
+- [ ] Flesh out delete flows (soft delete)
   - [ ] Delete all a user's minis when their account is deleted
-
 - [ ] Set up CDN
 - Errors and Validation
   - [ ] Make api errors consistent `({message: "text"})`
@@ -27,16 +28,18 @@ npm run dev
     - [x] force lowercase
     - [x] attatch to validation?
   - Sanatize text fields
-  - Error pages (404, etc)
+  - [ ] Error pages (404, etc)
+    - [x] 404
   - mongoose schema:
     - `timestamps: true`
     - [x] immutable? (on things like username)
     - ~~use joi?~~ (nah.)
 - [ ] Validate email on signup (before allowing posting)
 - [ ] Accessibility (a11y)
+- [ ] Encrypt login tokens?
+- [ ] Remove cloudinary support
 - Design homepage
 - Add blog/articles
-- Moderation
 - Reputation
 - Copyright notice in code
 - Choose source code license

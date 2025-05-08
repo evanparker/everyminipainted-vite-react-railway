@@ -1,14 +1,23 @@
 import { Button } from "flowbite-react";
 import { useContext, useEffect, useState } from "react";
-import { FaHeart, FaPencil, FaRegHeart, FaTrashCan } from "react-icons/fa6";
+import {
+  FaFlag,
+  FaHeart,
+  FaPencil,
+  FaRegHeart,
+  FaTrashCan,
+} from "react-icons/fa6";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify/unstyled";
 import { deleteMini, getMini } from "../../services/mini";
+import { postModerationReport } from "../../services/moderationReport";
 import { addFavorite, removeFavorite } from "../../services/user";
 import UserContext from "../../userContext";
 import DeleteModal from "../deleteModal";
 import HeadTags from "../headTags";
+import ModerationReportModal from "../moderationReportModal";
 import DeleteToast from "../toasts/deleteToast";
+import ModerationReportToast from "../toasts/moderationReportToast";
 import UserAvatar from "../users/userAvatar";
 import DisplayMini from "./displayMini";
 
@@ -16,6 +25,8 @@ const Mini = () => {
   const navigate = useNavigate();
   const [mini, setMini] = useState();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showModerationReportModal, setShowModerationReportModal] =
+    useState(false);
   const [favorited, setFavorited] = useState(false);
   const { user, setUser } = useContext(UserContext);
   const { id } = useParams();
@@ -27,7 +38,7 @@ const Mini = () => {
         setMini(miniData);
       } catch (e) {
         if (e.status === 404) {
-          navigate("/404");
+          navigate("/404", { replace: true });
         }
       }
     };
@@ -48,6 +59,11 @@ const Mini = () => {
       });
       navigate("/");
     }
+  };
+
+  const handleModerationReport = async (data) => {
+    postModerationReport({ mini: mini._id, ...data });
+    toast(ModerationReportToast, {});
   };
 
   const favorite = async () => {
@@ -82,17 +98,33 @@ const Mini = () => {
         onClose={() => setShowDeleteModal(false)}
         onConfirm={handleDeleteMini}
       />
+      <ModerationReportModal
+        show={showModerationReportModal}
+        onClose={() => setShowModerationReportModal(false)}
+        onConfirm={handleModerationReport}
+      />
+
       {mini && <DisplayMini mini={mini} />}
 
       {mini && (
-        <Button className="max-w-36 mt-5" disabled={!user} onClick={favorite}>
-          {favorited ? (
-            <FaHeart className="mr-2 h-5 w-5" />
-          ) : (
-            <FaRegHeart className="mr-2 h-5 w-5" />
-          )}
-          <span>{mini.favorites}</span>
-        </Button>
+        <div className="flex gap-5 mt-5">
+          <Button className="max-w-36" disabled={!user} onClick={favorite}>
+            {favorited ? (
+              <FaHeart className="mr-2 h-5 w-5" />
+            ) : (
+              <FaRegHeart className="mr-2 h-5 w-5" />
+            )}
+            <span>{mini.favorites}</span>
+          </Button>
+          <Button
+            className="max-w-36"
+            disabled={!user}
+            color="red"
+            onClick={() => setShowModerationReportModal(true)}
+          >
+            <FaFlag className="mr-2 h-5 w-5" /> Report
+          </Button>
+        </div>
       )}
 
       {mini?.userId && (
