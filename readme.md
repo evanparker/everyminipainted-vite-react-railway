@@ -10,15 +10,16 @@ npm run dev
 
 ## TODO:
 
-- [x] NSFW tagging/flagging/bluring
-- [x] Moderation
-  - Not a mini
-  - NSFW (and not tagged)
-  - Hate speech
-  - Other
-- [ ] Flesh out delete flows (soft delete)
-  - [ ] Delete all a user's minis when their account is deleted
+- [ ] Generate invite keys from api
+- [ ] Ban user flows
+  - [ ] (soft) Delete all a user's minis when their account is deleted
+  - [ ] Validate email on signup (before allowing posting)
+- [ ] Feature Flags
+  - [ ] Allow/restrict creation of figures/manufacturers
 - [ ] Set up CDN
+- [ ] Create sample data for resetting staging
+  - [ ] add population scripts
+- [ ] Compliance stuff... EU, California...
 - Errors and Validation
   - [ ] Make api errors consistent `({message: "text"})`
   - [x] Show form errors
@@ -34,9 +35,7 @@ npm run dev
     - `timestamps: true`
     - [x] immutable? (on things like username)
     - ~~use joi?~~ (nah.)
-- [ ] Validate email on signup (before allowing posting)
 - [ ] Accessibility (a11y)
-- [ ] Encrypt login tokens?
 - [ ] Remove cloudinary support
 - Design homepage
 - Add blog/articles
@@ -161,6 +160,13 @@ npm run dev
 - [x] Trim whitespace on signup inputs
 - [x] In page profile pic cropping
   - Croppie? https://foliotek.github.io/Croppie/
+- [x] NSFW tagging/flagging/bluring
+- [x] Moderation
+  - Not a mini
+  - NSFW (and not tagged)
+  - Hate speech
+  - Other
+- [x] Flesh out delete flows (soft delete)
 
 # Vite + React + Caddy
 
