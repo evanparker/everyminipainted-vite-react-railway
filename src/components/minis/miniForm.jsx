@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useUserData from "../../useUserData";
 import { getMini, postMini, putMini } from "../../services/mini";
-import { Button, Label, Textarea, TextInput } from "flowbite-react";
+import { Button, Checkbox, Label, Textarea, TextInput } from "flowbite-react";
 import { getFiguresBySearch } from "../../services/figure";
 import ImageSortContainer from "../images/imageSortContainer";
 import { FaMagnifyingGlass } from "react-icons/fa6";
@@ -97,6 +97,10 @@ const MiniForm = ({ mode }) => {
   const handleDescriptionChange = (e) => {
     e.preventDefault();
     setMini((prevMini) => ({ ...prevMini, description: e.target.value }));
+  };
+
+  const handleBlur = () => {
+    setMini((prevMini) => ({ ...prevMini, blur: !prevMini.blur }));
   };
 
   const chooseFigure = (figure) => {
@@ -202,6 +206,11 @@ const MiniForm = ({ mode }) => {
                 />
               </div>
             </div>
+            <div className="flex gap-3 items-center">
+              <Checkbox id="blur1" checked={mini.blur} onChange={handleBlur} />
+              <Label htmlFor="blur1">Blur (for NSFW/Content Warning)</Label>
+            </div>
+
             <div className="max-w-lg">
               <Button type="submit">Save</Button>
             </div>

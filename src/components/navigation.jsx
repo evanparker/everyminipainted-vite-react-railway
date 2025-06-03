@@ -13,7 +13,7 @@ import {
 } from "flowbite-react";
 import { useContext } from "react";
 import { FaPlus, FaUser } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import UserContext from "../userContext";
 import CldThumbnailImage from "./images/CldThumbnailImage";
 import S3Image from "./images/s3Image";
@@ -116,20 +116,31 @@ function Navigation() {
       </div>
       <NavbarCollapse>
         <div className="md:self-center">
-          <NavbarLink as={Link} to={"/minis"}>
-            Minis
-          </NavbarLink>
+          <NavLink to={"/minis"}>
+            {({ isActive }) => (
+              <NavbarLink as="div" active={isActive}>
+                Minis
+              </NavbarLink>
+            )}
+          </NavLink>
         </div>
         <div className="md:self-center">
-          <NavbarLink as={Link} to={"/figures"}>
-            Figures
-          </NavbarLink>
+          <NavLink to={"/figures"}>
+            {({ isActive }) => (
+              <NavbarLink as="div" active={isActive}>
+                Figures
+              </NavbarLink>
+            )}
+          </NavLink>
         </div>
-
         <div className="md:self-center">
-          <NavbarLink as={Link} to={"/manufacturers"}>
-            Manufacturers
-          </NavbarLink>
+          <NavLink to={"/manufacturers"}>
+            {({ isActive }) => (
+              <NavbarLink as="div" active={isActive}>
+                Manufacturers
+              </NavbarLink>
+            )}
+          </NavLink>
         </div>
         {user && (
           <Button as={Link} to={`/minis/new`}>

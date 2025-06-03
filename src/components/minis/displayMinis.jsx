@@ -20,7 +20,12 @@ const DisplayMinis = ({ minis }) => {
               className="relative overflow-hidden text-gray-900 dark:text-white"
               renderImage={() =>
                 img?.type === "s3Image" ? (
-                  <S3Image image={img} width={400} height={400} />
+                  <S3Image
+                    image={img}
+                    width={400}
+                    height={400}
+                    blur={mini.blur}
+                  />
                 ) : (
                   <CldThumbnailImage
                     publicId={img?.cloudinaryPublicId}
