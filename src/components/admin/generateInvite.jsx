@@ -3,6 +3,7 @@ import { getInvites, postInvite } from "../../services/invite";
 import { useNavigate } from "react-router-dom";
 import {
   Button,
+  HelperText,
   Label,
   Table,
   TableBody,
@@ -19,6 +20,7 @@ const GenerateInvite = () => {
   const [invites, setInvites] = useState([]);
   const [inviteCode, setInviteCode] = useState("");
   const navigate = useNavigate();
+  const [formError, setFormError] = useState("");
 
   useEffect(() => {
     if (user !== undefined && !user?.roles?.includes("admin")) {
@@ -42,10 +44,15 @@ const GenerateInvite = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const invite = await postInvite({ code: inviteCode });
-    if (invite) {
-      setInviteCode("");
-      setInvites((prevInvites) => [invite, ...prevInvites]);
+    try {
+      const invite = await postInvite({ code: inviteCode });
+      if (invite) {
+        setInviteCode("");
+        setFormError("");
+        setInvites((prevInvites) => [invite, ...prevInvites]);
+      }
+    } catch (error) {
+      setFormError(error.response?.message);
     }
   };
 
@@ -61,6 +68,7 @@ const GenerateInvite = () => {
             onChange={handleInviteCodeChange}
             required={true}
           />
+          {formError && <HelperText color="failure">{formError}</HelperText>}
         </div>
         <div className="max-w-lg">
           <Button type="submit">Save</Button>
