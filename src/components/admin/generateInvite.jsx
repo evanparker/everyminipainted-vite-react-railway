@@ -28,7 +28,7 @@ const GenerateInvite = () => {
     }
     const fetchData = async () => {
       const results = await getInvites();
-
+      results.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       setInvites(results);
     };
     if (user?.roles?.includes("admin")) {

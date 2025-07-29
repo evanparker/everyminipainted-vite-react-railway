@@ -10,7 +10,7 @@ npm run dev
 
 ## TODO:
 
-- [ ] Generate invite keys from api
+- [x] Generate invite keys from api
 - [ ] Ban user flows
   - [ ] (soft) Delete all a user's minis when their account is deleted
   - [ ] Validate email on signup (before allowing posting)
