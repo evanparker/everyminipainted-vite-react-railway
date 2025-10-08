@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postSignup } from "../../services/auth";
 import { Button, HelperText, Label, TextInput } from "flowbite-react";
+import toBool from "../../util/toBool";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +11,10 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [formError, setFormError] = useState("");
   const navigate = useNavigate();
+  const inviteRequired =
+    import.meta.env.VITE_CREATE_USER_REQUIRES_INVITE !== undefined
+      ? toBool(import.meta.env.VITE_CREATE_USER_REQUIRES_INVITE)
+      : true;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,18 +72,20 @@ const Signup = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div>
-          <div className="mb-2 block">
-            <Label htmlFor="invite1">Invite Code</Label>
+        {inviteRequired && (
+          <div>
+            <div className="mb-2 block">
+              <Label htmlFor="invite1">Invite Code</Label>
+            </div>
+            <TextInput
+              id="invite1"
+              type="text"
+              autoComplete="one-time-code"
+              required
+              onChange={(e) => setInvite(e.target.value)}
+            />
           </div>
-          <TextInput
-            id="invite1"
-            type="text"
-            autoComplete="one-time-code"
-            required
-            onChange={(e) => setInvite(e.target.value)}
-          />
-        </div>
+        )}
         {formError && <HelperText color="failure">{formError}</HelperText>}
 
         <Button type="submit">Submit</Button>

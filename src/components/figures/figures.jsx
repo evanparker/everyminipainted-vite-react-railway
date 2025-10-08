@@ -6,6 +6,7 @@ import { itemsPerPage } from "../../constants/requestDefaults";
 import { getFigures, getFiguresBySearch } from "../../services/figure";
 import UserContext from "../../userContext";
 import DisplayFigures from "./displayFigures";
+import toBool from "../../util/toBool";
 
 const Figures = () => {
   const { user } = useContext(UserContext);
@@ -60,9 +61,17 @@ const Figures = () => {
     setSearchParams(searchParams, { replace: false });
   };
 
+  const canEditFigure = () => {
+    return (
+      (import.meta.env.VITE_EDIT_FIGURE_REQUIRES_ADMIN !== undefined &&
+        toBool(import.meta.env.VITE_EDIT_FIGURE_REQUIRES_ADMIN) === false) ||
+      isAdmin
+    );
+  };
+
   return (
     <>
-      {isAdmin && (
+      {canEditFigure && (
         <div className="mb-5 flex gap-5">
           <Button as={Link} to={`/figures/new`}>
             <FaPlus className="inline" /> New Figure

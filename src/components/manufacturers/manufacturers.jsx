@@ -10,6 +10,7 @@ import {
 import UserContext from "../../userContext";
 import CldThumbnailImage from "../images/CldThumbnailImage";
 import S3Image from "../images/s3Image";
+import toBool from "../../util/toBool";
 
 const Manufacturers = () => {
   const { user } = useContext(UserContext);
@@ -62,9 +63,18 @@ const Manufacturers = () => {
     setSearchParams(searchParams, { replace: false });
   };
 
+  const canEditManufacturer = () => {
+    return (
+      (import.meta.env.VITE_EDIT_MANUFACTURER_REQUIRES_ADMIN !== undefined &&
+        toBool(import.meta.env.VITE_EDIT_MANUFACTURER_REQUIRES_ADMIN) ===
+          false) ||
+      isAdmin
+    );
+  };
+
   return (
     <>
-      {isAdmin && (
+      {canEditManufacturer() && (
         <div className="mb-5 flex gap-5">
           <Button as={Link} to={`/manufacturers/new`}>
             <FaPlus className="inline" /> New Manufacturer

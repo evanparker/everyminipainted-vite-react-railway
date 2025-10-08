@@ -14,8 +14,11 @@ npm run dev
 - [ ] Ban user flows
   - [ ] (soft) Delete all a user's minis when their account is deleted
   - [ ] Validate email on signup (before allowing posting)
-- [ ] Feature Flags
-  - [ ] Allow/restrict creation of figures/manufacturers
+- [x] Feature Flags
+  - [x] Non admin manufacturer submittal
+  - [x] Non admin figure submittal
+  - [x] Require invite code to create account
+- [ ] Restrict usernames to valid url characters
 - [ ] Set up CDN
 - [ ] Create sample data for resetting staging
   - [ ] add population scripts
