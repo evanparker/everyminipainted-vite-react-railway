@@ -18,7 +18,7 @@ npm run dev
   - [x] Non admin manufacturer submittal
   - [x] Non admin figure submittal
   - [x] Require invite code to create account
-- [ ] Restrict usernames to valid url characters
+- [x] Restrict usernames to valid url characters
 - [ ] Set up CDN
 - [ ] Create sample data for resetting staging
   - [ ] add population scripts

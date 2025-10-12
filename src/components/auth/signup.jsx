@@ -16,6 +16,12 @@ const Signup = () => {
       ? toBool(import.meta.env.VITE_CREATE_USER_REQUIRES_INVITE)
       : true;
 
+  const handleUsername = (e) => {
+    const text = e.target.value.toLowerCase();
+    const re = /[a-z0-9\-_]+/g;
+    setUsername((text.match(re) || []).join(""));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormError("");
@@ -46,8 +52,12 @@ const Signup = () => {
             type="text"
             required
             value={username}
-            onChange={(e) => setUsername(e.target.value.toLowerCase())}
+            pattern="^[a-z0-9\-_]+$"
+            onChange={handleUsername}
           />
+          <HelperText>
+            Only alphanumeric characters, dashes, and underscores
+          </HelperText>
         </div>
         <div>
           <div className="mb-2 block">
