@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import CldThumbnailImage from "../images/CldThumbnailImage";
 import ImageModal from "../images/imageModal";
@@ -12,6 +12,30 @@ const DisplayFigure = ({ figure }) => {
   const onClose = () => {
     setSelectedImage(undefined);
   };
+
+  const onArrowKeyDown = useCallback(
+    (e) => {
+      if (selectedImage) {
+        const index = figure.images.indexOf(selectedImage);
+
+        if (e.key === "ArrowLeft") {
+          setSelectedImage(figure.images[Math.max(0, index - 1)]);
+        } else if (e.key === "ArrowRight") {
+          setSelectedImage(
+            figure.images[Math.min(figure.images.length - 1, index + 1)]
+          );
+        }
+      }
+    },
+    [selectedImage, figure.images]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", onArrowKeyDown, false);
+    return () => {
+      document.removeEventListener("keydown", onArrowKeyDown, false);
+    };
+  });
 
   return (
     <>

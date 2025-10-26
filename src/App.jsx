@@ -37,6 +37,7 @@ import { getUserByMe } from "./services/user";
 import UserContext from "./userContext";
 import useUserData from "./useUserData";
 import NotFound from "./404";
+import GenerateInvite from "./components/admin/generateInvite";
 
 function App() {
   const { token, setUserData, resetUserData } = useUserData();
@@ -126,6 +127,7 @@ function App() {
 
           {/* Admin */}
           <Route path="/admin" element={<ModerationReports />} />
+          <Route path="/admin/invites" element={<GenerateInvite />} />
           <Route path="/admin/moderation" element={<ModerationReports />} />
           <Route path="/admin/moderation/:id" element={<ModerationReport />} />
           {/* <Route path="/admin/users" element={<></>} /> */}

@@ -12,6 +12,7 @@ import ImageSortContainer from "../images/imageSortContainer";
 import S3DragAndDrop from "../images/s3DragAndDrop";
 import SocialsForm from "../socialsForm";
 import SaveToast from "../toasts/saveToast";
+import toBool from "../../util/toBool";
 
 const ManufacturerForm = ({ mode }) => {
   const { user } = useContext(UserContext);
@@ -131,9 +132,18 @@ const ManufacturerForm = ({ mode }) => {
     }));
   };
 
+  const canEditManufacturer = () => {
+    return (
+      (import.meta.env.VITE_EDIT_MANUFACTURER_REQUIRES_ADMIN !== undefined &&
+        toBool(import.meta.env.VITE_EDIT_MANUFACTURER_REQUIRES_ADMIN) ===
+          false) ||
+      isAdmin
+    );
+  };
+
   return (
     <>
-      {manufacturer && isAdmin && (
+      {manufacturer && canEditManufacturer && (
         <div>
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="block max-w-lg">

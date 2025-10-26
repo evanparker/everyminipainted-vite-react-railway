@@ -1,7 +1,7 @@
 import CldThumbnailImage from "../images/CldThumbnailImage";
 import PropTypes from "prop-types";
 import ImageModal from "../images/imageModal";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Markdown from "react-markdown";
 import S3Image from "../images/s3Image";
@@ -12,6 +12,30 @@ const DisplayMini = ({ mini }) => {
   const onClose = () => {
     setSelectedImage(undefined);
   };
+
+  const onArrowKeyDown = useCallback(
+    (e) => {
+      if (selectedImage) {
+        const index = mini.images.indexOf(selectedImage);
+
+        if (e.key === "ArrowLeft") {
+          setSelectedImage(mini.images[Math.max(0, index - 1)]);
+        } else if (e.key === "ArrowRight") {
+          setSelectedImage(
+            mini.images[Math.min(mini.images.length - 1, index + 1)]
+          );
+        }
+      }
+    },
+    [selectedImage, mini.images]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", onArrowKeyDown, false);
+    return () => {
+      document.removeEventListener("keydown", onArrowKeyDown, false);
+    };
+  });
 
   return (
     <>

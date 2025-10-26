@@ -9,6 +9,7 @@ import { toast } from "react-toastify/unstyled";
 import SaveToast from "../toasts/saveToast";
 import S3DragAndDrop from "../images/s3DragAndDrop";
 import UserContext from "../../userContext";
+import toBool from "../../util/toBool";
 
 const FigureForm = ({ mode }) => {
   const { user } = useContext(UserContext);
@@ -153,9 +154,17 @@ const FigureForm = ({ mode }) => {
     setManufacturerResults(manufacturers.docs);
   };
 
+  const canEditFigure = () => {
+    return (
+      (import.meta.env.VITE_EDIT_FIGURE_REQUIRES_ADMIN !== undefined &&
+        toBool(import.meta.env.VITE_EDIT_FIGURE_REQUIRES_ADMIN) === false) ||
+      isAdmin
+    );
+  };
+
   return (
     <>
-      {figure && isAdmin && (
+      {figure && canEditFigure && (
         <div>
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="max-w-lg block">
