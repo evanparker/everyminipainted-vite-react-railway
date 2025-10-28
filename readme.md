@@ -13,6 +13,7 @@ npm run dev
 - [ ] Ban user flows
   - [ ] (soft) Delete all a user's minis when their account is deleted
   - [ ] Validate email on signup (before allowing posting)
+- [ ] Make thumbnail size consistent when loading images
 - [ ] Set up CDN
 - [ ] Create sample data for resetting staging
   - [ ] add population scripts
@@ -30,20 +31,20 @@ npm run dev
     - ~~use joi?~~ (nah.)
 - [ ] Accessibility (a11y)
 - [ ] Remove cloudinary support
-- Design homepage
-- Add blog/articles
-- Reputation
-- Copyright notice in code
-- Choose source code license
-- Tagging
-- Request a figure
-- Style and write email templates
-- Comments on entities (minis etc)
-- [ ] Keyboard support
-  - [ ] Arrow key to change images being viewed
+- [ ] Design homepage
+- [ ] Add blog/articles
+- [ ] Reputation
+- [ ] Copyright notice in code
+- [ ] Choose source code license
+- [ ] Tagging
+- [ ] Request a figure
+- [ ] Style and write email templates
+- [ ] Comments on entities (minis etc)
+- [x] Keyboard support
+  - [x] Arrow key to change images being viewed
 - Search within other entities (search on a user page for example)
-- Figure out how to merge duplicate records
-  - Find a way to search for likely duplicates
+- [ ] Figure out how to merge duplicate records
+  - [ ] Find a way to search for likely duplicates
 - Change api to use json:api format?
   - https://jsonapi.org/
   - https://www.npmjs.com/package/jsonapi-serializer#relationship-deserializer
