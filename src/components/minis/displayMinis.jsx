@@ -5,7 +5,7 @@ import { FaHeart } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import UserContext from "../../userContext";
 import CldThumbnailImage from "../images/CldThumbnailImage";
-import S3Image from "../images/s3Image";
+import S3Thumbnail from "../images/s3Thumbnail";
 
 const DisplayMinis = ({ minis }) => {
   const { user } = useContext(UserContext);
@@ -20,7 +20,7 @@ const DisplayMinis = ({ minis }) => {
               className="relative overflow-hidden text-gray-900 dark:text-white"
               renderImage={() =>
                 img?.type === "s3Image" ? (
-                  <S3Image
+                  <S3Thumbnail
                     image={img}
                     width={400}
                     height={400}

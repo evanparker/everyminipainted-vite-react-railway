@@ -1,6 +1,6 @@
 import getS3Url from "./getS3Url";
 
-const S3Image = ({ image, width, height, blur, className }) => {
+const S3Image = ({ image, width, height, blur, className = "" }) => {
   const options = ["quality:80", "extend:1"];
 
   if (width) {
@@ -19,6 +19,7 @@ const S3Image = ({ image, width, height, blur, className }) => {
     bucket: image.s3Bucket,
     extension: "png",
   });
+
   return <img className={className} src={url} />;
 };
 
