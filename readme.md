@@ -13,7 +13,7 @@ npm run dev
 - [ ] Ban user flows
   - [ ] (soft) Delete all a user's minis when their account is deleted
   - [ ] Validate email on signup (before allowing posting)
-- [ ] Make thumbnail size consistent when loading images
+- [x] Make thumbnail size consistent when loading images
 - [ ] Set up CDN
 - [ ] Create sample data for resetting staging
   - [ ] add population scripts
@@ -42,7 +42,7 @@ npm run dev
 - [ ] Comments on entities (minis etc)
 - [x] Keyboard support
   - [x] Arrow key to change images being viewed
-- Search within other entities (search on a user page for example)
+- [ ] Search within other entities (search on a user page for example)
 - [ ] Figure out how to merge duplicate records
   - [ ] Find a way to search for likely duplicates
 - Change api to use json:api format?
