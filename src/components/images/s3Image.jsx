@@ -3,10 +3,10 @@ import getS3Url from "./getS3Url";
 const S3Image = ({ image, width, height, blur, className = "" }) => {
   const options = ["quality:80", "extend:1"];
 
-  if (width) {
+  if (width !== undefined) {
     options.push(`width:${width}`);
   }
-  if (height) {
+  if (height !== undefined) {
     options.push(`height:${height}`);
   }
   if (blur) {
