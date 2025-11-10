@@ -10,6 +10,11 @@ npm run dev
 
 ## TODO:
 
+- [x] Click to zoom in on open images
+- [ ] Links to admin pages (if admin)
+- [ ] Request invite form
+- [ ] Populate Name field with figure if name field is blank
+- [ ] Arrow navigation on figure/manufacturer picker
 - [ ] Ban user flows
   - [ ] (soft) Delete all a user's minis when their account is deleted
   - [ ] Validate email on signup (before allowing posting)
