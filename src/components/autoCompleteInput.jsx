@@ -16,7 +16,6 @@ function AutoCompleteInput({
   const dropdownContainerRef = useRef();
 
   const handleOnKeyDown = async (e) => {
-    console.log(e.key, activeItem);
     if (!dropdownOpen) {
       if (e.key === "ArrowUp" || e.key === "ArrowDown") {
         await setDropdownOpen(true);
