@@ -5,10 +5,10 @@ import { getMini, postMini, putMini } from "../../services/mini";
 import { Button, Checkbox, Label, Textarea, TextInput } from "flowbite-react";
 import { getFiguresBySearch } from "../../services/figure";
 import ImageSortContainer from "../images/imageSortContainer";
-import { FaMagnifyingGlass } from "react-icons/fa6";
 import { toast } from "react-toastify/unstyled";
 import SaveToast from "../toasts/saveToast";
 import S3DragAndDrop from "../images/s3DragAndDrop";
+import AutoCompleteInput from "../autoCompleteInput";
 
 const MiniForm = ({ mode }) => {
   const [mini, setMini] = useState({ name: "", images: [] });
@@ -121,6 +121,12 @@ const MiniForm = ({ mode }) => {
     setFigureResults(figures);
   };
 
+  const handleFigureSearchBlur = (e) => {
+    if (!e.relatedTarget || !e.currentTarget.contains(e.relatedTarget)) {
+      setFigureDropdownOpen(false);
+    }
+  };
+
   return (
     <>
       {mini && token && (userId === mini?.userId?._id || mode === "new") && (
@@ -148,47 +154,29 @@ const MiniForm = ({ mode }) => {
 
             <div className="max-w-lg">
               <Label htmlFor="figure1">Figure</Label>
-              {selectedFigure && (
-                <div className="py-2 dark:text-white">
+              {selectedFigure ? (
+                <div className="ml-4 py-2 dark:text-white">
                   {selectedFigure.name}{" "}
                   <span className="text-gray-700 dark:text-gray-500">
                     {selectedFigure.partNumber}
                   </span>
                 </div>
+              ) : (
+                <div className="ml-4 py-2 dark:text-gray-500 text-gray-700">
+                  None
+                </div>
               )}
-              <TextInput
-                id="figure1"
-                type="text"
-                icon={FaMagnifyingGlass}
-                value={figureSearch}
+
+              <AutoCompleteInput
+                chooseItem={chooseFigure}
+                dropdownOpen={figureDropdownOpen}
+                setDropdownOpen={setFigureDropdownOpen}
                 onChange={handleFigureSearchChange}
                 onFocus={handleFigureSearchChange}
+                value={figureSearch}
+                items={figureResults}
+                onBlur={handleFigureSearchBlur}
               />
-              {figureDropdownOpen && (
-                <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm bg-gray-300 dark:bg-gray-800 text-gray-700 dark:text-gray-200">
-                  <li key={"none"}>
-                    <div
-                      onClick={() => chooseFigure(undefined)}
-                      className="w-full py-2 text-sm rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600 font-medium text-gray-900 dark:text-gray-300"
-                    >
-                      None
-                    </div>
-                  </li>
-                  {figureResults.map((f) => (
-                    <li key={f._id}>
-                      <div
-                        onClick={() => chooseFigure(f)}
-                        className="w-full py-2 text-sm rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600 font-medium text-gray-900 dark:text-gray-300"
-                      >
-                        {f.name}{" "}
-                        <span className="text-gray-700 dark:text-gray-500">
-                          {f.partNumber}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              )}
             </div>
 
             <div className="flex flex-col gap-5">

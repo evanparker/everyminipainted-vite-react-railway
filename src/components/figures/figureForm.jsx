@@ -4,12 +4,12 @@ import { getFigure, postFigure, putFigure } from "../../services/figure";
 import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import ImageSortContainer from "../images/imageSortContainer";
 import { getManufacturersBySearch } from "../../services/manufacturer";
-import { FaMagnifyingGlass } from "react-icons/fa6";
 import { toast } from "react-toastify/unstyled";
 import SaveToast from "../toasts/saveToast";
 import S3DragAndDrop from "../images/s3DragAndDrop";
 import UserContext from "../../userContext";
 import toBool from "../../util/toBool";
+import AutoCompleteInput from "../autoCompleteInput";
 
 const FigureForm = ({ mode }) => {
   const { user } = useContext(UserContext);
@@ -154,6 +154,12 @@ const FigureForm = ({ mode }) => {
     setManufacturerResults(manufacturers.docs);
   };
 
+  const handleManufacturerSearchBlur = (e) => {
+    if (!e.relatedTarget || !e.currentTarget.contains(e.relatedTarget)) {
+      setManufacturerDropdownOpen(false);
+    }
+  };
+
   const canEditFigure = () => {
     return (
       (import.meta.env.VITE_EDIT_FIGURE_REQUIRES_ADMIN !== undefined &&
@@ -220,41 +226,26 @@ const FigureForm = ({ mode }) => {
 
             <div className="max-w-lg block">
               <Label htmlFor="manufacturer1">Manufacturer</Label>
-              {selectedManufacturer && (
-                <div className="dark:text-white">
+              {selectedManufacturer ? (
+                <div className="ml-4 py-2 dark:text-white">
                   {selectedManufacturer.name}
                 </div>
+              ) : (
+                <div className="ml-4 py-2 dark:text-gray-500 text-gray-700">
+                  None
+                </div>
               )}
-              <TextInput
-                id="manufacturer1"
-                type="text"
-                icon={FaMagnifyingGlass}
-                value={manufacturerSearch}
+
+              <AutoCompleteInput
+                chooseItem={chooseManufacturer}
+                dropdownOpen={manufacturerDropdownOpen}
+                setDropdownOpen={setManufacturerDropdownOpen}
                 onChange={handleManufacturerSearchChange}
                 onFocus={handleManufacturerSearchChange}
+                value={manufacturerSearch}
+                items={manufacturerResults}
+                onBlur={handleManufacturerSearchBlur}
               />
-              {manufacturerDropdownOpen && (
-                <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm bg-gray-300 dark:bg-gray-800 text-gray-700 dark:text-gray-200">
-                  <li key={"none"}>
-                    <div
-                      onClick={() => chooseManufacturer(undefined)}
-                      className="w-full py-2 text-sm rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600 font-medium text-gray-900 dark:text-gray-300"
-                    >
-                      None
-                    </div>
-                  </li>
-                  {manufacturerResults.map((f) => (
-                    <li key={f._id}>
-                      <div
-                        onClick={() => chooseManufacturer(f)}
-                        className="w-full py-2 text-sm rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600 font-medium text-gray-900 dark:text-gray-300"
-                      >
-                        {f.name}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              )}
             </div>
 
             <div className="block">
