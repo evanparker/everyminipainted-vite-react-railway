@@ -10,7 +10,7 @@ npm run dev
 
 ## TODO:
 
-- [ ] Add favicon
+- [x] Add favicon
 - [x] Click to zoom in on open images
 - [ ] Links to admin pages (if admin)
 - [ ] Request invite form
