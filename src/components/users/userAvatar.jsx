@@ -1,4 +1,3 @@
-import CldThumbnailImage from "../images/CldThumbnailImage";
 import { Avatar } from "flowbite-react";
 import SocialsBlock from "../socialsBlock";
 import { Link } from "react-router-dom";
@@ -60,12 +59,7 @@ const ProfilePicture = ({ user, props }) => {
           {user?.avatar.type === "s3Image" ? (
             <S3Image image={user?.avatar} width={120} height={120} {...props} />
           ) : (
-            <CldThumbnailImage
-              publicId={user?.avatar?.cloudinaryPublicId}
-              width={120}
-              height={120}
-              {...props}
-            />
+            <div></div>
           )}
         </div>
       )) || (

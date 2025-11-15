@@ -15,7 +15,6 @@ import { useContext } from "react";
 import { FaPlus, FaUser } from "react-icons/fa6";
 import { Link, NavLink } from "react-router-dom";
 import UserContext from "../userContext";
-import CldThumbnailImage from "./images/CldThumbnailImage";
 import S3Image from "./images/s3Image";
 
 function Navigation() {
@@ -54,12 +53,7 @@ function Navigation() {
                           {...props}
                         />
                       ) : (
-                        <CldThumbnailImage
-                          publicId={user?.avatar?.cloudinaryPublicId}
-                          width={120}
-                          height={120}
-                          {...props}
-                        />
+                        <div></div>
                       )}
                     </div>
                   )) || (

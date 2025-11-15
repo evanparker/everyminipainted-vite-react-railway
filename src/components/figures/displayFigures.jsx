@@ -1,4 +1,3 @@
-import CldThumbnailImage from "../images/CldThumbnailImage";
 import { Card } from "flowbite-react";
 import { Link } from "react-router-dom";
 import S3Thumbnail from "../images/s3Thumbnail";
@@ -16,11 +15,7 @@ const DisplayFigures = ({ figures }) => {
                 img?.type === "s3Image" ? (
                   <S3Thumbnail image={img} width={400} height={400} />
                 ) : (
-                  <CldThumbnailImage
-                    publicId={img?.cloudinaryPublicId}
-                    width={400}
-                    height={400}
-                  />
+                  <div></div>
                 )
               }
             >

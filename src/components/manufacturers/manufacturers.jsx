@@ -8,7 +8,6 @@ import {
   getManufacturersBySearch,
 } from "../../services/manufacturer";
 import UserContext from "../../userContext";
-import CldThumbnailImage from "../images/CldThumbnailImage";
 import S3Image from "../images/s3Image";
 import toBool from "../../util/toBool";
 
@@ -95,11 +94,7 @@ const Manufacturers = () => {
                   img?.type === "s3Image" ? (
                     <S3Image image={img} width={400} height={400} />
                   ) : (
-                    <CldThumbnailImage
-                      publicId={img?.cloudinaryPublicId}
-                      width={400}
-                      height={400}
-                    />
+                    <div></div>
                   )
                 }
               >

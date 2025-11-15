@@ -1,4 +1,3 @@
-import CldThumbnailImage from "../images/CldThumbnailImage";
 import PropTypes from "prop-types";
 import ImageModal from "../images/imageModal";
 import { useCallback, useEffect, useState } from "react";
@@ -61,11 +60,7 @@ const DisplayMini = ({ mini }) => {
               {img.type === "s3Image" ? (
                 <S3Thumbnail image={img} width={400} height={400} />
               ) : (
-                <CldThumbnailImage
-                  publicId={img.cloudinaryPublicId}
-                  width={400}
-                  height={400}
-                />
+                <div></div>
               )}
             </div>
           ))}

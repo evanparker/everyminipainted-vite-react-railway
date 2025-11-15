@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import CldThumbnailImage from "../images/CldThumbnailImage";
 import ImageModal from "../images/imageModal";
 import Markdown from "react-markdown";
 import { Link } from "react-router-dom";
@@ -64,11 +63,7 @@ const DisplayManufacturer = ({ manufacturer }) => {
               {img.type === "s3Image" ? (
                 <S3Thumbnail image={img} width={400} height={400} />
               ) : (
-                <CldThumbnailImage
-                  publicId={img.cloudinaryPublicId}
-                  width={400}
-                  height={400}
-                />
+                <div></div>
               )}
             </div>
           ))}

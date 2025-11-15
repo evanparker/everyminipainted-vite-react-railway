@@ -4,7 +4,6 @@ import { useContext } from "react";
 import { FaHeart } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import UserContext from "../../userContext";
-import CldThumbnailImage from "../images/CldThumbnailImage";
 import S3Thumbnail from "../images/s3Thumbnail";
 
 const DisplayMinis = ({ minis }) => {
@@ -27,11 +26,7 @@ const DisplayMinis = ({ minis }) => {
                     blur={mini.blur}
                   />
                 ) : (
-                  <CldThumbnailImage
-                    publicId={img?.cloudinaryPublicId}
-                    width={400}
-                    height={400}
-                  />
+                  <div></div>
                 )
               }
             >

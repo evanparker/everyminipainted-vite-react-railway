@@ -10,11 +10,12 @@ npm run dev
 
 ## TODO:
 
+- [x] Add favicon
 - [x] Click to zoom in on open images
 - [ ] Links to admin pages (if admin)
 - [ ] Request invite form
 - [ ] Populate Name field with figure if name field is blank
-- [ ] Arrow navigation on figure/manufacturer picker
+- [x] Arrow navigation on figure/manufacturer picker
 - [ ] Ban user flows
   - [ ] (soft) Delete all a user's minis when their account is deleted
   - [ ] Validate email on signup (before allowing posting)
@@ -35,7 +36,7 @@ npm run dev
     - [x] immutable? (on things like username)
     - ~~use joi?~~ (nah.)
 - [ ] Accessibility (a11y)
-- [ ] Remove cloudinary support
+- [x] Remove cloudinary support
 - [ ] Design homepage
 - [ ] Add blog/articles
 - [ ] Reputation
