@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import CldThumbnailImage from "./CldThumbnailImage";
 import { FaRegStar, FaStar, FaTrashCan } from "react-icons/fa6";
 import S3Image from "./s3Image";
 
@@ -48,12 +47,7 @@ const ImageSortContainer = ({
               className="w-44 h-44"
             />
           ) : (
-            <CldThumbnailImage
-              publicId={img.cloudinaryPublicId}
-              width={200}
-              height={200}
-              className="w-44 h-44"
-            />
+            <div></div>
           )}
         </div>
       ))}

@@ -1,20 +1,16 @@
-import { Cloudinary } from "@cloudinary/url-gen";
-import { format, quality } from "@cloudinary/url-gen/actions/delivery";
-import { scale } from "@cloudinary/url-gen/actions/resize";
-
-const cld = new Cloudinary({
-  cloud: {
-    cloudName: import.meta.env.VITE_CLOUD_NAME,
-  },
-});
+import getS3Url from "./images/getS3Url";
 
 function HeadTags({ name, description, thumbnail }) {
-  const thumbnailImageURL = cld
-    .image(thumbnail?.cloudinaryPublicId)
-    .resize(scale().width(400).height(400))
-    .delivery(format("auto"))
-    .delivery(quality("auto"))
-    .toURL();
+  let thumbnailImageURL = "";
+
+  if (thumbnail.type === "s3Image") {
+    thumbnailImageURL = getS3Url({
+      options: ["width:400", "height:400", "quality:80", "extend:1"].join("/"),
+      key: thumbnail.s3Key,
+      bucket: thumbnail.s3Bucket,
+      extension: "png",
+    });
+  }
 
   return (
     <>

@@ -1,6 +1,5 @@
 import { Modal, ModalBody } from "flowbite-react";
 import PropTypes from "prop-types";
-import CldImage from "./CldImage";
 import S3Image from "./s3Image";
 import { useCallback, useState } from "react";
 import { FaX } from "react-icons/fa6";
@@ -31,7 +30,7 @@ function ImageModal({ image, onClose, show }) {
           {image?.type === "s3Image" ? (
             <S3Image image={image} width={1600} className="w-full" />
           ) : (
-            <CldImage publicId={image?.cloudinaryPublicId} width={1600} />
+            <div></div>
           )}
         </div>
         <FaX
