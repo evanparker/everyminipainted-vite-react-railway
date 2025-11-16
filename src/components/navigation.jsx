@@ -3,6 +3,7 @@ import {
   Button,
   DarkThemeToggle,
   Dropdown,
+  DropdownDivider,
   DropdownHeader,
   DropdownItem,
   Navbar,
@@ -88,6 +89,28 @@ function Navigation() {
               >
                 Sign out
               </DropdownItem>
+              {user.roles.includes("admin") && (
+                <>
+                  <DropdownDivider />
+                  <DropdownHeader className="dark:text-white font-bold">
+                    Admin
+                  </DropdownHeader>
+                  <DropdownItem
+                    className="dark:text-white"
+                    as={Link}
+                    to={`/admin/moderation`}
+                  >
+                    Moderation
+                  </DropdownItem>
+                  <DropdownItem
+                    className="dark:text-white"
+                    as={Link}
+                    to={`/admin/invites`}
+                  >
+                    Invite Codes
+                  </DropdownItem>
+                </>
+              )}
             </>
           )}
           {!user && (
