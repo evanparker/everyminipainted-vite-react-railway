@@ -23,7 +23,7 @@ const ImageSortContainer = ({
           onDrop={(e) => e.preventDefault()}
           onDragOver={(e) => e.preventDefault()}
           key={img._id}
-          className="relative cursor-move max-w-md flex rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800"
+          className="relative cursor-move w-48 h-48 flex rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800"
         >
           <div
             onClick={() => onDelete(index)}
@@ -40,12 +40,7 @@ const ImageSortContainer = ({
             </div>
           )}
           {img.type === "s3Image" ? (
-            <S3Image
-              image={img}
-              width={400}
-              height={400}
-              className="w-44 h-44"
-            />
+            <S3Image image={img} width={400} height={400} />
           ) : (
             <div></div>
           )}
