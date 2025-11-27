@@ -11,6 +11,11 @@ npm run dev
 ## TODO:
 
 - [x] Add favicon
+- [ ] Improve bot server
+  - [x] Fix link thumbnails
+  - [x] Serve multiple images in previews
+  - [ ] Better user pages (serve description, user avatar)
+  - [ ] Better index pages
 - [x] Click to zoom in on open images
 - [x] Links to admin pages (if admin)
 - [ ] Request invite form
@@ -40,6 +45,7 @@ npm run dev
 - [ ] Design homepage
 - [ ] Add blog/articles
 - [ ] Reputation
+  - [ ] Bounties
 - [ ] Copyright notice in code
 - [ ] Choose source code license
 - [ ] Tagging

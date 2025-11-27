@@ -99,13 +99,14 @@ const DisplayFigure = ({ figure }) => {
         )}
         {figure.manufacturer && (
           <div className="max-w-md">
-            <Link to={`/manufacturers/${figure.manufacturer._id}`} className="">
-              <div className="mt-5 p-3 cursor-pointer rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 text-gray-900 dark:text-white">
-                <div className="mb-1 text-xs text-gray-600 dark:text-gray-400">
-                  Manufacturer:
-                </div>
-                {figure.manufacturer.name}
+            <Link
+              to={`/manufacturers/${figure.manufacturer._id}`}
+              className="block mt-5 p-3 cursor-pointer max-w-md rounded-lg border overflow-hidden border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 text-gray-900 dark:text-white"
+            >
+              <div className="mb-1 text-xs text-gray-600 dark:text-gray-400">
+                Manufacturer:
               </div>
+              {figure.manufacturer.name}
             </Link>
           </div>
         )}
