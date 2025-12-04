@@ -7,9 +7,14 @@ async function getFigures({ limit = 20, offset = 0 }) {
   return response;
 }
 
-async function getFiguresBySearch(search, { limit = 20, offset = 0 }) {
+async function getFiguresBySearch(
+  search,
+  { limit = 20, offset = 0, manufacturer = "" }
+) {
   const response = await apiClient.get(
-    `/figures/search?search=${search}&limit=${limit}&offset=${offset}`
+    `/figures/search?search=${search}&limit=${limit}&offset=${offset}${
+      manufacturer ? `&manufacturer=${manufacturer}` : ""
+    }`
   );
   return response;
 }

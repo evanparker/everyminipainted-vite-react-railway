@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { itemsPerPage } from "../../constants/requestDefaults";
 import { getMinis, getMinisBySearch } from "../../services/mini";
 import DisplayMinis from "./displayMinis";
+import SearchBar from "../searchBar";
 
 const Minis = () => {
   const [minis, setMinis] = useState([]);
@@ -50,13 +51,16 @@ const Minis = () => {
   return (
     <>
       <div>
+        <SearchBar className="mb-5" placeholder="Search Minis..." />
         <DisplayMinis minis={minis} />
         <div>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={onPageChange}
-          />
+          {totalPages > 1 && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={onPageChange}
+            />
+          )}
         </div>
       </div>
     </>

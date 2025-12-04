@@ -11,6 +11,7 @@ function AutoCompleteInput({
   items,
   value,
   onBlur,
+  id = "item1",
 }) {
   const [activeItem, setActiveItem] = useState(-1);
   const dropdownContainerRef = useRef();
@@ -74,7 +75,7 @@ function AutoCompleteInput({
       tabIndex={1}
     >
       <TextInput
-        id="item1"
+        id={id}
         type="text"
         icon={FaMagnifyingGlass}
         value={value}

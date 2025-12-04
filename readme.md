@@ -18,6 +18,10 @@ npm run dev
   - [ ] Better index pages
 - [x] Click to zoom in on open images
 - [x] Links to admin pages (if admin)
+- [ ] Improve Search/Advanced Search
+  - [x] Allow figure search to specify manufacturer
+  - [ ] Allow mini to search by figure
+  - [ ] Allow mini to search by username
 - [ ] Request invite form
 - [ ] Populate Name field with figure if name field is blank?
 - [x] Arrow navigation on figure/manufacturer picker
@@ -75,7 +79,7 @@ npm run dev
     - [ ] ... GW?
   - [x] Reaper APIs: https://www.reapermini.com/retailsupport/resources
   - [x] Wizkids unpainted essentials page: https://wizkids.com/upmessentials/
-- Consolodate search pickers (figure, manufacturer)
+- [x] Consolodate search pickers (figure, manufacturer)
 
 ### Bugs
 

@@ -28,7 +28,6 @@ import MiniNew from "./components/minis/miniNew";
 import Minis from "./components/minis/minis";
 import Navigation from "./components/navigation";
 import PageFooter from "./components/pageFooter";
-import SearchBar from "./components/searchBar";
 import LogoutToast from "./components/toasts/logoutToast";
 import User from "./components/users/user";
 import UserEdit from "./components/users/userEdit";
@@ -89,7 +88,6 @@ function App() {
 
         <div className="mb-5">
           <Navigation />
-          <SearchBar />
         </div>
 
         <Routes>

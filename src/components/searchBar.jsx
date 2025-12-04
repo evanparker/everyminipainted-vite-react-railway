@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaCaretDown, FaMagnifyingGlass } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
-function SearchBar() {
+function SearchBar({ className, placeholder }) {
   const dropdownOptions = [
     { name: "Minis", link: "/minis" },
     { name: "Figures", link: "/figures" },
@@ -25,7 +25,7 @@ function SearchBar() {
   };
 
   return (
-    <form className="mt-3" onSubmit={handleSubmit}>
+    <form className={className} onSubmit={handleSubmit}>
       <div className="flex relative">
         <label
           htmlFor="search-dropdown"
@@ -70,7 +70,7 @@ function SearchBar() {
             type="search"
             id="search-dropdown"
             className="outline-0 block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg rounded-s-gray-100 rounded-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-            placeholder="Search"
+            placeholder={placeholder || "Search"}
             required
             value={search}
             onChange={(e) => setSearch(e.target.value)}

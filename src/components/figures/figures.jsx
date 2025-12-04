@@ -7,6 +7,7 @@ import { getFigures, getFiguresBySearch } from "../../services/figure";
 import UserContext from "../../userContext";
 import DisplayFigures from "./displayFigures";
 import toBool from "../../util/toBool";
+import FigureSearchForm from "./figureSearchForm";
 
 const Figures = () => {
   const { user } = useContext(UserContext);
@@ -17,15 +18,17 @@ const Figures = () => {
     parseInt(searchParams.get("page") || 1)
   );
   const [totalPages, setTotalPages] = useState(0);
-  const searchString = searchParams.get("search");
+  const searchString = searchParams.get("search") || "";
+  const manufacturer = searchParams.get("manufacturer");
 
   useEffect(() => {
     const fetchData = async () => {
       let results;
-      if (searchString) {
+      if (searchString || manufacturer) {
         results = await getFiguresBySearch(searchString, {
           limit: itemsPerPage,
           offset: (currentPage - 1) * itemsPerPage,
+          manufacturer,
         });
         setTotalPages(results.totalPages);
         setFigures(results.docs);
@@ -40,7 +43,7 @@ const Figures = () => {
     };
 
     fetchData();
-  }, [searchString, currentPage]);
+  }, [searchString, currentPage, manufacturer]);
 
   useEffect(() => {
     setCurrentPage(parseInt(searchParams.get("page") || 1));
@@ -58,6 +61,9 @@ const Figures = () => {
     if (searchString) {
       searchParams.search = searchString;
     }
+    if (manufacturer) {
+      searchParams.manufacturer = manufacturer;
+    }
     setSearchParams(searchParams, { replace: false });
   };
 
@@ -71,6 +77,7 @@ const Figures = () => {
 
   return (
     <>
+      <FigureSearchForm className="mb-5" />
       {canEditFigure && (
         <div className="mb-5 flex gap-5">
           <Button as={Link} to={`/figures/new`}>
@@ -78,14 +85,16 @@ const Figures = () => {
           </Button>
         </div>
       )}
-
       <DisplayFigures figures={figures} />
+
       <div>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={onPageChange}
-        />
+        {totalPages > 1 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={onPageChange}
+          />
+        )}
       </div>
     </>
   );

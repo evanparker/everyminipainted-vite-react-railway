@@ -57,6 +57,7 @@ const Manufacturer = () => {
       });
       setTotalPages(results.totalPages);
       setFigures(results.docs);
+      console.log(results);
     };
 
     fetchManufacturerFiguresData();
@@ -118,11 +119,13 @@ const Manufacturer = () => {
             <DisplayFigures figures={figures} />
           </div>
           <div>
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={onPageChange}
-            />
+            {totalPages > 1 && (
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={onPageChange}
+              />
+            )}
           </div>
         </>
       )}
