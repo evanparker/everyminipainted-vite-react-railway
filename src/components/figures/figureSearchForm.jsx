@@ -1,4 +1,4 @@
-import { FaCaretDown } from "react-icons/fa6";
+import { FaCaretDown, FaMagnifyingGlass } from "react-icons/fa6";
 import { HelperText, Label, TextInput } from "flowbite-react";
 import { useState } from "react";
 import AutoCompleteInput from "../autoCompleteInput";
@@ -66,14 +66,27 @@ const FigureSearchForm = ({ className }) => {
 
   return (
     <form className={`${className} z-10 relative`} onSubmit={handleSubmit}>
-      <TextInput
-        id="figureSearch"
-        type="search"
-        // rightIcon={FaMagnifyingGlass}
-        placeholder="Search Figures..."
-        onChange={handleSearchChange}
-        onKeyDown={handleSearchKeydown}
-      />
+      <div className="relative">
+        <label
+          htmlFor="figureSearch"
+          className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+        >
+          Search Figures
+        </label>
+        <TextInput
+          id="figureSearch"
+          type="search"
+          placeholder="Search Figures..."
+          onChange={handleSearchChange}
+          onKeyDown={handleSearchKeydown}
+        />
+        <button
+          type="submit"
+          className="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          <FaMagnifyingGlass />
+        </button>
+      </div>
       {!expand && (
         <HelperText>
           <span onClick={toggleExpand} className="text-blue-500 cursor-pointer">
