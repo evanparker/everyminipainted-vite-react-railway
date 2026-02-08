@@ -3,7 +3,7 @@ import getS3Url from "./images/getS3Url";
 function HeadTags({ name, description, thumbnail }) {
   let thumbnailImageURL = "";
 
-  if (thumbnail.type === "s3Image") {
+  if (thumbnail?.type === "s3Image") {
     thumbnailImageURL = getS3Url({
       options: ["width:400", "height:400", "quality:80", "extend:1"].join("/"),
       key: thumbnail.s3Key,
